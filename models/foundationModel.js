@@ -24,32 +24,8 @@ const foundationSchema = new Schema({
     lowercase: true,
   },
 
-  image: {
-    type: String,
-    default: "user.png",
-  },
-
-  coverProfileImage: {
-    type: String,
-    default: "coverProfile.png",
-  },
-
   password: {
     type: String,
-    required: true,
-  },
-
-  description: {
-    type: String,
-  },
-
-  address: {
-    type: String,
-    maxlength: 255,
-  },
-
-  policyApproval: {
-    type: Boolean,
     required: true,
   },
 
@@ -59,6 +35,11 @@ const foundationSchema = new Schema({
     maxlength: 9,
   },
 
+  policyApproval: {
+    type: Boolean,
+    required: true,
+  },
+  
   city: {
     type: String,
     required: true,
@@ -77,12 +58,27 @@ const foundationSchema = new Schema({
       maxlength: 255 
     }
   ],
+
   activityType: [
     { 
       type: String, 
       maxlength: 255 
     }
   ],
+
+  image: {
+    type: String,
+    default: "user.png",
+  },
+
+  coverProfileImage: {
+    type: String,
+    default: "coverProfile.png",
+  },
+
+  description: {
+    type: String,
+  },
 
 
   memberShips: [

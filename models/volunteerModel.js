@@ -1,10 +1,8 @@
 import { Schema, SchemaTypes, model } from "mongoose";
 const cities = [];
-const skills =[];
-
+const skills = [];
 
 const volunteerSchema = new Schema({
-
   username: {
     type: String,
     required: true,
@@ -26,27 +24,8 @@ const volunteerSchema = new Schema({
     lowercase: true,
   },
 
-  image: {
-    type: String,
-    default: "user.png",
-  },
-
-  coverProfileImage: {
-    type: String,
-    default: "coverProfile.png",
-  },
-
   password: {
     type: String,
-    required: true,
-  },
-
-  description:{
-    type: String,
-  },
-
-  policyApproval: {
-    type: Boolean,
     required: true,
   },
 
@@ -54,6 +33,17 @@ const volunteerSchema = new Schema({
     type: String,
     required: true,
     maxlength: 9,
+  },
+
+  whatsappPhoneNumber: {
+    type: String,
+    maxlength: 9,
+    required: true,
+  },
+
+  birthDate: {
+    type: Date,
+    required: true,
   },
 
   city: {
@@ -68,25 +58,35 @@ const volunteerSchema = new Schema({
     },
   },
 
-  birthDate: {
-    type: Date,
+  policyApproval: {
+    type: Boolean,
+    required: true,
   },
 
-  whatsappPhoneNumber: {
+  skills: [
+    {
+      type: String,
+      maxlength: 255,
+    },
+  ],
+
+  image: {
     type: String,
-    maxlength: 9,
-    required: true,
+    default: "user.png",
+  },
+
+  coverProfileImage: {
+    type: String,
+    default: "coverProfile.png",
+  },
+
+  description: {
+    type: String,
   },
 
   points: {
     type: Number,
   },
-
-  skills: [
-    { 
-      type: String, maxlength: 255 
-    },
-  ],
 
   badges: [
     {
