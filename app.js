@@ -1,6 +1,7 @@
 import express from "express";
 import env from "dotenv";
 import mongoose from "mongoose"
+import {logger,session} from "./middlewares/index.js";
 
 //env configuration
 env.config();
@@ -24,6 +25,9 @@ mongoose.connection.on('error',(error)=>{
 });
 
 // middlewares
+session(app);
+logger(app);
+
 
 
 app.get('/', (req, res) => res.send('Hello World!'))
