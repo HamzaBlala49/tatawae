@@ -1,0 +1,87 @@
+{
+    "volunteer":[{
+        "id":"3232",
+        "username":"hamza",
+        "fullName":"hamza omer balala",
+        "email":"hamza@gamil.com",
+        "password":"1234",
+        "image":"1.png",
+        "description":"",
+        "policy-approval":1,
+        "phone-number":"1232343545",
+        "city":"المكلا",
+        "birthDate":"2000-1-1",
+        "whatsapp-phone-number":"32322323",
+        "points":123,
+
+        "skills":[],
+        "badges":["badgesId"]
+    }],
+    "foundation":[{
+        "id":"1",
+        "username":"hamza",
+        "fullName":"hamza omer balala",
+        "email":"hamza@gamil.com",
+        "password":"1234",
+        "image":"1.png",
+        "description":"",
+        "policy-approval":1,
+        "phone-number":"1232343545",
+        "city":"المكلا",
+        "address":"المكلا-الديس-جانب مستشفئ البرج",
+        "natural-work":["قطاع خاص","مؤسسة غير ربحية"],
+        "activity-type":["ديني","خيري","رياضي"],
+        
+        "memberships":["121212","1212121"]
+    }],
+    "events":[{
+        "id":"12345",
+        "foundationId":"1234",
+        "title":"عنوان",
+        "image":"1.png",
+        "city":"المكلا",
+        "address":"المكلا-الديس-جانب مستشفئ البرج",
+        "googleMapUrl":"https//google.com",
+        "description":"",
+        "volunteer-role":"",
+        "registration-conditions":"",
+        "gender":1,
+        "volunteer-number":12,
+        "start-date":"",
+        "end-date":"",
+        "start-hour":"",
+        "end-hour":"",
+
+        "volunteers":[{
+            "id":"12345",
+            "volunteerId":"1233",
+            "rating":"0 or 1 or 2",
+            "reviews":[{
+                "id":"12345",
+                "content":""
+            }]
+        }]
+
+    }],
+
+    "badges":[{
+        "id":"12345",
+        "name":"",
+        "description":"",
+        "image":"1.png"
+    }],
+
+    "event-request":[{
+        "id":"123456789",
+        "volunteer":"12433",
+        "eventId":"32323",
+        "sender":" 0 or 1",
+        "status":"0 or 1 or 2"
+    }],
+
+    "membership-request":[{
+        "id":"12345",
+        "volunteerId":"1233",
+        "status":"0 or 1 or 2"
+    }]
+}
