@@ -1,6 +1,6 @@
 import express from "express";
 import env from "dotenv";
-import mongoose from "mongoose"
+import mongoose, { set } from "mongoose"
 import {logger,session} from "./middlewares/index.js";
 
 //env configuration
@@ -27,10 +27,15 @@ mongoose.connection.on('error',(error)=>{
 // middlewares
 session(app);
 logger(app);
+app.set('view engine', 'ejs');
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+app.use(express.static('public'));
 
 
 
-app.get('/', (req, res) => res.send('Hello World!'))
+
+app.get('/', (req, res) => res.render('volunteer/login'))
 
 // routes
 

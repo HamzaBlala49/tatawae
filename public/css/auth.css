@@ -1,0 +1,23 @@
+body{
+    overflow-x: hidden;
+}
+#login-wrpper{
+    z-index: 100;
+    width: 60%;
+    margin-top: 10px;
+    height: fit-content;
+}
+#login-imag{
+    width: 100%;
+    height: 100%;
+}
+
+.circle{
+    position: absolute;
+    z-index: -1;
+    width: 900px;
+    height: 900px;
+    left: -400px;
+    top: -250px;
+    
+}
