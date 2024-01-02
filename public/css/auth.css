@@ -9,7 +9,7 @@ body{
 }
 #login-imag{
     width: 100%;
-    height: 100%;
+    height: 100vh
 }
 
 .circle{
@@ -19,5 +19,4 @@ body{
     height: 900px;
     left: -400px;
     top: -250px;
-    
 }

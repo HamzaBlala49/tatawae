@@ -34,11 +34,6 @@ const foundationSchema = new Schema({
     required: true,
     maxlength: 9,
   },
-
-  policyApproval: {
-    type: Boolean,
-    required: true,
-  },
   
   city: {
     type: String,

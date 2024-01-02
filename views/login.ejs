@@ -10,12 +10,11 @@
     <title>LogIn</title>
 </head>
 <body class="bg-light">
-    <div class="circle h-bg-secondary-dark rounded-circle"></div>
-    <div class="container">
+    <div class="full-screen">
         <div class="row">
-            <div class="col-lg-6 col-md-12 col-sm-12 pt-5 d-flex justify-content-center align-content-center">
-                <div id="login-wrpper" class="bg-white p-3 rounded shadow">
-                    <h4 class="text-center h-text-secondary-dark my-2 fw-bold">مرحباً بكَ مجدداً</h4>
+            <div class="col-lg-4 col-md-12 col-sm-12 pt-5 d-flex justify-content-center align-content-center">
+                <div id="login-wrpper" class="pt-4 rounded">
+                    <h4 class="text-center h-text-primary-dark my-3 fw-bold">مرحباً بكَ مجدداً</h4>
                     <form action="post">
                             <div class="mb-3">
                               <label for="exampleInputEmail1" class="form-label h-text-14 fw-bold">
@@ -31,21 +30,33 @@
                                 </label>
                                 <input type="password" class="form-control form-control-sm" id="exampleInputPassword1">
                             </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="role" value="volunteer" id="volunteer"  checked/>
+                                <label class="form-check-label h-text-14 fw-bold" for="volunteer"> متطوّع </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" value="foundation" name="role" id="foundation" />
+                                <label class="form-check-label h-text-14 fw-bold " for="foundation">
+                                    مؤسسة
+                                </label>
+                            </div>
+                            
                             <!-- <p class="h-text-secondary-dark h-text-14 fw-bold">أنت غير مصرح به!! تأكد من صحة البيانات :)</p> -->
-                            <button type="submit" class="btn btn-sm h-btn-primary h-bg-secondary-dark text-white h-text-17 ">دخول</button>
+                            
+                            <button type="submit" class="btn btn-sm w-100 h-btn-primary mt-3 h-bg-primary-dark text-white h-text-17 ">دخول</button>
                             <p class="h-text-13 text-secondary mt-2 m-0">
                                 ليس لديك حساب مسبق؟ 
-                                <a href="" class=" h-text-secondary-dark  ">
+                                <a href="" class=" h-text-primary-dark  ">
                                     تسجيل حساب جديد
                                 </a>
                             </p>
                     </form>
                 </div>
             </div>
-            <div class="col-lg-6 d-none d-lg-block d-md-block">
-                <img  src="/img/login4.svg" id="login-imag" alt="login">
+
+            <div class="col-lg-8 d-none d-lg-block d-md-block">
+                <img  src="/img/pg1.jpg" id="login-imag" alt="login">
             </div>
-            
         </div>
     </div>
       <!-- لا تنسئ تحط الرابط -->

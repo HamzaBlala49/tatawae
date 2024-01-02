@@ -4,7 +4,7 @@ import foundation from "./foundationModel";
 import event from "./eventModel";
 import eventRequest from "./eventRequestModel";
 
-export default {
+export  {
     volunteer,
     badge,
     foundation,

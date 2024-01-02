@@ -1,21 +1,52 @@
+import e from "express";
+import { volunteer, foundation } from "../models/index.js";
 
-const login = (req,res) =>{
-    res.render('login');
-}
+const login = async (req, res) => {
+  const { role, username, password } = req.body;
 
+  if(!role,!username,!password){
+    res.render
+  }
 
-const logout = (req,res) =>{
-    req.session.destroy()
-    res.redirect('/')
-}
+  if (role === "volunteer") {
 
+    const volunteerData = await volunteer.findOne({ username: username });
 
-const register = (req,res) =>{
-    res.render('register')
-}
+    if (volunteerData) {
+      if (volunteerData.password === password) {
+        req.session.username = username;
+        res.redirect("/volunteer");
+        return;
+      } else {
+        res.render("login", {
+          msg: "أنت غير مصرح لك بالدخول تأكد من صحة البيانات المدخله",
+        });
+      }
+    }
+  } else if (role === "foundation") {
+    const foundationData = await foundation.findOne({ username: username });
+    if (foundationData) {
+      if (foundationData.password === password) {
+        req.session.username = username;
+        res.redirect("/foundation");
+        return;
+      }
+    }
+  }
+  res.render("login");
+};
 
-export default{
-    login,
-    logout,
-    
-}
+const logout = (req, res) => {
+  req.session.destroy();
+  res.redirect("/");
+};
+
+const register = (req, res) => {
+  res.render("register");
+};
+
+export default {
+  login,
+  logout,
+  register,
+};

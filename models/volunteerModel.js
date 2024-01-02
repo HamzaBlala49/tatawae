@@ -58,11 +58,6 @@ const volunteerSchema = new Schema({
     },
   },
 
-  policyApproval: {
-    type: Boolean,
-    required: true,
-  },
-
   skills: [
     {
       type: String,

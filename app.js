@@ -35,7 +35,7 @@ app.use(express.static('public'));
 
 
 
-app.get('/', (req, res) => res.render('volunteer/login'))
+app.get('/', (req, res) => res.render('login'));
 
 // routes
 

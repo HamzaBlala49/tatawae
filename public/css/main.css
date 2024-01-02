@@ -1,13 +1,13 @@
 :root{  
-    --h-primary:#4dff4d;
+    --h-primary:#48e948;
     --h-primary-dark:#36b336;
-    --h-primary-light:#d3ffd3;
+    --h-primary-light:#b8efb8;
     --h-secondary:rgb(255, 77, 77);
     --h-secondary-dark:rgb(179, 54, 54);
     --h-gray:#9DA0A7;
-    --h-light:#E3EAF4;
+    --h-light:#ffffff;
     --h-brown:#64312F;
-    --h-dark:#160C0D;
+    --h-dark:#141514;
 
     direction: rtl;
 }
@@ -108,6 +108,49 @@
 }
 
 .h-btn-primary:hover{
-    background-color:var(--h-secondary-dark);
+    background-color:var(--h-primary-dark);
     color: var(--h-light);
 }
+
+.full-screen{
+    width: 100vw;
+    height: 100vh !important;
+}
+
+.form-check-input:checked {
+    background-color: var(--h-primary-dark);
+    border-color: var(--h-primary-dark);
+}
+
+.form-control:focus {
+    border-color: #a6cd7a;
+    box-shadow: 0 0 0 0.25rem #a6cd7a;
+}
+
+.sidebar-link{
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+.sidebar-link > li{
+    margin: 15px 0 15px 0;
+}
+
+.sidebar-link > li > a{
+    color:var(--h-dark);
+    font-weight:bold;
+    text-decoration: none;
+    font-size: 15px;
+}
+.sidebar-link > li > a > i{
+    margin-left: 10px;
+}
+
+.sidebar-link >li:hover > a{
+    color: #4dff4d;
+}
+
+.active-link-sidebar{
+    color: var(--h-primary) !important;
+}
+

@@ -1,0 +1,48 @@
+
+@import url("./main.css");
+#profile-header{
+    position: relative;
+}
+
+.coverProfile{
+    width: 100%;
+    height: 200px;
+    border-radius: 10px;
+    background-position: center;
+    
+}
+.profileImg{
+    background: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius:50%;
+    position: absolute;
+    top: 120px;
+    right: 50px;
+    padding: 4px;
+}
+.profileImg > img{
+    border-radius: 50%;
+    width: 130px;
+    height: 130px;
+    object-fit: cover;
+}
+#profileSocial > a > img {
+    width: 30px;
+    height: 30px;
+}
+.nav-tabs > .nav-item > .active{
+    color:var(--h-primary-dark) !important;
+}
+.nav-tabs > .nav-item{
+    color: black;
+}
+
+.volunteering-card > div:first-child > img{
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    object-fit: cover;
+    
+}
