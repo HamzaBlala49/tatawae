@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/public/css/all.min.css">
+    <link rel="stylesheet" href="/public/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/public/css/main.css">
+    <link rel="stylesheet" href="/public/css/profile.css">
+    <title>Profile</title>
+</head>
+<body>
+    <main>
+         <div class="">
+            <div class="row position-relative">
+                <div class="col-2 vh-100 position-sticky top-0 end-0 bg-light">
+                    <aside class="p-3">
+                        <div class="brand fs-3 mb-3 h-text-primary-dark fw-bold">تطوع</div>
+                        <ul class="sidebar-link">
+                            <li>
+                                <a href="./home.html">
+                                    <i class="fa-solid fa-house"></i>
+                                    الصفحة الرئيسية
+                                </a>
+                            </li>
+                            <li>
+                                <a href="./notifications.html">
+                                    <i class="fa-solid fa-bell"></i>
+                                    الأشعارات
+                                </a>
+                            </li>
+                            <li>
+                                <a href="./events.html">
+                                    <i class="fa-solid fa-handshake-angle"></i>
+                                    الأحداث التطوعية
+                                </a>
+                            </li>
+                            <li>
+                                <a href="./myEvents.html">
+                                    <i class="fa-solid fa-hands-holding"></i>
+                                    المشاركات التطوعية
+                                </a>
+                            </li>
+                            <li>
+                                <a href="./profile.html" class="active-link-sidebar">
+                                    <i class="fa-solid fa-user"></i>
+                                    ملفي الشخصي
+                                </a>
+                            </li>
+                            <li class="mt-4">
+                                <a href="./profile.html" class="h-bg-primary-light rounded-pill px-2 py-1">
+                                    <i class="fa-solid fa-right-from-bracket"></i>
+                                    تسجيل الخروج
+                                </a>
+                            </li>
+                        </ul>
+                    </aside>
+                </div>
+                <div class="col-8">
+                    <section class="p-3">
+                        <header id="profile-header">
+                            <div class="coverProfile" style="background-image: url('/public/img/pg1.jpg');"></div>
+                            <div class="profileImg">
+                                <img src="/public/img/person.jpg" alt="">
+                            </div>
+                        </header>
+                        <section id="profileInfo" class="mt-5">
+                            <div class="row">
+                                <div class="col-6 pt-3 pe-5">
+                                    <h5 id="profileName" class="fw-bold">حمزة عمر بلعلا</h5>
+                                    <p class="h-text-15 mx-0 my-2 p-0 fw-bold text-secondary">@hamza_balala</p>
+                                    <div id="profileSocial">
+                                        <a href=""><img src="/public/img/whatsapp.png" alt=""></a>
+                                        <a href=""><img src="/public/img/mail.png" alt=""></a>
+                                    </div>
+                                </div>
+                                <div class="col-6 pt-3 d-flex justify-content-around">
+                                    <div>
+                                        <p class="h-text-16 fw-bold">الساعات التطوعية</p>
+                                        <p class="fw-bold">100 <span>س</span></p>
+                                    </div>
+                                    <div>
+                                        <p class="h-text-16 fw-bold">النقاط التطوعية</p>
+                                        <p class="fw-bold">100</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+                        <section id="profileInfo" class="pe-4 pt-4">
+                            <ul class="nav nav-tabs" id="myTab" role="tablist">
+                                <li class="nav-item" role="presentation">
+                                  <button class="nav-link text-dark active" id="profile-info-tab" data-bs-toggle="tab" data-bs-target="#profile-info" type="button" role="tab" aria-controls="home-tab-pane" aria-selected="true">معلومات شخصية</button>
+                                </li>
+                                <li class="nav-item" role="presentation">
+                                  <button class="nav-link text-dark" id="volunteering-info-tab" data-bs-toggle="tab" data-bs-target="#volunteering-info" type="button" role="tab" aria-controls="profile-tab-pane" aria-selected="false">التطوعات</button>
+                                </li>
+                              </ul>
+                              <div class="tab-content" id="myTabContent">
+                                <div class="tab-pane fade show active p-2" id="profile-info" role="tabpanel" aria-labelledby="home-tab" tabindex="0">
+                                    <p>
+                                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Provident, illo. Rem possimus, quos cum magnam quia praesentium. Aut maiores facilis dolorem esse quisquam, explicabo suscipit inventore ducimus animi laudantium odit.
+                                    </p>
+                                </div>
+                                <div class="tab-pane fade p-3" id="volunteering-info" role="tabpanel" aria-labelledby="profile-tab" tabindex="0">
+                                    <div class="row">
+                                        <div class="col-6">
+                                            <div class="volunteering-card card p-4 mb-2">
+                                                <div class="mb-2">
+                                                    <img src="/public/img/pg1.jpg">
+                                                    <p class="h-text-17 fw-bold m-0">مؤسسة متطوعون</p>
+                                                </div>
+                                                <div class="d-flex mb-2">
+                                                    <p class="h-text-16 fw-bold m-0">الحدث:</p>
+                                                    <p class="h-text-16 m-0">توزيع كسوة العيد</p>
+                                                </div>
+                                                <div class="d-flex align-items-center">
+                                                    <p class="h-text-16 fw-semibold m-0 mb-2">التقييم:</p>
+                                                    <p class="m-0">
+                                                        <i class="fa-solid fa-star"></i>
+                                                        <i class="fa-solid fa-star"></i>
+                                                        <i class="fa-regular fa-star"></i> 
+                                                        <i class="fa-regular fa-star"></i> 
+                                                        <i class="fa-regular fa-star"></i>
+                                                    </p>
+                                                </div>
+                                                <div class="">
+                                                    <p class="h-text-16 fw-semibold m-0">المراجعة:</p>
+                                                    <p class="h-text-16 m-0">مينس سيمسي سيسممني ثكم3كم4 يصصقن</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-6">
+                                            <div class="volunteering-card card p-4 mb-2">
+                                                <div class="mb-2">
+                                                    <img src="/public/img/pg1.jpg">
+                                                    <p class="h-text-17 fw-bold m-0">مؤسسة متطوعون</p>
+                                                </div>
+                                                <div class="d-flex mb-2">
+                                                    <p class="h-text-16 fw-bold m-0">الحدث:</p>
+                                                    <p class="h-text-16 m-0">توزيع كسوة العيد</p>
+                                                </div>
+                                                <div class="d-flex align-items-center">
+                                                    <p class="h-text-16 fw-semibold m-0 mb-2">التقييم:</p>
+                                                    <p class="m-0">
+                                                        <i class="fa-solid fa-star"></i>
+                                                        <i class="fa-solid fa-star"></i>
+                                                        <i class="fa-regular fa-star"></i> 
+                                                        <i class="fa-regular fa-star"></i> 
+                                                        <i class="fa-regular fa-star"></i>
+                                                    </p>
+                                                </div>
+                                                <div class="">
+                                                    <p class="h-text-16 fw-semibold m-0">المراجعة:</p>
+                                                    <p class="h-text-16 m-0">مينس سيمسي سيسممني ثكم3كم4 يصصقن</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                              </div>
+                        </section>
+
+                    </section>
+                </div>
+                <div class="col-2">
+                    <section class="p-2 pt-3">
+                        <div class="bg-light p-3 pt-3 mb-2 rounded">
+                            <h6 class="border-bottom pb-1">أحصائيات</h6>
+                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Optio, iure.</p>
+                        </div>
+                        <div class="bg-light p-3 pt-3 mb-2 rounded">
+                            <h6 class="border-bottom pb-1">المؤسسات</h6>
+                            <div class="foundations">
+                                <img src="/public/img/pg1.jpg" 
+                                    data-bs-toggle="tooltip" 
+                                    data-bs-placement="bottom"
+                                    data-bs-title="مؤسسة متطوعون"
+                                    alt=""
+                                >
+                                <img src="/public/img/pg1.jpg" 
+                                    data-bs-toggle="tooltip" 
+                                    data-bs-placement="bottom"
+                                    data-bs-title="مؤسسة متطوعون"
+                                    alt=""
+                                >
+                                <img src="/public/img/pg1.jpg" 
+                                    data-bs-toggle="tooltip" 
+                                    data-bs-placement="bottom"
+                                    data-bs-title="مؤسسة متطوعون"
+                                    alt=""
+                                >
+                                
+                            </div>
+                        </div>
+                        <div class="bg-light p-3 pt-3 mb-2 rounded">
+                            <h6 class="border-bottom pb-1">الأنجازات</h6>
+                            <div class="badges">
+                                <img src="/public/img/insignia.png" 
+                                    data-bs-toggle="tooltip" 
+                                    data-bs-placement="bottom"
+                                    data-bs-title="مؤسسة متطوعون"
+                                    alt=""
+                                >
+                                <img src="/public/img/insignia.png" 
+                                    data-bs-toggle="tooltip" 
+                                    data-bs-placement="bottom"
+                                    data-bs-title="مؤسسة متطوعون"
+                                    alt=""
+                                >
+                                <img src="/public/img/insignia.png" 
+                                    data-bs-toggle="tooltip" 
+                                    data-bs-placement="bottom"
+                                    data-bs-title="مؤسسة متطوعون"
+                                    alt=""
+                                >
+                                
+                            </div>
+                        </div>
+                       
+
+                    </section>
+                </div>
+            </div>
+            
+         </div>
+    </main>
+    <div></div>
+    
+    <script src="/public/js/bootstrap.bundle.min.js"></script>
+    <script>
+        const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
+        const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl))
+    </script>
+</body>
+</html>

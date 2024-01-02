@@ -154,3 +154,15 @@
     color: var(--h-primary) !important;
 }
 
+.fa-star{
+    color: gold;
+    font-size: 14px;
+    margin-bottom: 20px;
+}
+
+.foundations img , .badges img{
+    width: 50px;
+    height: 50px;
+    border-radius: 5px;
+    cursor: pointer;
+}
