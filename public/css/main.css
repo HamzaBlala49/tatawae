@@ -112,6 +112,15 @@
     color: var(--h-light);
 }
 
+.h-btn-primary-outline{
+    border: 2px solid var(--h-primary-dark);
+}
+
+.h-btn-primary-outline:hover{
+    background-color:var(--h-primary-dark);
+    color: var(--h-light) !important;  
+}
+
 .full-screen{
     width: 100vw;
     height: 100vh !important;
@@ -165,4 +174,12 @@
     height: 50px;
     border-radius: 5px;
     cursor: pointer;
+}
+
+.notification{
+    display: block;
+    width: 10px;
+    height: 10px;
+    background: var(--h-primary);
+    border-radius: 50%;
 }

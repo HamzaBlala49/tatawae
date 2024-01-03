@@ -1,0 +1,12 @@
+@import url("./main.css");
+#memberShip-msg > div> img , #eventRequest-msg > div> img{
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid var(--h-primary-dark);
+}
+
+#memberShip-msg > span , #eventRequest-msg > span{
+    width: fit-content;
+}
