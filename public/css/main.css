@@ -37,7 +37,7 @@
 }
 
 .h-bg-primary-dark{
-    background-color: var(--h-primary-dark);
+    background-color: var(--h-primary-dark) !important;
 }
 .h-bg-primary-light{
     background-color: var(--h-primary-light);
@@ -182,4 +182,12 @@
     height: 10px;
     background: var(--h-primary);
     border-radius: 50%;
+}
+
+.backBtn{
+    border: 1px solid black ;
+    border-radius: 50%;
+    height: 40px;
+    width:40px ;
+    background-color: var(--h-primary-light);
 }

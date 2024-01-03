@@ -6,7 +6,6 @@
     <link rel="stylesheet" href="/public/css/all.min.css">
     <link rel="stylesheet" href="/public/css/bootstrap.min.css">
     <link rel="stylesheet" href="/public/css/main.css">
-    <link rel="stylesheet" href="/public/css/notifications.css">
     <title>notifications</title>
 </head>
 <body>
@@ -231,6 +230,27 @@
                                     </div>
                                 </div>
                             </div>
+                            <div id="pagenation" class="d-flex justify-content-between align-items-center">
+                                <nav aria-label="Page navigation example" class="mt-4">
+                                    <ul class="pagination">
+                                      <li class="page-item">
+                                        <a class="page-link h-text-primary-dark" href="#" aria-label="Previous">
+                                          <span aria-hidden="true">&laquo;</span>
+                                        </a>
+                                      </li>
+                                      <li class="page-item"><a class="page-link text-white h-bg-primary-dark" href="#">1</a></li>
+                                      <li class="page-item"><a class="page-link h-text-primary-dark" href="#">2</a></li>
+                                      <li class="page-item"><a class="page-link h-text-primary-dark" href="#">3</a></li>
+                                      <li class="page-item">
+                                        <a class="page-link h-text-primary-dark" href="#" aria-label="Next">
+                                          <span aria-hidden="true">&raquo;</span>
+                                        </a>
+                                      </li>
+                                    </ul>
+                                </nav>
+                                <span> الصفحه 1 من 3</span>
+                            </div>
+                            
                         </div>
                    </section> 
                 </div>
@@ -249,7 +269,7 @@
                                             بحث
                                             <i class="fa-solid fa-search"></i>
                                         </label>
-                                        <input type="text" name="" id="" class="form-control form-control-sm h-text-17" placeholder="تنظيف الشاطئ" aria-describedby="helpId"/>
+                                        <input type="text" name="" id="" class="form-control rounded-pill form-control-sm h-text-17" placeholder="تنظيف الشاطئ" aria-describedby="helpId"/>
                                     </div>
                                 </div>
                                 <div class="mb-3">
@@ -257,7 +277,7 @@
                                         <i class="fa-solid fa-map-location"></i>
                                         المدينة
                                     </label>
-                                    <select class="form-select form-select-sm h-text-17" name="" id="">
+                                    <select class="form-select form-select-sm rounded-pill h-text-17" name="" id="">
                                         <option selected>الكل</option>
                                         <option value="">المكلا</option>
                                         <option value="">سيؤون</option>
@@ -269,7 +289,7 @@
                                         <i class="fa-solid fa-person-half-dress"></i>
                                         الجنس
                                     </label>
-                                    <select class="form-select form-select-sm h-text-17" name="" id="">
+                                    <select class="form-select form-select-sm rounded-pill h-text-17" name="" id="">
                                         <option selected>الكل</option>
                                         <option value="">ذكر</option>
                                         <option value="">أنثئ</option>
@@ -281,7 +301,7 @@
                                         <i class="fa-solid fa-calendar"></i>
                                         تاريخ البدء
                                     </label>
-                                    <input type="date" class="form-control form-control-sm" name="" id="" aria-describedby="helpId" placeholder="" />
+                                    <input type="date" class="form-control rounded-pill form-control-sm" name="" id="" aria-describedby="helpId" placeholder="" />
                                 </div>
                                 
                             </form>
