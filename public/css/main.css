@@ -8,9 +8,28 @@
     --h-light:#ffffff;
     --h-brown:#64312F;
     --h-dark:#141514;
-
     direction: rtl;
 }
+::-webkit-scrollbar {
+    width: 10px; /* Adjust the width of the scrollbar */
+    height: 10px;
+  }
+
+  /* Set styles for the thumb (the moving part of the scrollbar) */
+  ::-webkit-scrollbar-thumb {
+    background-color: var(--h-primary-light); /* Set the background color of the thumb */
+    border-radius: 6px; /* Set the border radius to make it rounder */
+  }
+
+  /* Set styles for the scrollbar track on hover */
+  ::-webkit-scrollbar-track:hover {
+    background-color: var(--h-primary-light); /* Change the background color on hover */
+  }
+
+  /* Set styles for the scrollbar thumb on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background-color: var(--h-primary-dark); /* Change the background color of the thumb on hover */
+  }
 @font-face {
     font-family:Cairo;
     src: url("../font/Cairo-VariableFont_slnt\,wght.ttf");
@@ -22,6 +41,9 @@
     outline:none;
     font-family:Cairo;
 }
+/* body{
+    overflow-x: hidden;
+} */
 .h-text-primary{
     color: var(--h-primary);
 }
@@ -185,9 +207,10 @@
 }
 
 .backBtn{
-    border: 1px solid black ;
+    border: none ;
     border-radius: 50%;
     height: 40px;
     width:40px ;
-    background-color: var(--h-primary-light);
+    background-color: var(--h-primary-dark);
+    color: var(--h-light);
 }

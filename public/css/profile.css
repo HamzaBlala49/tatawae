@@ -47,3 +47,14 @@
     border: 3px solid var(--h-primary-dark);
 
 }
+
+
+.member > img{
+    border-radius: 50%;
+    width: 75px;
+    height: 75px;
+    object-fit: cover;
+    border: 4px solid var(--h-primary-dark);
+    
+}
+

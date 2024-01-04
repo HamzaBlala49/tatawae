@@ -34,10 +34,6 @@ const eventSchema = new Schema({
     type: String,
   },
 
-  address: {
-    type: String,
-    maxlength: 255,
-  },
 
 
   city: {
