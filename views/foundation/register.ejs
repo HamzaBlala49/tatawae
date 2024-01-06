@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/all.min.css">
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/main.css">
+    <title>أنشاء حساب مؤسسة</title>
+</head>
+<body class="bg-light">
+    <div class="container">       
+        <h4 class="my-4 fw-bold">إنشاء حساب (مؤسسة)</h4>
+        <p>لديك حساب مسبق؟<a class="h-text-primary-dark" href="/auth/login">تسجيل الدخول</a></p>
+
+        <% if (msg != null) { %>
+            <div class="alert alert-danger" role="alert"><strong>رسالة خطأ</strong><%= msg %></div>
+        <% } %>
+        
+        <form action="/auth/foundation/register" method="post" enctype="multipart/form-data">
+            <div class="row mt-3 ">
+                <div class="col-6 mb-2 ">
+                    <div class="bg-white rounded mb-3 p-3">
+                        <h5 class="h-text-primary-dark fw-bold">معلومات شخصية (مطلوبة)</h5>
+                        <div class="mb-3">
+                            <label for="" class="form-label h-text-17 fw-bold">أسم المؤسسة  (الجهه):</label>
+                            <input  type="text" maxlength="50" required class="form-control form-control-sm h-text-15 rounded-pill" name="fullName"/>
+                        </div>
+                        <div class="mb-3">
+                            <label for="" class="form-label h-text-17 fw-bold">أسم المستخدم:</label>
+                            <input  type="text" maxlength="50" required class="form-control form-control-sm h-text-15  rounded-pill" name="username"/>
+                        </div>
+                        <div class="mb-3">
+                            <label for="" class="form-label h-text-17 fw-bold">كلمة المرور:</label>
+                            <input  type="password" maxlength="30" required class="form-control form-control-sm h-text-15  rounded-pill" name="password"/>
+                        </div>
+                    </div>
+                    <div class="bg-white rounded p-3">
+                        <h5 class="h-text-primary-dark fw-bold">صورة المؤسسة وغلاف الملف الشخصي</h5>
+                        <div class="mb-3">
+                            <label for="" class="form-label h-text-17 fw-bold">صورة:</label>
+                            <input  type="file" class="form-control form-control-sm h-text-15 rounded-pill" name="avatar"/>
+                        </div>
+                        <div class="mb-3">
+                            <label for="" class="form-label h-text-17 fw-bold">الغلاف:</label>
+                            <input  type="file"   class="form-control form-control-sm h-text-15  rounded-pill" name="coverProfileImage" />
+                        </div>
+                        <div class="mb-3">
+                            <label for="" class="form-label h-text-17 fw-bold">وصف المؤسسة:</label>
+                            <textarea class="form-control rounded-4 h-text-17" name="description" id="" rows="3" placeholder="زود ملفك الشخصي بمعلومات عن المؤسسة..."></textarea>  
+                        </div>
+                    </div>      
+                    <div>
+                        <button type="submit" class="btn h-btn-primary rounded-pill px-4 h-bg-primary-dark my-4 text-white">
+                            إنشاء
+                        </button>
+                    </div>          
+                </div>
+                <div class="col-6 mb-2 ">
+                    <div class="bg-white rounded mb-2 p-3">
+                        <h5 class="h-text-primary-dark fw-bold">المدينة و الموقع</h5>
+                        <div class="mb-3">
+                            <label for="" class="form-label fw-bold h-text-17">
+                                المدينة:
+                            </label>
+                            <select class="form-select form-select-sm rounded-pill h-text-17" name="city" id="">
+                                <option value="" selected>أختر مدينة</option>
+                                <option value="المكلا">المكلا</option>
+                                <option value="سيؤون">سيؤون</option>
+                                <option value="غيل باوزير">غيل باوزير</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="" class="form-label h-text-17 fw-bold">الموقع:</label>
+                            <input  type="text" maxlength="255" class="form-control form-control-sm h-text-15  rounded-pill" name="address" placeholder="حضرموت-المكلا-الديس-جانب مستشفئ البرج"/>
+                        </div>
+                    </div>
+                    <div class="bg-white rounded p-3">
+                        <h5 class="h-text-primary-dark fw-bold">التواصل الاجتماعي</h5>
+                        <div class="mb-3">
+                            <label for="" class="form-label h-text-17 fw-bold">الأيميل:</label>
+                            <input  type="email"  class="form-control form-control-sm h-text-15 rounded-pill" name="email"/>
+                        </div>
+                        <div class="mb-3">
+                            <label for="" class="form-label h-text-17 fw-bold">الفيسبوك:</label>
+                            <input  type="text" maxlength="50"  class="form-control form-control-sm h-text-15  rounded-pill" name="facebook"/>
+                        </div>
+                        <div class="mb-3">
+                            <label for="" class="form-label h-text-17 fw-bold">تويتر(X):</label>
+                            <input  type="text" maxlength="20"  class="form-control form-control-sm h-text-15  rounded-pill" name="twitter"/>
+                        </div>
+                        <div class="mb-3">
+                            <label for="" class="form-label h-text-17 fw-bold">انستقرام:</label>
+                            <input  type="text" maxlength="20"  class="form-control form-control-sm h-text-15  rounded-pill" name="instagram" />
+                        </div>
+                        <div class="mb-3">
+                            <label for="" class="form-label h-text-17 fw-bold">رقم الواتساب:</label>
+                            <input  type="text" maxlength="20"  class="form-control form-control-sm h-text-15  rounded-pill" name="whatsapp" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</body>
+</html>

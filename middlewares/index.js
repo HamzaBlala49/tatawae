@@ -1,12 +1,11 @@
 import logger from "./moragnLoger.js";
 import session from "./expressSession.js";
-import { comparePassword, hashPassword } from "../services/bcrypt.js";
 import checkRole from "./checkRole.js";
+import upload from "./upload.js";
 
 export { 
     logger, 
     session, 
-    comparePassword, 
-    hashPassword,
-    checkRole, 
+    checkRole,
+    upload
 };

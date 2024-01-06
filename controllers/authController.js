@@ -1,39 +1,33 @@
 import e from "express";
-import { volunteer, foundation } from "../models/index.js";
+import { foundation, volunteer } from "../models/index.js";
 
 const login = async (req, res) => {
-  const { role, username, password } = req.body;
+  res.render("login",{msg:null});
+};
 
-  if(!role,!username,!password){
-    res.render
+const loginUser = async (req, res) => {
+  const data = req.body;
+  let user ;
+  if(data.role == 0){
+    user = await foundation.findOne({ username: data.username });
+  }else{
+    user = await volunteer.findOne({ username: data.username });
   }
 
-  if (role === "volunteer") {
-
-    const volunteerData = await volunteer.findOne({ username: username });
-
-    if (volunteerData) {
-      if (volunteerData.password === password) {
-        req.session.username = username;
-        res.redirect("/volunteer");
-        return;
-      } else {
-        res.render("login", {
-          msg: "أنت غير مصرح لك بالدخول تأكد من صحة البيانات المدخله",
-        });
+  if (user) {
+    if (user.password === data.password) {
+      req.session.user = user;
+      if(data.role == 0){
+        res.redirect("/foundation/dashboard");
+      }else{
+        res.redirect("/volunteer/dashboard");
       }
+    } else {
+      res.render("login", { msg: "كلمة المرور خاطئة" });
     }
-  } else if (role === "foundation") {
-    const foundationData = await foundation.findOne({ username: username });
-    if (foundationData) {
-      if (foundationData.password === password) {
-        req.session.username = username;
-        res.redirect("/foundation");
-        return;
-      }
-    }
+  } else {
+    res.render("login", { msg: "اسم المستخدم خاطئ" });
   }
-  res.render("login");
 };
 
 const logout = (req, res) => {
@@ -41,12 +35,71 @@ const logout = (req, res) => {
   res.redirect("/");
 };
 
-const register = (req, res) => {
-  res.render("register");
+const registerFoundationPage = (req, res) => {
+  res.render("foundation/register", { msg: null });
 };
 
-export default {
+const registerFoundation = async (req, res) => {
+    const data = req.body;
+
+    const foundationData = await foundation.findOne({ username: data.username });
+    if (foundationData) {
+      res.render("/foundation/register", { msg: "أسم المستخدم موجود بلفعل" });
+    } else {
+      if (req.files.avatar) {
+        data.avatar = req.files.avatar[0].filename;
+      }
+      if (req.files.coverProfileImage) {
+        data.coverProfileImage = req.files.coverProfileImage[0].filename;
+      }
+      
+      const newFoundation = await foundation.create(data);
+
+      if(newFoundation){
+        res.redirect("/auth/login");
+      }else{
+        res.render("/foundation/register", { msg: "حدث خطأ اثناء التسجيل" });
+        return;
+      }
+    }
+};
+
+const registerVolunteerPage = (req, res) => {
+  res.render("volunteer/register", { msg: null });
+}
+
+const registerVolunteer = async (req, res) => {
+  const data = req.body;
+
+  const volunteerData = await volunteer.findOne({ username: data.username });
+  if (volunteerData) {
+    res.render("/volunteer/register", { msg: "أسم المستخدم موجود بلفعل" });
+  } else {
+    if (req.files.avatar) {
+      data.avatar = req.files.avatar[0].filename;
+    }
+    if (req.files.coverProfileImage) {
+      data.coverProfileImage = req.files.coverProfileImage[0].filename;
+    }
+
+    const newVolunteer = await volunteer.create(data);
+
+    if(newVolunteer){
+      res.redirect("/auth/login");
+    }else{
+      res.render("/volunteer/register", { msg: "حدث خطأ اثناء التسجيل" });
+      return;
+    }
+  }
+
+}
+
+export {
   login,
-  logout,
-  register,
+  loginUser,
+  registerFoundationPage,
+  registerFoundation,
+  registerVolunteerPage,
+  registerVolunteer,
+  logout
 };

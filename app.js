@@ -2,6 +2,7 @@ import express from "express";
 import env from "dotenv";
 import mongoose, { set } from "mongoose"
 import {logger,session} from "./middlewares/index.js";
+import { authRouter } from "./routes/index.js";
 
 //env configuration
 env.config();
@@ -28,15 +29,16 @@ mongoose.connection.on('error',(error)=>{
 session(app);
 logger(app);
 app.set('view engine', 'ejs');
-app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
 app.use(express.static('public'));
 
 
 
 
-app.get('/', (req, res) => res.render('login'));
+app.get('/', (req, res) => res.send('landing page'));
 
 // routes
+app.use('/auth',authRouter);
 
 // 404 route

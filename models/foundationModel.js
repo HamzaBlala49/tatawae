@@ -1,67 +1,59 @@
 import { Schema, SchemaTypes, model } from "mongoose";
 
-
 const foundationSchema = new Schema({
-
   username: {
     type: String,
     required: true,
     unique: true,
     lowercase: true,
-    maxlength: 50,
+    maxlength: 255,
   },
 
   fullName: {
     type: String,
     required: true,
-    maxlength: 50,
+    maxlength: 255,
   },
-
-  email: {
-    type: String,
-    required: true,
-    unique: true,
-    lowercase: true,
-  },
-
+ 
   password: {
     type: String,
     required: true,
+    maxlength: 255,
+  },
+  email :{
+    type: String,
+  },
+  facebook :{
+    type: String,
+  },
+  instagram:{
+    type: String,
+  },
+  whatsapp:{
+    type: String,
+  },
+  twitter:{
+    type: String,
   },
 
-  phoneNumber: {
-    type: String,
-    required: true,
-    maxlength: 9,
-  },
-  
   city: {
     type: String,
-    required: true,
     maxlength: 255,
-    validate: {
-      validator: function (value) {
-        return !cities.includes(value);
-      },
-      message: "Invalid city",
-    },
+  },
+  address :{
+    type: String,
+    maxlength: 255,
+
   },
 
-  naturalWork: [
-    { 
-      type: String,
-      maxlength: 255 
-    }
-  ],
+  // activityType: [
+  //   {
+  //     type: String,
+  //     maxlength: 255,
+  //   },
+  // ],
 
-  activityType: [
-    { 
-      type: String, 
-      maxlength: 255 
-    }
-  ],
-
-  image: {
+  avatar: {
     type: String,
     default: "user.png",
   },
@@ -74,7 +66,6 @@ const foundationSchema = new Schema({
   description: {
     type: String,
   },
-
 
   memberShips: [
     {
@@ -93,7 +84,6 @@ const foundationSchema = new Schema({
     type: Date,
     default: new Date(),
   },
-
 });
 
 const foundation = model("foundations", foundationSchema);

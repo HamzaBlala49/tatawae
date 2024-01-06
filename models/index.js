@@ -1,8 +1,8 @@
-import volunteer from "./volunteerModel";
-import badge from "./badgeModel";
-import foundation from "./foundationModel";
-import event from "./eventModel";
-import eventRequest from "./eventRequestModel";
+import volunteer from "./volunteerModel.js";
+import badge from "./badgeModel.js";
+import foundation from "./foundationModel.js";
+import event from "./eventModel.js";
+import eventRequest from "./eventRequestModel.js";
 
 export  {
     volunteer,

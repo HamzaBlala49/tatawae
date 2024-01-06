@@ -1,27 +1,22 @@
 import { Schema, SchemaTypes, model } from "mongoose";
-const cities = [];
-const skills = [];
-
 const volunteerSchema = new Schema({
   username: {
     type: String,
     required: true,
     unique: true,
     lowercase: true,
-    maxlength: 50,
+    maxlength: 255,
   },
 
   fullName: {
     type: String,
     required: true,
-    maxlength: 50,
+    maxlength: 255,
   },
 
   email: {
     type: String,
     required: true,
-    unique: true,
-    lowercase: true,
   },
 
   password: {
@@ -29,13 +24,7 @@ const volunteerSchema = new Schema({
     required: true,
   },
 
-  phoneNumber: {
-    type: String,
-    required: true,
-    maxlength: 9,
-  },
-
-  whatsappPhoneNumber: {
+  whatsapp: {
     type: String,
     maxlength: 9,
     required: true,
@@ -43,29 +32,15 @@ const volunteerSchema = new Schema({
 
   birthDate: {
     type: Date,
-    required: true,
   },
 
   city: {
     type: String,
-    required: true,
     maxlength: 255,
-    validate: {
-      validator: function (value) {
-        return !cities.includes(value);
-      },
-      message: "Invalid city",
-    },
   },
 
-  skills: [
-    {
-      type: String,
-      maxlength: 255,
-    },
-  ],
-
-  image: {
+  
+  avatar: {
     type: String,
     default: "user.png",
   },

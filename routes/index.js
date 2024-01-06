@@ -1,20 +1,6 @@
-import authRouter from "./authRoute";
-const path = "/auth"
+import authRouter from "./authRoute.js";
 
-const loginRoute = (app) => {
-    app.use(path, authRouter)
-}
 
-const logoutRoute = (app) => {
-    app.use(path, authRouter)
-}
-
-const registerRoute = (app) => {
-    app.use(path, authRouter)
-}
-
-export default {
-    loginRoute,
-    registerRoute,
-    logoutRoute,
+export  {
+    authRouter
 }
