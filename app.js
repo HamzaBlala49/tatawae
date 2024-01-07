@@ -2,7 +2,7 @@ import express from "express";
 import env from "dotenv";
 import mongoose, { set } from "mongoose"
 import {logger,session} from "./middlewares/index.js";
-import { authRouter,membersRouter } from "./routes/index.js";
+import { authRouter,membersRouter,volunteerRouter,membershipRequestRouter } from "./routes/index.js";
 
 //env configuration
 env.config();
@@ -43,8 +43,10 @@ app.get('/', (req, res) => res.send('landing page'));
 app.use('/auth',authRouter);
 // foundation
 app.use('/foundation/members',membersRouter);
+app.use('/foundation/invitation',membershipRequestRouter)
 
 //volunteer
+app.use('/volunteer',volunteerRouter);
 
 
 // 404 route

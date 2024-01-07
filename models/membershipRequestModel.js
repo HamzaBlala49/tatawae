@@ -3,9 +3,14 @@ import { Schema, SchemaTypes, model } from "mongoose";
 
 const membershipRequestSchema = new Schema({
 
-  volunteerId: {
+  volunteer: {
     type: SchemaTypes.ObjectId,
-    ref: "volunteer",
+    ref: "volunteers",
+  },
+  
+  foundation:{
+    type: SchemaTypes.ObjectId,
+    ref: "foundations",
   },
 
   // 0: pending, 1: accepted, 2: rejected

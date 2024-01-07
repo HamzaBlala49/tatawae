@@ -76,7 +76,7 @@ const registerVolunteer = async (req, res) => {
 
   const volunteerData = await volunteer.findOne({ username: data.username });
   if (volunteerData) {
-    res.render("/volunteer/register", { msg: "أسم المستخدم موجود بلفعل" });
+    res.render("volunteer/register", { msg: "أسم المستخدم موجود بلفعل" });
   } else {
     if (req.files.avatar) {
       data.avatar = req.files.avatar[0].filename;
@@ -90,7 +90,7 @@ const registerVolunteer = async (req, res) => {
     if(newVolunteer){
       res.redirect("/auth/login");
     }else{
-      res.render("/volunteer/register", { msg: "حدث خطأ اثناء التسجيل" });
+      res.render("volunteer/register", { msg: "حدث خطأ اثناء التسجيل" });
       return;
     }
   }

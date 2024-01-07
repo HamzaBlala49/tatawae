@@ -31,13 +31,13 @@
                             <li>
                                 <a href="./events.html" class="active-link-sidebar">
                                     <i class="fa-solid fa-handshake-angle"></i>
-                                    الأحداث التطوعية
+                                     إدارة الأحداث
                                 </a>
                             </li>
                             <li>
                                 <a href="./myEvents.html">
-                                    <i class="fa-solid fa-hands-holding"></i>
-                                    المشاركات التطوعية
+                                    <i class="fa-solid fa-people-group"></i>
+                                    فريقي التطوعي
                                 </a>
                             </li>
                             <li>
@@ -75,7 +75,6 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-
                                     <% foundationsMember.memberShips.forEach((element,index) => { %>
                                         <tr class="">
                                             <td scope="row"></td>
@@ -98,26 +97,6 @@
                             </table>
                         </div>
                         
-                        <div id="pagenation" class="d-flex justify-content-between align-items-center">
-                            <nav aria-label="Page navigation example" class="mt-4">
-                                <ul class="pagination">
-                                    <li class="page-item">
-                                    <a class="page-link h-text-primary-dark" href="#" aria-label="Previous">
-                                        <span aria-hidden="true">&laquo;</span>
-                                    </a>
-                                    </li>
-                                    <li class="page-item"><a class="page-link text-white h-bg-primary-dark" href="#">1</a></li>
-                                    <li class="page-item"><a class="page-link h-text-primary-dark" href="#">2</a></li>
-                                    <li class="page-item"><a class="page-link h-text-primary-dark" href="#">3</a></li>
-                                    <li class="page-item">
-                                    <a class="page-link h-text-primary-dark" href="#" aria-label="Next">
-                                        <span aria-hidden="true">&raquo;</span>
-                                    </a>
-                                    </li>
-                                </ul>
-                            </nav>
-                            <span> الصفحه 1 من 3</span>
-                        </div>
                    </section> 
                 </div>
                 <div class="col-3">
@@ -162,29 +141,12 @@
         <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header align-items-center">
-                <input type="text" style="width: 383px;" name="" id="serchMember" class="form-control rounded-pill form-control-sm h-text-17" placeholder="بحث...." aria-describedby="helpId"/>
-            <button type="button" class="btn-close ms-0" data-bs-dismiss="modal" aria-label="Close"></button>
+                <input id="userSearchInput" type="text" style="width: 383px;" name="" id="serchMember" class="form-control rounded-pill form-control-sm h-text-17" placeholder="بحث...." aria-describedby="helpId"/>
+            <button  type="button" class="btn-close ms-0" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <div id="users-continer">
-                    <a href="/foundation/volunteer/1" class="text-decoration-none mb-2">
-                        <div class="p-3 d-flex justify-content-between align-items-center">
-                            <div class="d-flex justify-content-between align-items-center">
-                                <img src="/public/img/person.jpg" style="width: 60px; height: 60px; object-fit: cover;" class="img-fluid rounded-pill" >
-                                <p class="fw-semibold m-0 me-3 text-dark">hamza</p>
-                            </div>
-                            <button class="btn btn-sm  rounded-pill h-btn-primary text-white h-bg-primary-dark">دعوة</button>
-                        </div>
-                    </a>
-                    <a href="/foundation/volunteer/1" class="text-decoration-none mb-2">
-                        <div class="p-3 d-flex justify-content-between align-items-center">
-                            <div class="d-flex justify-content-between align-items-center">
-                                <img src="/public/img/person.jpg" style="width: 60px; height: 60px; object-fit: cover;" class="img-fluid rounded-pill" >
-                                <p class="fw-semibold m-0 me-3 text-dark">hamza</p>
-                            </div>
-                            <button class="btn btn-sm  rounded-pill h-btn-primary text-white h-bg-primary-dark">دعوة</button>
-                        </div>
-                    </a>
+                <div id="users-container">
+                    
                 </div>
             </div>
         </div>
@@ -192,6 +154,45 @@
     </div>    
     <script src="/js/bootstrap.bundle.min.js"></script>
     <script>
+        const userSearchContainer = document.getElementById("users-container");
+        const userSearchInput = document.getElementById("userSearchInput");
+
+        userSearchInput.addEventListener("input",async()=>{
+            userSearchContainer.innerHTML = "";
+            const response = await fetch(`http://localhost:3000/volunteer/search?username=${userSearchInput.value}`)
+            const data = await response.json();
+            data.data.forEach(element => {
+                const template = `
+                <div class="p-3 d-flex justify-content-between align-items-center mb-2">
+                        <a href="/foundation/volunteer/${element._id}" class="text-decoration-none">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <img src="/${element.avatar}" style="width: 60px; height: 60px; object-fit: cover;" class="img-fluid rounded-pill" >
+                                <p class="fw-semibold m-0 me-3 text-dark">${element.username}</p>
+                            </div>
+                        </a>
+                        <button onclick="invitation('${element._id}')"  class="btn btn-sm  rounded-pill h-btn-primary text-white h-bg-primary-dark" id="${element._id}">دعوة</button>
+                    </div>`
+                userSearchContainer.innerHTML +=template;
+                
+            });
+
+            if(userSearchInput.value == "") userSearchContainer.innerHTML =""
+           
+        })
+
+        function invitation(id){
+            const invitationBtn =  document.getElementById(id);
+            fetch("/foundation/invitation/invite",{
+                method:"POST",
+                headers: {'Content-Type': 'application/json'},
+                body:JSON.stringify({volunteerId:id})
+            }).then(res=>{
+                if(res.ok){
+                    invitationBtn.classList.add("disabled");
+                }
+            })
+
+        }
 
     </script>
 </body>

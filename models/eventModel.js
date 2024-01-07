@@ -40,12 +40,6 @@ const eventSchema = new Schema({
     type: String,
     required: true,
     maxlength: 255,
-    validate: {
-      validator: function (value) {
-        return !cities.includes(value);
-      },
-      message: "Invalid city",
-    },
   },
 
   volunteersNumber: {

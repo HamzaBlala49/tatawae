@@ -11,7 +11,6 @@ const index = async (req, res) => {
       .findById(user._id)
       .populate("memberShips")
       .select("memberShips");
-    // console.log(foundationsMember);
     res.render("foundation/members", { foundationsMember });
     res.end();
   } catch (e) {

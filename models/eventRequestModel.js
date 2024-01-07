@@ -3,34 +3,30 @@ import { Schema, SchemaTypes, model } from "mongoose";
 
 const eventRequestSchema = new Schema({
 
-  name: {
-    type: String,
-    required: true,
-    unique: true,
-    maxlength: 255,
+  foundation:{
+    type: SchemaTypes.ObjectId,
+    ref: "foundations",
   },
 
   volunteer: {
     type: SchemaTypes.ObjectId,
-    ref: "volunteer",
-    require: true,
+    ref: "volunteers",
+
   },
 
   event: {
     type: SchemaTypes.ObjectId,
-    ref: "event",
+    ref: "events",
     require: true,
   },
 
   sender: {
     type: Boolean,
-    default: 0, // 0 represent volunteer
+    default: 0, // 0 represent foundation
   },
 
   status: {
     type: Number,
-    min: 0,
-    max: 2,
     default: 0,
   },
 
