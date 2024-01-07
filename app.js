@@ -2,7 +2,7 @@ import express from "express";
 import env from "dotenv";
 import mongoose, { set } from "mongoose"
 import {logger,session} from "./middlewares/index.js";
-import { authRouter } from "./routes/index.js";
+import { authRouter,membersRouter } from "./routes/index.js";
 
 //env configuration
 env.config();
@@ -31,6 +31,7 @@ logger(app);
 app.set('view engine', 'ejs');
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+app.use(express.static('uploads'));
 app.use(express.static('public'));
 
 
@@ -40,5 +41,10 @@ app.get('/', (req, res) => res.send('landing page'));
 
 // routes
 app.use('/auth',authRouter);
+// foundation
+app.use('/foundation/members',membersRouter);
+
+//volunteer
+
 
 // 404 route

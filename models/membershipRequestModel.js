@@ -8,17 +8,10 @@ const membershipRequestSchema = new Schema({
     ref: "volunteer",
   },
 
+  // 0: pending, 1: accepted, 2: rejected
   status: {
     type: Number,
     default: 0,
-    min: 0,
-    max: 2,
-    validate: {
-      validator: function (value) {
-        return value < 0 || value > 2;
-      },
-      message: "the rage must be between 0 and 2",
-    },
   },
 
   createdAt: {

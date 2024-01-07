@@ -70,7 +70,7 @@ const foundationSchema = new Schema({
   memberShips: [
     {
       type: SchemaTypes.ObjectId,
-      ref: "volunteer",
+      ref: "volunteers",
     },
   ],
 

@@ -214,3 +214,8 @@
     background-color: var(--h-primary-dark);
     color: var(--h-light);
 }
+.form-select:focus {
+
+    border-color: #a6cd7a;
+    box-shadow: 0 0 0 0.25rem #a6cd7a;
+}

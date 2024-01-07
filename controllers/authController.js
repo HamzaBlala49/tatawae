@@ -16,6 +16,7 @@ const loginUser = async (req, res) => {
 
   if (user) {
     if (user.password === data.password) {
+      req.session.role = data.role;
       req.session.user = user;
       if(data.role == 0){
         res.redirect("/foundation/dashboard");
@@ -41,6 +42,7 @@ const registerFoundationPage = (req, res) => {
 
 const registerFoundation = async (req, res) => {
     const data = req.body;
+    data.memberShips = [];
 
     const foundationData = await foundation.findOne({ username: data.username });
     if (foundationData) {
@@ -70,6 +72,7 @@ const registerVolunteerPage = (req, res) => {
 
 const registerVolunteer = async (req, res) => {
   const data = req.body;
+  data.badges = [];
 
   const volunteerData = await volunteer.findOne({ username: data.username });
   if (volunteerData) {
