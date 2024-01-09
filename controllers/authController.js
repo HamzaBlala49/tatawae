@@ -43,7 +43,6 @@ const registerFoundationPage = (req, res) => {
 const registerFoundation = async (req, res) => {
     const data = req.body;
     data.memberShips = [];
-
     const foundationData = await foundation.findOne({ username: data.username });
     if (foundationData) {
       res.render("/foundation/register", { msg: "أسم المستخدم موجود بلفعل" });

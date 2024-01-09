@@ -24,17 +24,13 @@ const eventSchema = new Schema({
   },
 
   gender: {
-    type: Number,
-    min: 0,
-    max: 2,
+    type: String,
     required: true,
   },
 
   googleMapUrl: {
     type: String,
   },
-
-
 
   city: {
     type: String,
@@ -56,10 +52,17 @@ const eventSchema = new Schema({
     type: Date,
     required: true,
   },
+  
+// for sowfet delete
+  status: {
+    type: Boolean,
+    default: 0,
+  },
+
   volunteers: [
     {
       type: SchemaTypes.ObjectId,
-      ref: "volunteer",
+      ref: "volunteers",
 
       rating: {
         type: Number,

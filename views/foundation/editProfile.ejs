@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/all.min.css">
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="/css/profile.css">
+    <title>Profile</title>
+</head>
+<body>
+    <main>
+         <div class="">
+            <div class="row position-relative">
+                <div class="col-2 vh-100 position-sticky top-0 end-0 bg-light">
+                    <aside class="p-3">
+                        <div class="brand fs-3 mb-3 h-text-primary-dark fw-bold">تطوع</div>
+                        <ul class="sidebar-link">
+                            <li>
+                                <a href="./home.html">
+                                    <i class="fa-solid fa-house"></i>
+                                    الصفحة الرئيسية
+                                </a>
+                            </li>
+                            <li>
+                                <a href="./notifications.html">
+                                    <i class="fa-solid fa-bell"></i>
+                                    الأشعارات
+                                </a>
+                            </li>
+                            <li>
+                                <a href="./events.html" class="active-link-sidebar">
+                                    <i class="fa-solid fa-handshake-angle"></i>
+                                     إدارة الأحداث
+                                </a>
+                            </li>
+                            <li>
+                                <a href="./myEvents.html">
+                                    <i class="fa-solid fa-people-group"></i>
+                                    فريقي التطوعي
+                                </a>
+                            </li>
+                            <li>
+                                <a href="./profile.html" >
+                                    <i class="fa-solid fa-user"></i>
+                                    ملفي الشخصي
+                                </a>
+                            </li>
+                            <li>
+                                
+                            </li>
+                            <li class="mt-4">
+                                <a href="./profile.html" class="h-bg-primary-light rounded-pill px-2 py-1">
+                                    <i class="fa-solid fa-right-from-bracket"></i>
+                                    تسجيل الخروج
+                                </a>
+                            </li>
+                        </ul>
+                    </aside>
+                </div>
+                <div class="col-8 m-3">
+                    <h4 class="fw-bold">تعديل الملف الشخصي</h4>
+                    <hr>
+                    
+                    <form action="/foundation/profile/edit" method="post" enctype="multipart/form-data">
+                        <div class="row mt-3 ">
+                            <div class="col-6 mb-2 ">
+                                <div class="bg-white rounded mb-3 p-3">
+                                    <h5 class="h-text-primary-dark fw-bold">معلومات شخصية</h5>
+                                    <div class="mb-3">
+                                        <label for="" class="form-label h-text-17 fw-bold">أسم المؤسسة  (الجهه):</label>
+                                        <input  type="text" maxlength="50" value="<%- data.fullName %>" required class="form-control form-control-sm h-text-15 rounded-pill" name="fullName"/>
+                                    </div>
+                                </div>
+                                <div class="bg-white rounded p-3">
+                                    <h5 class="h-text-primary-dark fw-bold">صورة المؤسسة وغلاف الملف الشخصي</h5>
+                                    <div class="mb-3">
+                                        <label for="" class="form-label h-text-17 fw-bold">تغير الصورة:</label>
+                                        <input  type="file"  class="form-control form-control-sm h-text-15 rounded-pill" name="newAvatar"/>
+                                        <input  type="hidden" value="<%- data.avatar %>" class="form-control form-control-sm h-text-15 rounded-pill" name="avatar"/>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="" class="form-label h-text-17 fw-bold">تغير الغلاف:</label>
+
+                                        <input  type="file"   class="form-control form-control-sm h-text-15  rounded-pill" name="newCoverProfileImage" />
+                                        <input  type="hidden" value="<%- data.coverProfileImage %>"   class="form-control form-control-sm h-text-15  rounded-pill" name="coverProfileImage" />
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="" class="form-label h-text-17 fw-bold">وصف المؤسسة:</label>
+                                        <textarea class="form-control rounded-4 h-text-17" name="description" id="" rows="3" placeholder="زود ملفك الشخصي بمعلومات عن المؤسسة..."><%- data.description %></textarea>  
+                                    </div>
+                                </div>      
+                                <div>
+                                    <button type="submit" class="btn h-btn-primary rounded-pill px-4 h-bg-primary-dark my-4 text-white">
+                                        حفظ
+                                    </button>
+                                </div>          
+                            </div>
+                            <div class="col-6 mb-2 ">
+                                <div class="bg-white rounded mb-2 p-3">
+                                    <h5 class="h-text-primary-dark fw-bold">المدينة و الموقع</h5>
+                                    <div class="mb-3">
+                                        <label for="" class="form-label fw-bold h-text-17">
+                                            المدينة:
+                                        </label>
+                                        <select  class="form-select form-select-sm rounded-pill h-text-17" name="city" id="">
+                                            <option selected value="<%- data.city %>"><%- data.city %></option>
+                                            <option value="المكلا">المكلا</option>
+                                            <option value="سيؤون">سيؤون</option>
+                                            <option value="غيل باوزير">غيل باوزير</option>
+                                        </select>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="" class="form-label h-text-17 fw-bold">الموقع:</label>
+                                        <input  type="text" maxlength="255" class="form-control form-control-sm h-text-15  rounded-pill" value="<%- data.address %>" name="address" placeholder="حضرموت-المكلا-الديس-جانب مستشفئ البرج"/>
+                                    </div>
+                                </div>
+                                <div class="bg-white rounded p-3">
+                                    <h5 class="h-text-primary-dark fw-bold">التواصل الاجتماعي</h5>
+                                    <div class="mb-3">
+                                        <label for="" class="form-label h-text-17 fw-bold">الأيميل:</label>
+                                        <input value="<%- data.email%>"  type="email"  class="form-control form-control-sm h-text-15 rounded-pill" name="email"/>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="" class="form-label h-text-17 fw-bold">الفيسبوك:</label>
+                                        <input  value="<%- data.facebook%>" type="text" maxlength="50"  class="form-control form-control-sm h-text-15  rounded-pill" name="facebook"/>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="" class="form-label h-text-17 fw-bold">تويتر(X):</label>
+                                        <input  type="text" value="<%- data.twitter%>" maxlength="20"  class="form-control form-control-sm h-text-15  rounded-pill" name="twitter"/>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="" class="form-label h-text-17 fw-bold">انستقرام:</label>
+                                        <input  type="text" value="<%- data.instagram%>" maxlength="20"  class="form-control form-control-sm h-text-15  rounded-pill" name="instagram" />
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="" class="form-label h-text-17 fw-bold">رقم الواتساب:</label>
+                                        <input  type="text" value="<%- data.whatsapp%>" maxlength="20"  class="form-control form-control-sm h-text-15  rounded-pill" name="whatsapp" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            
+         </div>
+    </main>
+    <div></div>
+    
+    <script src="/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
