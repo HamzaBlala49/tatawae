@@ -1,8 +1,16 @@
 import { event } from "../../models/index.js";
+
+
+
 const index = async (req, res) => {
-    const user = req.session.user;
-    const events = await event.find({foundationId:user._id,status:0}).select("title");
-    res.render('foundation/events', { events });
+    try{
+        const user = req.session.user;
+        const events = await event.find({foundationId:user._id,status:0}).select("title startDate endDate volunteers");
+        res.render('foundation/events', { events });
+    }catch(e){
+        console.log(e);
+    }
+    
 
 };
 
@@ -15,10 +23,15 @@ const create = async (req, res) => {
 // ===================================
 
 const find = async (req,res) =>{
-    const user = req.session.user;
-    const eventInfo = await event.findOne({_id:req.params.id,foundationId:user._id}).populate("volunteers");
+    try{
+        const user = req.session.user;
+        const eventInfo = await event.findOne({_id:req.params.id,foundationId:user._id}).populate("volunteers");
+        res.render("foundation/eventInfo",{data:eventInfo});
 
-    res.render("foundation/eventInfo",{data:eventInfo});
+    }catch(e){
+        console.log(e);
+    }
+    
 
 }
 
@@ -37,43 +50,69 @@ const add = async (req,res) =>{
     }
 
     const newEvent = await event.create(data)
-    res.redirect("/foundation/events")
+    res.redirect("/foundation/events");
 }
  
 
 const deleteMasge = async (req,res) =>{
-    const id = req.params.id;
-    const myevent = await event.findById(id);
-    res.render("foundation/deleteEvent",{myevent})
+    const user = req.session.user;
+    try{
+        const eventInfo = await event.findOne({_id:req.params.id,foundationId:user._id});
+        res.render("foundation/eventDelete",{data:eventInfo});
+    }catch(e){
+        console.log(e);
+    }
 
 }
 
 const deleteEvent = async (req,res) =>{
-    const id = req.params.id;
-    await event.findByIdAndDelete(id,{status:1});
-    res.redirect("/foundation/events")
+    try{
+        const id = req.body.id
+        await event.findByIdAndDelete(id,{status:1});
+        res.redirect("/foundation/events");
+    }catch(e){
+        console.log(e);
+    }
+  
 }
 
 const edit = async (req,res) =>{
-    const id = req.params.id;
-    const data = req.body;
-    const newEvent = await event.findById(id).select("volunteers startDate");
-    const date = Date.now();
-    const startDate = new Date(newEvent.startDate);
-    if(volunteer.length > 0 || date >= startDate.getTime()){
-        res.render("foundation/editEvent",{msg:"لايمكن التعديل على الحدث"});
-    }else{
-        await event.findByIdAndUpdate(id,data);
-        res.redirect("/foundation/events")
+    try{
+        const user = req.session.user;
+        const id = req.params.id;
+        const newEvent = await event.findOne({_id:req.params.id,foundationId:user._id});
+        
+        const date = Date.now();
+        const startDate = new Date(newEvent.startDate);
+        
+        if( newEvent.volunteers.length > 0 || date >= startDate.getTime()){
+            res.redirect("/foundation/events")
+        }else{
+            res.render("foundation/editEvent",{data:newEvent});
+        }
+    }catch(e){
+        console.log(e);
     }
+   
 }
 
 const update = async (req,res) =>{
-    const id = req.params.id;
-    const user = req.session.user;
-    const data = req.body;
-    await event.findByIdAndUpdate(id,data);
-    res.redirect("/foundation/events");
+    try{
+        const id = req.params.id;
+        const user = req.session.user;
+        const data = req.body;
+
+        if(req.file){
+            data.image = req.file.newImage.filename;
+        }
+
+        await event.findByIdAndUpdate(id,data);
+        res.redirect("/foundation/events");
+
+    }catch(e){
+        console.log(e);
+    }
+    
 
 }
 
