@@ -19,9 +19,9 @@ const loginUser = async (req, res) => {
       req.session.role = data.role;
       req.session.user = user;
       if(data.role == 0){
-        res.redirect("/foundation/dashboard");
+        res.redirect("/foundation");
       }else{
-        res.redirect("/volunteer/dashboard");
+        res.redirect("/volunteer");
       }
     } else {
       res.render("login", { msg: "كلمة المرور خاطئة" });
