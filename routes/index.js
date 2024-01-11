@@ -5,6 +5,7 @@ import membershipRequestRouter from "./membershipRequestRoute.js";
 import foundationRouter from "./foundationRoute.js";
 import foundationEventsRouter from "./foundationEvensRoute.js";
 import foundationEventsRequestRouter from "./foundationEventsRequest.js";
+import foundationHomeRoute from "./foundationHomeRoute.js";
 
 export  {
     authRouter,
@@ -13,5 +14,6 @@ export  {
     membershipRequestRouter,
     foundationRouter,
     foundationEventsRouter,
-    foundationEventsRequestRouter
+    foundationEventsRequestRouter,
+    foundationHomeRoute
 }
