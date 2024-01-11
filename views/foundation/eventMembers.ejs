@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/all.min.css">
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="/css/eventInfo.css">
+    <title>notifications</title>
+</head>
+<body>
+    <main>
+         <div class="">
+            <div class="row position-relative">
+                <div class="col-2 vh-100 position-sticky top-0 end-0 bg-light">
+                    <aside class="p-3">
+                        <div class="brand fs-3 mb-3 h-text-primary-dark fw-bold">تطوع</div>
+                        <ul class="sidebar-link">
+                            <li>
+                                <a href="./home.html">
+                                    <i class="fa-solid fa-house"></i>
+                                    الصفحة الرئيسية
+                                </a>
+                            </li>
+                            <li>
+                                <a href="./notifications.html">
+                                    <i class="fa-solid fa-bell"></i>
+                                    الأشعارات
+                                </a>
+                            </li>
+                            <li>
+                                <a href="./events.html" class="active-link-sidebar">
+                                    <i class="fa-solid fa-handshake-angle"></i>
+                                     إدارة الأحداث
+                                </a>
+                            </li>
+                            <li>
+                                <a href="./myEvents.html">
+                                    <i class="fa-solid fa-people-group"></i>
+                                    فريقي التطوعي
+                                </a>
+                            </li>
+                            <li>
+                                <a href="./profile.html" >
+                                    <i class="fa-solid fa-user"></i>
+                                    ملفي الشخصي
+                                </a>
+                            </li>
+                            <li>
+                                
+                            </li>
+                            <li class="mt-4">
+                                <a href="./profile.html" class="h-bg-primary-light rounded-pill px-2 py-1">
+                                    <i class="fa-solid fa-right-from-bracket"></i>
+                                    تسجيل الخروج
+                                </a>
+                            </li>
+                        </ul>
+                    </aside>
+                </div>
+                <div class="col-7">
+                    <section class="p-3">
+                        <h4 class="fw-bold">فريق الحدث</h4>
+                        <hr>
+                        <a href="/foundation/events" class="backBtn btn h-btn-primary d-flex justify-content-center align-items-center">
+                            <i class="fa-solid fa-arrow-right"></i>
+                        </a>
+                        <section class="m-2 mt-4">
+                            <div>
+                                <img src="/<%- data.image %>"  class="img-fluid mb-3" style="height: 200px; width: 100%; object-fit: cover;" alt="">
+                                <h5><%- data.title %></h4>
+                            </div>
+                            <h5 class="fw-bold mb-3 mt-4">
+                                <i class="fa-solid fa-people-group"></i>
+                                الفريق:
+                                
+                            </h5>
+                            <div class="m-4">
+                                <% data.volunteers.forEach(element => { %>
+                                    <div class="d-flex bg-light mb-2 px-3 py-2 rounded-pill justify-content-between align-items-center w-50 ">
+                                        <a class="text-decoration-none d-flex  justify-content-between align-items-center text-dark" href="/foundation/volunteer/<%- element.volunteerId._id %>">
+                                            <img src="/<%- element.volunteerId.avatar %>" style="width: 70px; height: 70px; object-fit: cover;" class="img-fluid rounded-pill ms-3" alt="">
+                                            <h6  class="fw-semibold"><%- element.volunteerId.username %></h6>
+                                        </a>
+                                        <a  href="/foundation/events/<%- data._id %>/evaluation/<%- element.volunteerId._id %>" class="inviteBtns btn btn-sm h-btn-primary h-text-14 px-3 h-bg-primary-dark rounded-pill text-white">تقيّيم</a>
+                                    </div>
+                                <% }) %>
+                            </div>
+                            
+                        
+                        </section>
+                        
+                    </section>
+                </div>
+             
+            </div>
+         </div>
+    </main>
+    <div></div>
+    
+    <script src="/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

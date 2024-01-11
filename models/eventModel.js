@@ -67,7 +67,7 @@ const eventSchema = new Schema({
       },
 
       rating: {
-        commitment: {
+        attendance: {
           type: Number,
         },
 
@@ -75,9 +75,18 @@ const eventSchema = new Schema({
           type: Number,
         },
 
-        discipline: {
+        interaction: {
           type: Number,
         },
+
+        compliance: {
+          type: Number,
+        },
+
+        initiative: {
+          type: Number,
+        },
+        
       },
 
       review: {

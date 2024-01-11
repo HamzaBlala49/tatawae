@@ -1,4 +1,4 @@
-import { event,eventRequest,foundation } from "../../models/index.js";
+import { event,eventRequest,foundation, volunteer } from "../../models/index.js";
 
 
 
@@ -16,8 +16,7 @@ const index = async (req, res) => {
 
 const create = async (req, res) => {
     const user = req.session.user
-    const data = await foundation.findOne({_id:user._id}).select("memberShips").populate("memberShips");
-    res.render("foundation/addEvent",{data})
+    res.render("foundation/addEvent")
 }
 
 // ===================================
@@ -41,18 +40,16 @@ const find = async (req,res) =>{
 
 const add = async (req,res) =>{
     const user = req.session.user;
-    const {data,invitation} = req.body;
+    const data = req.body;
 
-    console.log(data);
-    console.log(invitation);
-    // data.foundationId = user._id;
-    // data.volunteers = [];
+    data.foundationId = user._id;
+    data.volunteers = [];
 
-    // if(req.file){
-    //     data.image = req.file.filename;
-    // }
+    if(req.file){
+        data.image = req.file.filename;
+    }
 
-    // const newEvent = await event.create(data)
+    const newEvent = await event.create(data)
     
     res.redirect("/foundation/events");
 
@@ -122,12 +119,12 @@ const update = async (req,res) =>{
     }
 }
 
-const evaluation = async (req,res) =>{
+const evaluationPage = async (req,res) =>{
     try{
         const user = req.session.user;
-        const id = req.params.id;
-        const data = await event.findOne({_id:req.params.id,foundationId:user._id}).select("title endDate image volunteers.volunteerId").populate("volunteers.volunteerId");
-       
+        const {eId,vId} = req.params;
+
+        const data =  await volunteer.findOne({_id:vId}).select("avatar username");
         res.render("foundation/eventEvaluation",{data});
         // if(Date.now() > data.endDate.getTime()){
 
@@ -176,15 +173,31 @@ const addVolunteer = async (req,res) =>{
 
 }
 
-const evaluationSubmit = async (req,res) =>{
+const evaluation = async (req,res) =>{
     try{
         const user = req.session.user;
-        const id = req.params.id;
-        const data = req.body;
-        console.log(data);
+        const {eId,vId} = req.params;
+        const {review,attendance,cooperation,interaction,compliance,initiative} = req.body;
+        // console.log(id,data);
 
-        await event.findByIdAndUpdate(id,data);
-        res.redirect("/foundation/events");
+        const volunteerInEvent = await event.findOne({"volunteers.volunteerId":vId});
+
+        volunteerInEvent.volunteers.forEach( volunteer => {
+            if(volunteer.volunteerId == vId){
+                volunteer.review = review;
+                volunteer.rating = {
+                    attendance,
+                    cooperation,
+                    interaction,
+                    compliance,
+                    initiative,
+                };
+            }
+        
+        })
+
+        await  volunteerInEvent.save();
+        res.redirect(`/foundation/events/${eId}/members`);
 
     }catch(e){
         console.log(e);
@@ -192,6 +205,54 @@ const evaluationSubmit = async (req,res) =>{
 
 }
 
+const invitePage = async (req,res) =>{
+    const user = req.session.user;
+    const data = await foundation.findOne({_id:user._id}).select("memberShips").populate("memberShips");
+    console.log(data)
+    res.render("foundation/eventInvite",{data});
+
+}
+
+const invitation = async (req,res)=>{
+    const user = req.session.user;
+    const {volunteerId,eventId} = req.body;
+    console.log(req.body);
+
+    const volunteer =  await eventRequest.findOne({volunteer:volunteerId,event:eventId,foundation:user._id,status:0,sender:0});
+    if(volunteer == null){
+        const requests = await eventRequest.create({foundation:user._id,volunteer:volunteerId,event:eventId,status:0,sender:0});
+        res.status(200).json({msg:"created"});
+        
+    }else{
+        res.status(200).json({msg:"already exist"});
+
+    }
+
+}
+
+const eventMembers = async (req,res) =>{
+    const user = req.session.user;
+    const id = req.params.id;
+    let data = await event.findOne({_id:id,foundationId:user._id}).select("volunteers title image").populate("volunteers.volunteerId");
+    const filterList = []
+    // "volunteers.rating":{ $exists: false }
+    data.volunteers.forEach((volunteer)=>{
+        if(volunteer.rating.attendance == undefined){
+            filterList.push(volunteer)
+        }
+    });
+
+    data = {
+        _id:data._id,
+        title:data.title,
+        image:data.image,
+        volunteers:filterList,
+    }
+    console.log(data);
+    
+    res.render("foundation/eventMembers",{data});
+
+}
 export{
     index,
     create,
@@ -201,6 +262,10 @@ export{
     edit,
     update,
     find,
-    evaluation,
-    addVolunteer
+    evaluationPage,
+    addVolunteer,
+    invitePage,
+    invitation,
+    eventMembers,
+    evaluation
 }

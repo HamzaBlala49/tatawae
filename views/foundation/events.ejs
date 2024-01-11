@@ -64,7 +64,7 @@
                         <h4 class="fw-bold">إدارة الأحداث</h4>
                         <hr>
                         <a href="events/create" class="btn btn-sm rounded-pill text-white h-bg-primary-dark h-bg-primary-dark mb-3">
-                            أضافة حدث
+                            إضافة حدث
                             <i class="fa fa-plus"></i>
                         </a>
                         <div class="table-responsive">
@@ -74,6 +74,7 @@
                                         <th scope="col">#</th>
                                         <th scope="col">أسم الحدث</th>
                                         <th scope="col">الحالة</th>
+                                        <th scope="col">دعوة</th>
                                         <th scope="col">تقييم</th>
                                         <th scope="col">تفاصيل</th>
                                         <th class="h-" scope="col">تعديل</th>
@@ -100,8 +101,17 @@
                                                 <% } %>
                                             </td>
                                             <td>
+                                                <% if (Date.now() > new Date(element.endDate).getTime()) { %>
+                                                    <i class="fa-solid fa-person-circle-plus text-secondary fs-5"></i>
+                                                    <% } else{ %>
+                                                        <a href="/foundation/events/invite/<%- element._id %>">
+                                                            <i class="fa-solid fa-person-circle-plus h-text-primary-dark fs-5"></i>
+                                                        </a>
+                                                    <% } %>
+                                            </td>
+                                            <td>
                                                 <% if (Date.now() > new Date(element.endDate).getTime() ) { %>
-                                                    <a href="/foundation/events/<%- element._id %>/evaluation" class="text-decoration-none fs-5 ">
+                                                    <a href="/foundation/events/<%- element._id %>/members" class="text-decoration-none fs-5 ">
                                                         <i class="fa-solid fa-list-check text-warning"></i>
                                                     </a>
                                                 <% } else{ %>
@@ -134,27 +144,6 @@
 
                                 </tbody>
                             </table>
-                        </div>
-                        
-                        <div id="pagenation" class="d-flex justify-content-between align-items-center">
-                            <nav aria-label="Page navigation example" class="mt-4">
-                                <ul class="pagination">
-                                    <li class="page-item">
-                                    <a class="page-link h-text-primary-dark" href="#" aria-label="Previous">
-                                        <span aria-hidden="true">&laquo;</span>
-                                    </a>
-                                    </li>
-                                    <li class="page-item"><a class="page-link text-white h-bg-primary-dark" href="#">1</a></li>
-                                    <li class="page-item"><a class="page-link h-text-primary-dark" href="#">2</a></li>
-                                    <li class="page-item"><a class="page-link h-text-primary-dark" href="#">3</a></li>
-                                    <li class="page-item">
-                                    <a class="page-link h-text-primary-dark" href="#" aria-label="Next">
-                                        <span aria-hidden="true">&raquo;</span>
-                                    </a>
-                                    </li>
-                                </ul>
-                            </nav>
-                            <span> الصفحه 1 من 3</span>
                         </div>
                    </section> 
                 </div>
