@@ -4,7 +4,7 @@ const index = async (req, res) => {
     try {
         const user = req.session.user
         const data = await foundation.findById(user._id).populate("memberShips");
-        const events = await event.find({foundationId:user._id,status:1});
+        const events = await event.find({foundationId:user._id,status:0});
         console.log(data);
         res.render("foundation/profile",{data,events})
     } catch (error) {
@@ -18,7 +18,7 @@ const index = async (req, res) => {
 const find = async (req, res) => {
     try {
         const data = await foundation.findById(req.params.id).populate("memberShips");
-        const events = await event.find({foundationId:req.params.id,status:1});
+        const events = await event.find({foundationId:req.params.id,status:0});
         res.render("foundation/profile", {data,events})
     } catch (error) {
         console.log(error);

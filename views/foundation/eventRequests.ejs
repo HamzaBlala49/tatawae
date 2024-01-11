@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/public/css/all.min.css">
-    <link rel="stylesheet" href="/public/css/bootstrap.min.css">
-    <link rel="stylesheet" href="/public/css/main.css">
-    <link rel="stylesheet" href="/public/css/notifications.css">
+    <link rel="stylesheet" href="/css/all.min.css">
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="/css/notifications.css">
     <title>notifications</title>
 </head>
 <body>
@@ -24,21 +24,21 @@
                                 </a>
                             </li>
                             <li>
-                                <a href="./notifications.html" class="active-link-sidebar">
+                                <a href="./notifications.html">
                                     <i class="fa-solid fa-bell"></i>
                                     الأشعارات
                                 </a>
                             </li>
                             <li>
-                                <a href="./events.html">
+                                <a href="./events.html" class="active-link-sidebar">
                                     <i class="fa-solid fa-handshake-angle"></i>
-                                    الأحداث التطوعية
+                                     إدارة الأحداث
                                 </a>
                             </li>
                             <li>
                                 <a href="./myEvents.html">
-                                    <i class="fa-solid fa-hands-holding"></i>
-                                    المشاركات التطوعية
+                                    <i class="fa-solid fa-people-group"></i>
+                                    فريقي التطوعي
                                 </a>
                             </li>
                             <li>
@@ -46,6 +46,9 @@
                                     <i class="fa-solid fa-user"></i>
                                     ملفي الشخصي
                                 </a>
+                            </li>
+                            <li>
+                                
                             </li>
                             <li class="mt-4">
                                 <a href="./profile.html" class="h-bg-primary-light rounded-pill px-2 py-1">
@@ -62,51 +65,33 @@
                         <hr>
                         <section id="notificationsInfo" class="mt-5">
                             <div class="container">
-                                <div id="eventRequest-msg" class="card mb-2 p-3">
-                                    <div class="d-flex justify-content-between align-items-center">
-                                        <img src="/public/img/person.jpg" class="img-fluid" alt="">
-                                        <span class="h-bg-primary-light h-text-13 fw-bold mt-1 p-1 rounded-pill">طلب الأنضمام</span>
-                                    </div>
-                                    <p class="mt-2">
-                                        <a href="" class="h-text-primary-dark">@hamza_balala</a> طلب الأنضمام الئ حدث <a href="" class="h-text-primary-dark">كسوة العيد</a>
-                                    </p>
-                                    <div class="d-flex justify-content-between align-items-center">
-                                        <div>
-                                            <button type="button" class="btn rounded-pill h-btn-primary px-3 h-bg-primary-dark text-white btn-sm">
-                                                إنضمام
-                                            </button>
-                                            <button type="button" class="btn text-dark rounded-pill  h-btn-primary-outline btn-sm">
-                                                رفض
-                                            </button>
+                                <% data.forEach(element => { %>
+                                    <div id="eventRequest-msg" class="card mb-2 p-3">
+                                        <div class="d-flex justify-content-between align-items-center">
+                                            <img src="/<%-  element.volunteer.avatar %>" class="img-fluid" alt="">
+                                            <span class="h-bg-primary-light h-text-13 fw-bold mt-1 p-1 rounded-pill">طلب الأنضمام</span>
                                         </div>
-                                        <span class="text-secondary h-text-16 fw-semibold ">2024/2/1</span>
-
-
+                                        <p class="mt-2 h-text-17">
+                                            <a  href="/foundation/volunteer/<%- element.volunteer._id %>" class="h-text-primary-dark text-decoration-none">@<%- element.volunteer.username %></a> طلب الأنضمام الئ حدث <a href="/foundation/events/<%- element.event._id %>" class="h-text-primary-dark text-decoration-none"><%- element.event.title %></a>
+                                        </p>
+                                        <div class="d-flex justify-content-between align-items-center">
+                                            <div>
+                                                <button type="button" eventId="<%- element.event._id %>"  requestId="<%- element._id %>" status="1" volunteerId="<%- element.volunteer._id %>" class="actionBtn btn h-text-14 rounded-pill h-btn-primary px-3 h-bg-primary-dark text-white btn-sm">
+                                                    إنضمام
+                                                </button>
+                                                <button type="button" eventId="<%- element.event._id %>"  requestId="<%- element._id %>" status="2" volunteerId="<%- element.volunteer._id %>" class="actionBtn btn h-text-14 text-dark rounded-pill  h-btn-primary-outline btn-sm">
+                                                    رفض
+                                                </button>
+                                            </div>
+                                            <span class="text-secondary h-text-16 fw-semibold "><%- element.createdAt.toISOString().split("T")[0] %></span>
+                                        </div>
                                     </div>
-                                </div>
+                                    
+                                <% }) %>
+                               
                             </div>
                         </section>
                     </section>
-                    <div id="pagenation" class="d-flex justify-content-between align-items-center">
-                        <nav aria-label="Page navigation example" class="mt-4">
-                            <ul class="pagination">
-                              <li class="page-item">
-                                <a class="page-link h-text-primary-dark" href="#" aria-label="Previous">
-                                  <span aria-hidden="true">&laquo;</span>
-                                </a>
-                              </li>
-                              <li class="page-item"><a class="page-link text-white h-bg-primary-dark" href="#">1</a></li>
-                              <li class="page-item"><a class="page-link h-text-primary-dark" href="#">2</a></li>
-                              <li class="page-item"><a class="page-link h-text-primary-dark" href="#">3</a></li>
-                              <li class="page-item">
-                                <a class="page-link h-text-primary-dark" href="#" aria-label="Next">
-                                  <span aria-hidden="true">&raquo;</span>
-                                </a>
-                              </li>
-                            </ul>
-                        </nav>
-                        <span> الصفحه 1 من 3</span>
-                    </div>
                 </div>
                 <div class="col-3">
                     <div class="bg-light p-3">
@@ -126,17 +111,6 @@
                                 </div> 
                                 <div class="mb-3">
                                     <label for="" class="form-label fw-bold h-text-17">
-                                        <i class="fa-solid fa-clipboard-list"></i>
-                                        الحالة
-                                    </label>
-                                    <select class="form-select form-select-sm rounded-pill h-text-17" name="" id="">
-                                        <option selected>الكل</option>
-                                        <option value="">طلبات عضوية</option>
-                                        <option value="">طلبات الانضام</option>
-                                    </select>
-                                </div>  
-                                <div class="mb-3">
-                                    <label for="" class="form-label fw-bold h-text-17">
                                         <i class="fa-solid fa-handshake-angle"></i>
                                         الحدث
                                     </label>
@@ -150,12 +124,37 @@
                         </div>
                     </div>
                 </div>
-                
             </div>
          </div>
     </main>
     <div></div>
     
-    <script src="/public/js/bootstrap.bundle.min.js"></script>
+    <script src="/js/bootstrap.bundle.min.js"></script>
+    <script>
+        const actionBtns = document.querySelectorAll(".actionBtn")
+
+        actionBtns.forEach(btn=>{
+            btn.addEventListener("click",()=>{
+                const status = btn.getAttribute("status");
+                const volunteerId = btn.getAttribute("volunteerId");
+                const requestId = btn.getAttribute("requestId") ;
+                const eventId = btn.getAttribute("eventId") ;
+                fetch("/foundation/requests/foundationAction",{
+                    method:"POST",
+                    headers:{
+                        "Content-Type":"application/json"
+                    },
+                    body:JSON.stringify({status,volunteerId,requestId,eventId})
+                }).then((res)=>{
+                    if(res.ok){
+                        document.location.reload();
+                    }
+                }).catch(e=>{
+                    alert(e);
+                })
+            })
+        })
+
+    </script>
 </body>
 </html>

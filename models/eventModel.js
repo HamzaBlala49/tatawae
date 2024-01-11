@@ -52,8 +52,8 @@ const eventSchema = new Schema({
     type: Date,
     required: true,
   },
-  
-// for sowfet delete
+
+  // for sowfet delete
   status: {
     type: Boolean,
     default: 0,
@@ -61,18 +61,29 @@ const eventSchema = new Schema({
 
   volunteers: [
     {
-      type: SchemaTypes.ObjectId,
-      ref: "volunteers",
+      volunteerId: {
+        type: SchemaTypes.ObjectId,
+        ref: "volunteers",
+      },
 
       rating: {
-        type: Number,
-        required: true,
+        commitment: {
+          type: Number,
+        },
+
+        cooperation: {
+          type: Number,
+        },
+
+        discipline: {
+          type: Number,
+        },
       },
 
       review: {
         type: String,
-        maxlength: 255,
       },
+
     },
   ],
 
@@ -86,7 +97,6 @@ const eventSchema = new Schema({
     type: Date,
     default: new Date(),
   },
-  
 });
 
 const event = model("events", eventSchema);

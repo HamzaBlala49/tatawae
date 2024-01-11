@@ -66,19 +66,20 @@
                         <a href="/foundation/events" class="backBtn btn h-btn-primary d-flex justify-content-center align-items-center">
                             <i class="fa-solid fa-arrow-right"></i>
                         </a>
-                        <form action="/foundation/events/create" method="post" enctype="multipart/form-data" class="mt-3">
+                        <form action="/foundation/events/edit/<%- data._id %>" method="post" enctype="multipart/form-data" class="mt-3">
                             <div class="row">
                                 <div class="col-6">
                                     <div class="mb-3">
                                         <label for="" class="form-label h-text-17 fw-semibold">العنوان:</label>
-                                        <input  type="text" required class="form-control rounded-pill form-control-sm h-text-15" name="title" placeholder="عنوان..."/>
+                                        <input  type="text" value="<%- data.title %>" required class="form-control rounded-pill form-control-sm h-text-15" name="title" placeholder="عنوان..."/>
                                     </div>
                                 </div>
                                 <div class="col-6">
                                     <div class="mb-3">
                                         <label for="" class="form-label h-text-17  fw-semibold">الجنس:</label>
                                             <select class="form-select form-select-sm rounded-pill h-text-15" name="gender" >
-                                                <option selected value="ذكور وإناث">ذكور وإناث</option>
+                                                <option selected disabled value="<%- data.gender %>"><%- data.gender %></option>
+                                                <option value="ذكور وإناث">ذكور وإناث</option>
                                                 <option value="ذكور">ذكور</option>
                                                 <option value="إناث">إناث</option>
                                             </select>
@@ -88,7 +89,7 @@
                                     <div class="mb-3">
                                         <label for="" class="form-label h-text-17 fw-semibold">المدينة:</label>
                                             <select class="form-select form-select-sm rounded-pill h-text-15" name="city" id="" >
-                                                <option selected value="">أختر المدينة</option>
+                                                <option selected disabled value="<%- data.city %>"><%- data.city %></option>
                                                 <option value="المكلا">المكلا</option>
                                                 <option value="سيؤون">سيؤون</option>
                                                 <option value="غيل باوزير">غيل باوزير</option>
@@ -98,37 +99,38 @@
                                 <div class="col-6">
                                     <div class="mb-3">
                                         <label for="" class="form-label h-text-17 fw-semibold">رابط الموقع:</label>
-                                        <input  type="url" required class="form-control rounded-pill form-control-sm h-text-15" name="googleMapUrl" placeholder=""/>
+                                        <input  type="url" value="<%- data.googleMapUrl %>" required class="form-control rounded-pill form-control-sm h-text-15" name="googleMapUrl" placeholder=""/>
                                     </div>
                                 </div>
                                 <div class="col-12">
                                     <div class="mb-3">
                                         <label for="" class="form-label h-text-17 fw-semibold">عدد المتطوعين:</label>
-                                        <input  type="number" min="1" value="1" required class="form-control form-control-sm rounded-pill h-text-15" name="volunteersNumber" />
+                                        <input  type="number" min="1"  value="<%- data.volunteersNumber %>" required class="form-control form-control-sm rounded-pill h-text-15" name="volunteersNumber" />
                                     </div>
                                 </div>
                                 <div class="col-6">
                                     <div class="mb-3">
                                         <label for="" class="form-label h-text-17 fw-semibold">بداية الحدث:</label>
-                                        <input  type="date"  required class="form-control form-control-sm h-text-15 rounded-pill" name="startDate" />
+                                        <input  type="date"value="<%- data.startDate.toISOString().split("T")[0] %>" required class="form-control form-control-sm h-text-15 rounded-pill" name="startDate" />
                                     </div>
                                 </div>
                                 <div class="col-6">
                                     <div class="mb-3">
                                         <label for="" class="form-label h-text-17 fw-semibold">نهاية الحدث:</label>
-                                        <input  type="date"  required class="form-control form-control-sm h-text-15 rounded-pill" name="endDate" />
+                                        <input  type="date"  value="<%- data.endDate.toISOString().split("T")[0] %>"  required class="form-control form-control-sm h-text-15 rounded-pill" name="endDate" />
                                     </div>
                                 </div>
                                 <div class="col-12">
                                     <div class="mb-3">
-                                        <label for="" class="form-label h-text-17 fw-semibold">صورة الحدث:</label>
-                                        <input   class="form-control form-control-sm h-text-15 rounded-pill" type="file" name="image" />
+                                        <label for="" class="form-label h-text-17 fw-semibold"> تغيير صورة الحدث:</label>
+                                        <input   class="form-control form-control-sm h-text-15 rounded-pill" type="file" name="newImage" />
+                                        <input value="<%- data.image %>"   class="form-control form-control-sm h-text-15 rounded-pill" type="hidden" name="image" />
                                     </div>
                                 </div>
                                 <div class="col-12">
                                     <div class="mb-3">
                                         <label for="" class="form-label h-text-17 fw-semibold">وصف الحدث:</label>
-                                        <textarea required class="form-control form-control-sm h-text-15 rounded-5"  name="description" id="" rows="12"></textarea>                                        
+                                        <textarea required class="form-control form-control-sm h-text-15 rounded-5"  name="description" id="" rows="12"><%- data.description %></textarea>                                        
                                     </div>
                                 </div>
                                

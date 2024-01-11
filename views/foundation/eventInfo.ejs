@@ -101,12 +101,12 @@
 
                                           <tr>
                                             <td>بداية الحدث:</td>
-                                            <td><%-  data.startDate.toLocaleString().slice(0,9) %></td>
+                                            <td><%-  data.startDate.toISOString().split("T")[0] %></td>
                                           </tr>
 
                                           <tr>
                                             <td>نهاية الحدث:</td>
-                                            <td><%- data.endDate.toLocaleString().slice(0,9) %></td>
+                                            <td><%- data.endDate.toISOString().split("T")[0] %></td>
                                           </tr>
 
                                           <tr>
@@ -129,6 +129,7 @@
 
                             </div>
                             <div class="">
+                                <hr>
                                 <h5 class="fw-bold">الوصف:</h5>
                                 <p class="h-text-17">
                                     <%- data.description %>
@@ -152,11 +153,11 @@
                         </div>
                     <div id="members" class="container h-50 overflow-auto">
                         <% data.volunteers.forEach(element => { %>
-                            <a href="/foundation/volunteers/<% data._id %>" class="text-decoration-none text-dark">
+                            <a href="/foundation/volunteers/<%- element.volunteerId._id %>" class="text-decoration-none text-dark">
                                 <div class="d-flex bg-light mb-2 p-2 rounded-pill align-items-center justify-content-satrt">
                                     <div class="d-flex align-items-center">
-                                        <img src="/<% data.avatar %>" alt="">
-                                        <p class="h-text-15 fw-bold m-0 me-1"><% data.username %></p>
+                                        <img src="/<%- element.volunteerId.avatar %>" alt="">
+                                        <p class="h-text-15 fw-bold m-0 me-1"><%- element.volunteerId.username %></p>
                                     </div>
                                 </div>
                             </a>
@@ -166,7 +167,6 @@
             </div>
          </div>
     </main>
-    <div></div>
     
     <script src="/public/js/bootstrap.bundle.min.js"></script>
 </body>

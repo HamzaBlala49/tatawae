@@ -128,6 +128,7 @@
                                     <iframe src="<%- data.googleMapUrl %>" width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>                                </div>
                                 </div>
                             <div class="">
+                                <hr>
                                 <h5 class="fw-bold">الوصف:</h5>
                                 <p class="h-text-17">
                                     <%- data.description %>
@@ -152,20 +153,18 @@
                             </label>
                             <input type="text" name="" id="" class="form-control rounded-pill form-control-sm h-text-17" placeholder="بحث" aria-describedby="helpId"/>
                         </div>
-                    <div id="members" class="container h-50 overflow-auto">
-                        <% data.volunteers.forEach(element => { %>
-                            <a href="/foundation/volunteers/<% data._id %>" class="text-decoration-none text-dark">
-                                <div class="d-flex bg-light mb-2 p-2 rounded-pill align-items-center justify-content-satrt">
-                                    <div class="d-flex align-items-center">
-                                        <img src="/<% data.avatar %>" alt="">
-                                        <p class="h-text-15 fw-bold m-0 me-1"><% data.username %></p>
+                        <div id="members" class="container h-50 overflow-auto">
+                            <% volunteers.volunteers.forEach(element => { %>
+                                <a href="/foundation/volunteers/<%- element.volunteerId._id %>" class="text-decoration-none text-dark">
+                                    <div class="d-flex bg-light mb-2 p-2 rounded-pill align-items-center justify-content-satrt">
+                                        <div class="d-flex align-items-center">
+                                            <img src="/<%- element.volunteerId.avatar %>" alt="">
+                                            <p class="h-text-15 fw-bold m-0 me-1"><%- element.volunteerId.username %></p>
+                                        </div>
                                     </div>
-                                </div>
-                            </a>
-                        <% }) %>
-                        
-                       
-                    </div>
+                                </a>
+                            <% }) %>
+                        </div>
                 </div>
             </div>
          </div>

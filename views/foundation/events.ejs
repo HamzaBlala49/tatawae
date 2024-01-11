@@ -101,7 +101,7 @@
                                             </td>
                                             <td>
                                                 <% if (Date.now() > new Date(element.endDate).getTime() ) { %>
-                                                    <a href="/foundation/events/evaluation/<%- element._id %>" class="text-decoration-none fs-5 ">
+                                                    <a href="/foundation/events/<%- element._id %>/evaluation" class="text-decoration-none fs-5 ">
                                                         <i class="fa-solid fa-list-check text-warning"></i>
                                                     </a>
                                                 <% } else{ %>
@@ -115,12 +115,13 @@
                                                 </a>
                                             </td>
                                             <td>
-                                                <% if (element.volunteers.length == 0 || Date.now() < new Date(element.startDate).getTime()) { %>
+                                                <% if (element.volunteers.length > 0 || Date.now() >= new Date(element.startDate).getTime()) { %>
+                                                    <i class="fa-solid fa-edit fs-6 text-secondary"></i>
+                                                    
+                                                <% } else { %>
                                                     <a class="text-success fs-6" href="/foundation/events/edit/<%- element._id %>">
                                                         <i class="fa-solid fa-edit"></i>
                                                     </a>
-                                                <% } else { %>
-                                                    <i class="fa-solid fa-edit fs-6"></i>
                                                 <% } %>                                                
                                             </td>
                                             <td>

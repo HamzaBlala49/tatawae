@@ -1,7 +1,7 @@
 @import url("./main.css");
 #memberShip-msg > div> img , #eventRequest-msg > div> img{
-    width: 80px;
-    height: 80px;
+    width: 70px;
+    height: 70px;
     border-radius: 50%;
     object-fit: cover;
     border: 2px solid var(--h-primary-dark);

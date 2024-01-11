@@ -219,3 +219,18 @@
     border-color: #a6cd7a;
     box-shadow: 0 0 0 0.25rem #a6cd7a;
 }
+.accordion-button::after{
+    margin-left: 0;
+}
+
+.accordion-button{
+    justify-content:space-between;
+}
+
+.accordion-button:not(.collapsed){
+    color: var(--h-dark) !important;
+}
+
+.accordion-button:not(.collapsed)::after {
+    background-image: var(--bs-accordion-btn-icon);
+}
