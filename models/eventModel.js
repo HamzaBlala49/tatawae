@@ -3,7 +3,7 @@ import { Schema, SchemaType, SchemaTypes, model } from "mongoose";
 const eventSchema = new Schema({
   foundationId: {
     type: SchemaTypes.ObjectId,
-    ref: "foundation",
+    ref: "foundations",
     required: true,
   },
 

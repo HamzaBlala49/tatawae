@@ -1,4 +1,7 @@
-import { index,foundationAction } from "../controllers/foundation/eventRequestController.js";
+import {
+  index,
+  foundationAction,
+} from "../../controllers/foundation/eventRequestController.js";
 import { Router } from "express";
 
 const router = Router();

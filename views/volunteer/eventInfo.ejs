@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/all.min.css">
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="/css/eventInfo.css">
+    <title>notifications</title>
+</head>
+<body>
+    <main>
+         <div>
+            <div class="row position-relative">
+                <div class="col-2 vh-100 position-sticky top-0 end-0 bg-light">
+                    <aside class="p-3">
+                        <div class="brand fs-3 mb-3 h-text-primary-dark fw-bold">تطوع</div>
+                        <ul class="sidebar-link">
+                            <li>
+                                <a href="/foundation" >
+                                    <i class="fa-solid fa-house"></i>
+                                    الصفحة الرئيسية
+                                </a>
+                            </li>
+                            <li>
+                                <a href="/foundation/requests">
+                                    <i class="fa-solid fa-bell"></i>
+                                    الأشعارات
+                                </a>
+                            </li>
+                            <li>
+                                <a href="/foundation/events" class="active-link-sidebar">
+                                    <i class="fa-solid fa-handshake-angle"></i>
+                                     إدارة الأحداث
+                                </a>
+                            </li>
+                            <li>
+                                <a href="/foundation/members">
+                                    <i class="fa-solid fa-people-group"></i>
+                                    فريقي التطوعي
+                                </a>
+                            </li>
+                            <li>
+                                <a href="/foundation/profile" >
+                                    <i class="fa-solid fa-user"></i>
+                                    ملفي الشخصي
+                                </a>
+                            </li>
+                         
+                            <li class="mt-4">
+                                <a href="/logout" class="h-bg-primary-light rounded-pill px-2 py-1">
+                                    <i class="fa-solid fa-right-from-bracket"></i>
+                                    تسجيل الخروج
+                                </a>
+                            </li>
+                        </ul>
+                    </aside>
+                </div>
+                <div class="col-7">
+                    <section class="p-3">
+                        <h4 class="fw-bold">الغاء الحدث</h4>
+                        <hr>
+                        <a id="backBtn"  class="backBtn btn h-btn-primary d-flex justify-content-center align-items-center">
+                            <i class="fa-solid fa-arrow-right"></i>
+                        </a>
+                        <section id="event-info" class="mt-3">
+                            <img src="/<%- data.image %>" class="img-fluid mb-3" alt="">
+                            <div class="row">
+                                <div class="col-4">
+                                    <table class="table h-text-15">
+                                        <thead>
+                                          <tr>
+                                            <th scope="col">العنوان</th>
+                                            <th scope="col">التفصيل</th>
+                                          </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>المؤسسه:</td>
+                                                <td>
+                                                    <a class="text-decoration-none fw-bold h-text-primary-dark" href="/volunteer/foundation/:<%- data.foundationId._id %>">
+                                                        <%- data.foundationId.fullName %>
+                                                    </a>
+                                                </td>
+                                            </tr>
+                                          <tr>
+                                            <td>العنوان:</td>
+                                            <td><%- data.title %></td>
+                                          </tr>
+                                          <tr>
+                                            <td>الجنس:</td>
+                                            <td><%- data.gender %></td>
+                                          </tr>
+                                          <tr>
+                                            <td>المدينة:</td>
+                                            <td><%- data.city %></td>
+                                          </tr>
+                                          <tr>
+                                            <td>العدد المطلوب:</td>
+                                            <td><%- data.volunteersNumber %></td>
+                                          </tr>
+                                          <tr>
+                                            <td>العدد الحالي:</td>
+                                            <td><%- data.volunteers.length %></td>
+                                          </tr>
+
+                                          <tr>
+                                            <td>بداية الحدث:</td>
+                                            <td><%-  data.startDate.toLocaleString().slice(0,9) %></td>
+                                          </tr>
+
+                                          <tr>
+                                            <td>نهاية الحدث:</td>
+                                            <td><%- data.endDate.toLocaleString().slice(0,9) %></td>
+                                          </tr>
+
+                                          <tr>
+                                            <td>حالة الحدث:</td>
+                                            <td><% if ( Date.now() < new Date(data.startDate).getTime() ) { %>
+                                                    <span class="text-primary fw-bold">تجميع الاعضاء</span>
+                                                <% } else if ( Date.now() > new Date(data.startDate).getTime() && Date.now() < new Date(data.endDate).getTime() ) { %>
+                                                    <span class="h-text-primary-dark fw-bold">جاري</span>
+                                                <% } else { %>
+                                                    <span class="text-danger fw-bold">أنتهاء</span>
+                                                <% } %>
+                                            </td>
+                                          </tr>
+
+                                        </tbody>
+                                      </table>
+                                </div>
+                                <div class="col-8">
+                                    <iframe src="<%- data.googleMapUrl %>" width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>                                </div>
+                                </div>
+                            <div class="">
+                                <hr>
+                                <h5 class="fw-bold">الوصف:</h5>
+                                <p class="h-text-17">
+                                    <%- data.description %>
+                                </p>
+                            </div>
+                            <% if ( Date.now() < new Date(data.startDate).getTime() )  {%>
+                                <button fId="<%-data.foundationId%>" id="joinBtn"  class="btn rounded-5 p-2 btn-sm text-white mt-3 h-btn-primary h-bg-primary-dark">
+                                    <i class="fa-solid fa-hand"></i>
+                                    طلب الأنضمام                           
+                                </button>
+                            <% } %>
+                            
+                        </section>
+                    </section>
+                </div>
+                <div class="col-3 p-2 mt-3">
+                    <h6 class="fw-bold">
+                        <i class="fa-solid fa-people-group"></i>
+                        المتطوعين
+                    </h6>
+                    <hr>
+                        <div class="mb-3 px-3">
+                            <label for="" class="form-label  fw-bold h-text-17">
+                                بحث
+                                <i class="fa-solid fa-search"></i>
+                            </label>
+                            <input type="text" name="" id="" class="form-control rounded-pill form-control-sm h-text-17" placeholder="بحث" aria-describedby="helpId"/>
+                        </div>
+                        <div id="members" class="container h-50 overflow-auto">
+                            <% data.volunteers.forEach(element => { %>
+                                <a href="/foundation/volunteers/<%- element.volunteerId._id %>" class="text-decoration-none text-dark">
+                                    <div class="d-flex bg-light mb-2 p-2 rounded-pill align-items-center justify-content-satrt">
+                                        <div class="d-flex align-items-center">
+                                            <img src="/<%- element.volunteerId.avatar %>" alt="">
+                                            <p class="h-text-15 fw-bold m-0 me-1"><%- element.volunteerId.username %></p>
+                                        </div>
+                                    </div>
+                                </a>
+                            <% }) %>
+                        </div>
+                </div>
+            </div>
+         </div>
+    </main>
+    <div></div>
+    
+    <script src="/public/js/bootstrap.bundle.min.js"></script>
+    <script>
+        const joinBtnBtn = document.getElementById("joinBtn");
+        const eventId = document.location.pathname.split("/")[3];
+        const backBtn = document.getElementById("backBtn");
+        backBtn.addEventListener("click",()=>{
+            window.history.back();
+        })
+        joinBtn.addEventListener("click",()=>{
+            const foundation  =  joinBtn.getAttribute("fId")
+            fetch(`/volunteer/events/join`,{
+                method:"POST",
+                headers:{
+                    "Content-Type":"application/json"
+                },
+                body:JSON.stringify({foundation,eventId})
+            })
+            .then((res)=>{
+                if(res.ok){
+                    joinBtnBtn.classList.add("disabled");
+                }
+            }).catch(e=>{
+                alert(e)
+            })
+        })
+    </script>
+</body>
+</html>

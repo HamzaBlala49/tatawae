@@ -5,8 +5,6 @@ const invite = async (req, res) => {
     console.log(req.body);
     const user = req.session.user;
     const invitation = await membershipRequest.findOne({foundation: user._id,volunteer: volunteerId,status:0});
-    console.log(invitation);
-    console.log("===========");
     if(!invitation){
         await membershipRequest.create({foundation: user._id,volunteer: volunteerId});
         res.status(201).json({msg:"create invite"})

@@ -26,6 +26,7 @@ const find = async (req,res) =>{
         const user = req.session.user;
         const data = await event.findOne({_id:req.params.id,foundationId:user._id}).populate("volunteers.volunteerId");
         res.render("foundation/eventInfo",{data});
+        // res.json(data);
 
     }catch(e){
         console.log(e);
