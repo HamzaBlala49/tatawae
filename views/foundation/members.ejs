@@ -160,7 +160,7 @@
 
         userSearchInput.addEventListener("input",async()=>{
             userSearchContainer.innerHTML = "";
-            const response = await fetch(`http://localhost:3000/volunteer/search?username=${userSearchInput.value}`)
+            const response = await fetch(`http://localhost:3000/foundation/volunteer/search?username=${userSearchInput.value}`)
             const data = await response.json();
             data.data.forEach(element => {
                 const template = `

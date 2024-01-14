@@ -1,7 +1,5 @@
 import e from "express";
-import { volunteer ,event,foundation} from "../../models/index.js";
-
-
+import { volunteer ,event,foundation , badge}  from "../../models/index.js";
 
 
 const index = async (req, res) => {
@@ -67,6 +65,7 @@ const update = async (req, res) => {
     }
 
 }
+
 
 
 export {index,edit,update};

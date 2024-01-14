@@ -16,12 +16,6 @@ const index = async (req, res) => {
 
 
 
-
-
-
-
-
-
 const actionToEvent = async (req, res) => {
     const { requestId, status, eventId } = req.body;
     const user = req.session.user; // volunteer

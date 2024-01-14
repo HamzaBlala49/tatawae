@@ -26,6 +26,7 @@ const join = async (req,res) =>{
         const user = req.session.user;
         const {foundation,eventId} = req.body;
 
+
         const _event = await event.findById(eventId);
 
         if(_event.volunteersNumber == _event.volunteers.length || new Date(_event.startDate).getTime() < Date.now()){
@@ -48,6 +49,7 @@ const join = async (req,res) =>{
 
     }catch(e){
         console.log(e)
+        res.status(500).json({msg:"error"});
     }
 
 

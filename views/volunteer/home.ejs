@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/all.min.css">
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="/css/profile.css">
+    <title>Profile</title>
+</head>
+<body>
+    <main>
+         <div class="">
+            <div class="row position-relative">
+                <div class="col-2 vh-100 position-sticky top-0 end-0 bg-light">
+                    <aside class="p-3">
+                        <div class="brand fs-3 mb-3 h-text-primary-dark fw-bold">تطوع</div>
+                        <ul class="sidebar-link">
+                            <li>
+                                <a href="./home.html"  class="active-link-sidebar">
+                                    <i class="fa-solid fa-house"></i>
+                                    الصفحة الرئيسية
+                                </a>
+                            </li>
+                            <li>
+                                <a class="d-flex align-items-center" href="./notifications.html">
+                                    <i class="fa-solid fa-bell"></i>
+                                    الأشعارات
+                                    <span class="notification me-3"></span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="./events.html">
+                                    <i class="fa-solid fa-handshake-angle"></i>
+                                    الأحداث التطوعية
+                                </a>
+                            </li>
+                            <li>
+                                <a href="./myEvents.html">
+                                    <i class="fa-solid fa-hands-holding"></i>
+                                    المشاركات التطوعية
+                                </a>
+                            </li>
+                            <li>
+                                <a href="./profile.html">
+                                    <i class="fa-solid fa-user"></i>
+                                    ملفي الشخصي
+                                </a>
+                            </li>
+                            <li class="mt-4">
+                                <a href="./profile.html" class="h-bg-primary-light rounded-pill px-2 py-1">
+                                    <i class="fa-solid fa-right-from-bracket"></i>
+                                    تسجيل الخروج
+                                </a>
+                            </li>
+                        </ul>
+                    </aside>
+                </div>
+                <div class="col-7">
+                    <section class="p-3">
+                        <% events.forEach(element => { %>
+                            <a href="/volunteer/events/<%- element._id %>" class="text-decoration-none text-dark mb-3">
+                                <div>
+                                    <div class="d-flex align-items-center">
+                                        <img src="/<%- element.foundationId.avatar %>" class="img-fluid rounded-pill" style="width: 60px; height: 60px; object-fit: cover;" alt="">
+                                        <span class="h-text-17 me-2 fw-bold"><%- element.foundationId.fullName %></span>
+                                    </div>
+                                    <p class="h-text-17 mb-1 me-5 m-0" >
+                                        <%- element.description %>
+                                    </p>
+                                    <img src="/<%- element.image %>" class="img-fluid rounded me-5" style="height: 200px; width: 90%; object-fit: fill;" alt="">
+                                </div>
+                            </a>
+                        <% }) %>
+                  
+                    </section>
+                   
+                </div>
+                <div class="col-3   vh-100 position-sticky top-0 satrt-0">
+                    <section class="p-3 ">
+                        <div>
+                            <div class="d-flex align-items-center justify-content-between mb-3 ">
+                                <img src="/img/person.jpg" class="imag-fluid rounded-pill" style="width: 55px; height: 55px; object-fit: cover; border: 4px solid gold;" alt="">
+                                <p class="h-text-15 fw-bold m-0">haddjskdsjdkjmza</p>
+                                <p class="h-text-15 m-0">1</p>
+                                <p class="h-text-15 m-0">123</p>
+                            </div>
+
+                            <div class="d-flex align-items-center justify-content-between mb-3 ">
+                                <img src="/img/person.jpg" class="imag-fluid rounded-pill" style="width: 55px; height: 55px; object-fit: cover; border: 4px solid rgb(72, 73, 74);" alt="">
+                                <p class="h-text-15 fw-bold m-0">haddjskdsjdkjmza</p>
+                                <p class="h-text-15 m-0">2</p>
+                                <p class="h-text-15 m-0">123</p>
+                            </div>
+
+                            <div class="d-flex align-items-center justify-content-between mb-3 ">
+                                <img src="/img/person.jpg" class="imag-fluid rounded-pill" style="width: 55px; height: 55px; object-fit: cover; border: 4px solid rgb(156, 112, 1);" alt="">
+                                <p class="h-text-15 fw-bold m-0">haddjskdsjdkjmza</p>
+                                <p class="h-text-15 m-0">3</p>
+                                <p class="h-text-15 m-0">123</p>
+                            </div>
+
+                            <div class="d-flex align-items-center justify-content-between mb-3 ">
+                                <img src="/img/person.jpg" class="imag-fluid rounded-pill" style="width: 55px; height: 55px; object-fit: cover;" alt="">
+                                <p class="h-text-15 fw-bold m-0">haddjskdsjdkjmza</p>
+                                <p class="h-text-15 m-0">3</p>
+                                <p class="h-text-15 m-0">123</p>
+                            </div>
+                           
+
+
+                        </div>
+                       
+                       
+                    </section>
+                    
+                    
+                </div>
+            </div>
+            
+         </div>
+    </main>
+    <div></div>
+    
+    <script src="/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
