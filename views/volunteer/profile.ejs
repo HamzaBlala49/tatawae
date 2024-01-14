@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/public/css/all.min.css">
-    <link rel="stylesheet" href="/public/css/bootstrap.min.css">
-    <link rel="stylesheet" href="/public/css/main.css">
-    <link rel="stylesheet" href="/public/css/profile.css">
+    <link rel="stylesheet" href="/css/all.min.css">
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="/css/profile.css">
     <title>Profile</title>
 </head>
 <body>
@@ -60,29 +60,55 @@
                 <div class="col-8">
                     <section class="p-3">
                         <header id="profile-header">
-                            <div class="coverProfile" style="background-image: url('/public/img/pg1.jpg');"></div>
+                            <div class="coverProfile" style="background-image: url('/<%- data.coverProfileImage %>');"></div>
                             <div class="profileImg">
-                                <img src="/public/img/person.jpg" alt="">
+                                <img src="/<%- data.avatar %>" alt="">
                             </div>
                         </header>
                         <section id="profileInfo" class="mt-5">
                             <div class="row">
                                 <div class="col-6 pt-3 pe-5">
-                                    <h5 id="profileName" class="fw-bold">حمزة عمر بلعلا</h5>
-                                    <p class="h-text-15 mx-0 my-2 p-0 fw-bold text-secondary">@hamza_balala</p>
+                                    <h5 id="profileName" class="fw-bold"><%- data.fullName %></h5>
+                                    <p class="h-text-15 mx-0 my-2 p-0 fw-bold text-secondary">@<%- data.username %></p>
                                     <div id="profileSocial">
-                                        <a href=""><img src="/public/img/whatsapp.png" alt=""></a>
-                                        <a href=""><img src="/public/img/mail.png" alt=""></a>
+                                        <% if (data.email !="") { %>
+                                            <a href="<%- data.email %>"><img src="/img/mail.png" alt=""></a>
+                                         
+                                        <% } %>
+                                        <% if (data.whatsapp !="") { %>
+                                            <a href="<%- data.whatsapp %>"><img src="/img/whatsapp.png" alt=""></a>
+                                        <% } %>
+
                                     </div>
                                 </div>
                                 <div class="col-6 pt-3 d-flex justify-content-around">
                                     <div>
-                                        <p class="h-text-16 fw-bold">الساعات التطوعية</p>
-                                        <p class="fw-bold">100 <span>س</span></p>
+                                        <p class="h-text-16 fw-bold">الأيام التطوعية</p>
+                                            <% if (volunteeringDays == 0) { %>
+                                                <p class="fw-bold"><%- volunteeringDays %></p>
+                                            <% } %>
+                                            <% if (volunteeringDays == 1) { %>
+                                                <p class="fw-bold">يوم</p>
+                                            <% } %>
+                                            <% if (volunteeringDays == 2) { %>
+                                                <p class="fw-bold">يومان</p>
+                                            <% } %> 
+                                            <% if (volunteeringDays >= 3 && volunteeringDays <= 10) { %>
+                                                <p class="fw-bold">
+                                                    <%- volunteeringDays %>
+                                                    <span class="me-1 h-text-17">أيام</span>
+                                                </p>
+                                            <% } %> 
+                                            <% if (volunteeringDays > 11) { %>
+                                                <p class="fw-bold">
+                                                    <%- volunteeringDays %>
+                                                    <span class="me-1 h-text-17">يوم</span>
+                                                </p>
+                                            <% } %> 
                                     </div>
                                     <div>
                                         <p class="h-text-16 fw-bold">النقاط التطوعية</p>
-                                        <p class="fw-bold">100</p>
+                                        <p class="fw-bold"><%- data.points === 0 %></p>
                                     </div>
                                 </div>
                             </div>
@@ -226,7 +252,7 @@
     </main>
     <div></div>
     
-    <script src="/public/js/bootstrap.bundle.min.js"></script>
+    <script src="/js/bootstrap.bundle.min.js"></script>
     <script>
         let x = [{
             

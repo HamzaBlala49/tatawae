@@ -72,6 +72,7 @@ const registerVolunteerPage = (req, res) => {
 const registerVolunteer = async (req, res) => {
   const data = req.body;
   data.badges = [];
+  data.points = 1;
 
   const volunteerData = await volunteer.findOne({ username: data.username });
   if (volunteerData) {

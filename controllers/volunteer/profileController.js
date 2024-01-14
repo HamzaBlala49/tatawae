@@ -1,3 +1,4 @@
+import e from "express";
 import { volunteer ,event,foundation} from "../../models/index.js";
 
 
@@ -7,8 +8,20 @@ const index = async (req, res) => {
     const user  = req.session.user;
 
     // const volunteers = await volunteer.findById(user._id);
-    const events = await event.find({volunteer:user._id}).select("endDate startDate");
-    res.json(volunteers);
+    const events = await event.find({"volunteers.volunteerId":user._id}).select("title image volunteers endDate startDate").where("endDate").lte(new Date()).populate("foundationId");
+
+    let volunteeringDays = 0 ;
+
+    events.forEach(event => {
+        volunteeringDays += (event.endDate - event.startDate) / (1000 * 60 * 60 * 24);
+    })
+
+    const _foundation = await foundation.find({memberShips:{$in:[user._id]}}).select("fullName avatar");
+    
+    const data = await volunteer.findById(user._id).populate("badges");
+
+    
+    res.render("volunteer/profile",{events,foundation:_foundation,volunteeringDays,data});
 
 
 }
