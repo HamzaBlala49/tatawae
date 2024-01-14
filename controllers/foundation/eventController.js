@@ -198,6 +198,12 @@ const evaluation = async (req,res) =>{
         })
 
         await  volunteerInEvent.save();
+
+        let points = Math.round((review + attendance + cooperation + interaction + compliance + initiative) / 5)
+        const _volunteer = await volunteer.findById(vId);
+        _volunteer.points += points;
+        _volunteer.save();
+        
         res.redirect(`/foundation/events/${eId}/members`);
 
     }catch(e){

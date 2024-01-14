@@ -6,8 +6,8 @@ import { volunteer ,event,foundation} from "../../models/index.js";
 
 const index = async (req, res) => {
     const user  = req.session.user;
+    const eventsData = [];
 
-    // const volunteers = await volunteer.findById(user._id);
     const events = await event.find({"volunteers.volunteerId":user._id}).select("title image volunteers endDate startDate").where("endDate").lte(new Date()).populate("foundationId");
 
     let volunteeringDays = 0 ;
@@ -20,8 +20,22 @@ const index = async (req, res) => {
     
     const data = await volunteer.findById(user._id).populate("badges");
 
+    events.forEach(event => {
+        event.volunteers.forEach(volunteer => {
+            if(volunteer.volunteerId == user._id){
+                const temp = {};
+                temp.title = event.title;
+                temp.avatar = event.foundationId.avatar;
+                temp.foundationName = event.foundationId.fullName;
+                temp.review = volunteer.review;
+                temp.evaluate = Math.round((volunteer.rating.attendance + volunteer.rating.compliance + volunteer.rating.cooperation + volunteer.rating.initiative + volunteer.rating.interaction) / 5 );
+                eventsData.push(temp);
+            }
+        })
     
-    res.render("volunteer/profile",{events,foundation:_foundation,volunteeringDays,data});
+    });
+
+    res.render("volunteer/profile",{eventsData,foundation:_foundation,volunteeringDays,data});
 
 
 }

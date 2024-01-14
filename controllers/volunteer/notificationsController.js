@@ -1,4 +1,4 @@
-import { eventRequest,membershipRequest,foundation,event, } from "../../models/index.js";
+import { eventRequest,membershipRequest,foundation,event, volunteer, } from "../../models/index.js";
 
 const index = async (req, res) => {
     const user = req.session.user;
@@ -35,8 +35,12 @@ const actionToEvent = async (req, res) => {
             rating:{},
             review:""
         });
-
         await data.save();
+
+        const _volunteer = await volunteer.findById(user._id);
+        _volunteer.points +=2
+        _volunteer.save();
+
         res.status(200).json({msg:"volunteer in event"})
 
     }
@@ -48,11 +52,16 @@ const actionToEvent = async (req, res) => {
 const actionToMembership = async (req, res) => {
     const { requestId, status, foundationId } = req.body;
     const user = req.session.user; // volunteer
+    
+   
 
     await membershipRequest.findByIdAndUpdate(requestId,{status:status});
 
     if(status === 1){
         await foundation.findByIdAndUpdate({_id:foundationId},{$push:{memberShips:user_id}})
+        const _volunteer = await volunteer.findById(user._id);
+        _volunteer.points +=3
+        _volunteer.save();
     }
     res.status(200).json({msg:"accept invite"})
 

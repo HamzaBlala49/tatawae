@@ -1,19 +1,16 @@
-import { event, eventRequest } from "../../models/index.js";
+import { event, eventRequest, volunteer } from "../../models/index.js";
 
 const index = async (req, res) => {
   const user = req.session.user;
   try {
     const data = await eventRequest
-      .find({ foundation: user._id, sender: 1 , status: 0})
+      .find({ foundation: user._id, sender: 1, status: 0 })
       .populate(["volunteer", "event"]);
     res.render("foundation/eventRequests", { data: data });
   } catch (error) {
     console(error);
   }
 };
-
-
-
 
 const invite = async (req, res) => {
   user = req.session.user;
@@ -22,14 +19,10 @@ const invite = async (req, res) => {
     foundation: user_id,
     volunteer: volunteerId,
     event: eventId,
-    sender: req.session.role
+    sender: req.session.role,
   });
   return res.status(200).json(invite);
 };
-
-
-
-
 
 const requestVolunteer = async (req, res) => {
   user = req.session.user;
@@ -46,28 +39,28 @@ const requestVolunteer = async (req, res) => {
 const foundationAction = async (req, res) => {
   const user = req.session.user;
   const { requestId, eventId, volunteerId, status } = req.body;
-  const invite = await eventRequest.findOne({_id:requestId,foundation:user._id});
+  const invite = await eventRequest.findOne({
+    _id: requestId,
+    foundation: user._id,
+  });
   invite.status = status;
   await invite.save();
 
-  if(status == 1){
-    const data = await event.findOne({_id:eventId});
-    data.volunteers.push({volunteerId,rating:{},review:""})
+  if (status == 1) {
+    const data = await event.findOne({ _id: eventId });
+    data.volunteers.push({ volunteerId, rating: {}, review: "" });
     await data.save();
-    return res.status(200).json({msg:"add seccusse"});
-  }else{
+
+    const _volunteer = await volunteer.findById(volunteerId);
+    _volunteer.points += 2;
+    _volunteer.save();
+
+    return res.status(200).json({ msg: "add seccusse" });
+  } else {
     return res.status(200).json(invite);
   }
 };
 
-
-
 // ======================
 
-
-
-
-export {
-   index,
-   foundationAction
-   };
+export { index, foundationAction };
