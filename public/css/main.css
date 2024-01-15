@@ -234,3 +234,19 @@
 .accordion-button:not(.collapsed)::after {
     background-image: var(--bs-accordion-btn-icon);
 }
+#search-con{
+    border: 4px solid var(--h-primary-dark);
+    width: 400px;
+    border-radius: 30px;
+    padding-left: 130px;
+    padding-right: 10px;
+}
+#homeInput{
+    cursor: pointer;
+}
+
+
+#homeInput:focus{
+    box-shadow: none;
+    outline: none;
+}

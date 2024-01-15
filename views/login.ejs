@@ -24,16 +24,16 @@
                                   <i class="fa-solid fa-user"></i>
                                    أسم المستخدم
                             </label>
-                              <input type="text" required class="form-control form-control-sm" name="username">
+                              <input type="text" required class="form-control rounded-pill form-control-sm" name="username">
                             </div>
                             <div class="mb-3">
                                 <label class="form-label h-text-14 fw-bold ">
                                     <i class="fa-solid fa-key"></i> 
                                      كلمة المرور
                                 </label>
-                                <input type="password" required name="password" class="form-control form-control-sm">
+                                <input type="password" required name="password" class="form-control rounded-pill form-control-sm">
                             </div>
-                            <div class="form-check">
+                            <!-- <div class="form-check">
                                 <input class="form-check-input" type="radio" name="role" value="1" id="volunteer"  checked/>
                                 <label class="form-check-label h-text-14 fw-bold" for="volunteer"> متطوّع </label>
                             </div>
@@ -42,11 +42,21 @@
                                 <label class="form-check-label h-text-14 fw-bold " for="foundation">
                                     مؤسسة
                                 </label>
+                            </div> -->
+
+                            <div class="mb-3 mt-4">
+                                <select class="form-select form-select-sm rounded-pill h-text-15" name="role" id="">
+                                    <option selected value="1">متطوع</option>
+                                    <option value="0">مؤسسة (جهه)</option>
+                                </select>
                             </div>
                             
 
                             
-                            <button type="submit" class="btn btn-sm w-100 h-btn-primary mt-3 h-bg-primary-dark text-white h-text-17 ">دخول</button>
+                            
+
+                            
+                            <button type="submit" class="btn btn-sm rounded-pill w-100 h-btn-primary mt-3 h-bg-primary-dark text-white h-text-17 ">دخول</button>
                     </form>
                 </div>
             </div>

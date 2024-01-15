@@ -58,6 +58,15 @@
                     </aside>
                 </div>
                 <div class="col-7">
+                    <a data-bs-toggle="modal" data-bs-target="#exampleModal" id="search-link" class="text-decoration-none">
+                        <div class="mb-3 mt-4 d-flex justify-content-center align-items-center">
+                            <div id="search-con" class=" d-flex  justify-content-start align-items-center">
+                                <i class="fa-solid fa-magnifying-glass text-dark"></i>
+                                <p class="m-0 p-1 text-muted">ابحث</p>
+                            </div>
+                        </div>
+                    </a>
+                    
                     <section class="p-3">
                         <% events.forEach(element => { %>
                             <a href="/volunteer/events/<%- element._id %>" class="text-decoration-none text-dark mb-3">
@@ -79,40 +88,92 @@
                 </div>
                 <div class="col-3   vh-100 position-sticky top-0 satrt-0">
                     <section class="p-3 ">
+                        <div class="m-2 d-flex mb-3 align-items-center">
+                            <img src="/img/success.png" width="50px" height="50px" alt="">
+                            <p class="m-0 me-3 fw-bold">أفضل المتطوعين</p>
+                        </div>
                         <div>
-                            <div class="d-flex align-items-center justify-content-between mb-3 ">
-                                <img src="/img/person.jpg" class="imag-fluid rounded-pill" style="width: 55px; height: 55px; object-fit: cover; border: 4px solid gold;" alt="">
-                                <p class="h-text-15 fw-bold m-0">haddjskdsjdkjmza</p>
-                                <p class="h-text-15 m-0">1</p>
-                                <p class="h-text-15 m-0">123</p>
-                            </div>
+                             <% volunteers.forEach((element,index) => { %>
+                                <% if(index == 0) { %>
+                                    <a href="/volunteer/profile/<%- element._id %>" class="text-dark  text-decoration-none">
+                                        <div class=" row mb-1  align-items-center p-1" style="background-color: #36b336; border-top-right-radius:40px ;border-bottom-right-radius:40px ;">
+                                            <div class="col-3">
+                                                <img src="/<%- element.avatar %>" class="imag-fluid rounded-pill" style="width: 55px; height: 55px; object-fit: cover;" alt="">
+                                            </div>
+                                            <div class="col-5">
+                                                <p class="h-text-15 fw-bold m-0"><%- element.username %></p>
+                                            </div>
+                                            <div class="col-2">
+                                                <img src="/img/gold-cup.png" width="36px" height="36px" alt="">
 
-                            <div class="d-flex align-items-center justify-content-between mb-3 ">
-                                <img src="/img/person.jpg" class="imag-fluid rounded-pill" style="width: 55px; height: 55px; object-fit: cover; border: 4px solid rgb(72, 73, 74);" alt="">
-                                <p class="h-text-15 fw-bold m-0">haddjskdsjdkjmza</p>
-                                <p class="h-text-15 m-0">2</p>
-                                <p class="h-text-15 m-0">123</p>
-                            </div>
+                                            </div>
+                                            <div class="col-1">
+                                                <p class="h-text-15 m-0 fw-bold"><%- element.points  %></p>
+                                            </div>
+                                        </div>
+                                    </a>
+                                <% } else if(index == 1) { %>
+                                    <a href="/volunteer/profile/<%- element._id %>" class="text-dark  text-decoration-none">
+                                        <div class=" row mb-1  align-items-center  p-1" style="background-color:#36b336c4;  border-top-right-radius:40px ;border-bottom-right-radius:40px ;">
+                                            <div class="col-3">
+                                                <img src="/<%- element.avatar %>" class="imag-fluid rounded-pill" style="width: 55px; height: 55px; object-fit: cover;" alt="">
+                                            </div>
+                                            <div class="col-5">
+                                                <p class="h-text-15 fw-bold m-0"><%- element.username %></p>
+                                            </div>
+                                            <div class="col-2">
+                                                <img src="/img/silver-cup.png" width="36px" height="36px" alt="">
 
-                            <div class="d-flex align-items-center justify-content-between mb-3 ">
-                                <img src="/img/person.jpg" class="imag-fluid rounded-pill" style="width: 55px; height: 55px; object-fit: cover; border: 4px solid rgb(156, 112, 1);" alt="">
-                                <p class="h-text-15 fw-bold m-0">haddjskdsjdkjmza</p>
-                                <p class="h-text-15 m-0">3</p>
-                                <p class="h-text-15 m-0">123</p>
-                            </div>
+                                            </div>
+                                            <div class="col-1">
+                                                <p class="h-text-15 m-0 fw-bold"><%- element.points  %></p>
+                                            </div>
+                                        </div>
+                                    </a>
+                                <% } else if(index == 2) { %>
+                                    <a href="/volunteer/profile/<%- element._id %>" class="text-dark  text-decoration-none">
+                                        <div class=" row mb-1  align-items-center  p-1" style="background-color: #36b33680; border-top-right-radius:40px ;border-bottom-right-radius:40px ;">
+                                            <div class="col-3">
+                                                <img src="/<%- element.avatar %>" class="imag-fluid rounded-pill" style="width: 55px; height: 55px; object-fit: cover;" alt="">
+                                            </div>
+                                            <div class="col-5">
+                                                <p class="h-text-15 fw-bold m-0"><%- element.username %></p>
+                                            </div>
+                                            <div class="col-2">
+                                                <img src="/img/bronze-cup.png" width="36px" height="36px" alt="">
 
-                            <div class="d-flex align-items-center justify-content-between mb-3 ">
-                                <img src="/img/person.jpg" class="imag-fluid rounded-pill" style="width: 55px; height: 55px; object-fit: cover;" alt="">
-                                <p class="h-text-15 fw-bold m-0">haddjskdsjdkjmza</p>
-                                <p class="h-text-15 m-0">3</p>
-                                <p class="h-text-15 m-0">123</p>
-                            </div>
+                                            </div>
+                                            <div class="col-1">
+                                                <p class="h-text-15 m-0 fw-bold"><%- element.points  %></p>
+                                            </div>
+                                        </div>
+                                    </a>
+                                <% } else { %>
+                                    <a href="/volunteer/profile/<%- element._id %>" class="text-dark  text-decoration-none">
+                                        <div class=" row mb-1  align-items-center  p-1" style="background-color: #68ac682b;;  border-top-right-radius:40px ;border-bottom-right-radius:40px ;">
+                                            <div class="col-3">
+                                                <img src="/<%- element.avatar %>" class="imag-fluid rounded-pill" style="width: 55px; height: 55px; object-fit: cover;" alt="">
+                                            </div>
+                                            <div class="col-5">
+                                                <p class="h-text-15 fw-bold m-0"><%- element.username %></p>
+                                            </div>
+                                            <div class="col-2">
+                                                <p class="h-text-15 m-0 pe-2 fw-bold"><%- index + 1 %></p>
+
+                                            </div>
+                                            <div class="col-1">
+                                                <p class="h-text-15 m-0 fw-bold"><%- element.points  %></p>
+                                            </div>
+                                        </div>
+                                    </a>
+                                <% } %>
+                             
+                            <% }) %> 
+
                            
 
 
                         </div>
-                       
-                       
                     </section>
                     
                     
@@ -121,8 +182,82 @@
             
          </div>
     </main>
-    <div></div>
+     <!-- Modal -->
+     <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header align-items-center">
+                <input id="userSearchInput" type="text" style="width: 383px;" name="" id="serchMember" class="form-control rounded-pill form-control-sm h-text-17" placeholder="بحث...." aria-describedby="helpId"/>
+            <button  type="button" id="btn-close" class="btn-close ms-0" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div id="users-container">
+                    
+                </div>
+            </div>
+        </div>
+        </div>
+    </div>  
     
     <script src="/js/bootstrap.bundle.min.js"></script>
+    <script>
+        const userSearchContainer = document.getElementById("users-container");
+        const userSearchInput = document.getElementById("userSearchInput");
+        const searchLink = document.getElementById("search-link");
+        const btnClose = document.getElementById("btn-close");
+
+
+        btnClose.addEventListener("click",()=>{
+            userSearchContainer.innerHTML = "";
+            userSearchInput.value = "";
+        })
+
+        searchLink.addEventListener("click",()=>{
+            setTimeout(() => {
+                userSearchInput.focus();
+            }, 100);
+        })
+
+        userSearchInput.addEventListener("input",async()=>{
+            userSearchContainer.innerHTML = "";
+            const response = await fetch(`/volunteer/search?username=${userSearchInput.value}`)
+            const data = await response.json();
+            data.users.forEach(element => {
+
+                if(element.birthDate !== undefined){
+                    const template = `
+                    <div class="p-3 d-flex justify-content-between align-items-center mb-1">
+                        <a href="/volunteer/profile/${element._id}" class="text-decoration-none">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <img src="/${element.avatar}" style="width: 50px; height: 50px; object-fit: cover;" class="img-fluid rounded-pill" >
+                                <p class="fw-semibold m-0 me-3 text-dark">${element.username}</p>
+                                <p class="fw-semibold m-0 me-3 text-white rounded-pill p-1 h-bg-primary-dark" style="font-size:11px;">متطوع</p>
+                            </div>
+                        </a>
+                    </div>`
+                userSearchContainer.innerHTML +=template;
+
+                }else{
+                    const template = `
+                    <div class="p-3 d-flex justify-content-between align-items-center mb-1">
+                        <a href="/volunterr/foundation/${element._id}" class="text-decoration-none">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <img src="/${element.avatar}" style="width: 50px; height: 50px; object-fit: cover;" class="img-fluid rounded-pill" >
+                                <p class="fw-semibold m-0 me-3 text-dark">${element.username}</p>
+                                <p class="fw-semibold m-0 me-3 text-white rounded-pill p-1 h-bg-primary-dark" style="font-size:11px;">مؤسسة</p>
+                            </div>
+                        </a>
+                    </div>`
+                userSearchContainer.innerHTML +=template;
+
+                }
+               
+                
+            });
+
+            if(userSearchInput.value == "") userSearchContainer.innerHTML =""
+           
+        })
+    </script>
 </body>
 </html>
