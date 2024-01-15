@@ -31,9 +31,19 @@ const actionToEvent = async (req, res) => {
         });
         await data.save();
 
+        // points
         const _volunteer = await volunteer.findById(user._id);
         _volunteer.points +=2
-        _volunteer.save();
+
+        //badges
+        const events = await event.find({ "volunteers.volunteerId": user._id });
+        if (events.length >= 10) {
+            if (!_volunteer.badges.includes("65a3a9cfb3cb63028f79edc4")) {
+                _volunteer.badges.push("65a3a9cfb3cb63028f79edc4");
+            }
+        }
+
+       await _volunteer.save();
 
         res.status(200).json({msg:"volunteer in event"})
 
@@ -46,16 +56,34 @@ const actionToEvent = async (req, res) => {
 const actionToMembership = async (req, res) => {
     const { requestId, status, foundationId } = req.body;
     const user = req.session.user; // volunteer
-    
-   
 
     await membershipRequest.findByIdAndUpdate(requestId,{status:status});
 
     if(status === 1){
         await foundation.findByIdAndUpdate({_id:foundationId},{$push:{memberShips:user_id}})
+
+        // points
         const _volunteer = await volunteer.findById(user._id);
         _volunteer.points +=3
-        _volunteer.save();
+
+        // badges
+        const foundations = (await foundation.find({})).splice("memberShips");
+        let counter = 0;
+
+        foundations.forEach((foundation) => {
+            if (foundation.memberShips.includes(user._id)) {
+                counter++;
+            }
+            
+        })
+
+        if (counter >= 5) {
+            if (!_volunteer.badges.includes("65a3a9cfb3cb63028f79edc6")) {
+                _volunteer.badges.push("65a3a9cfb3cb63028f79edc6");
+            }
+        }
+
+        await _volunteer.save();
     }
     res.status(200).json({msg:"accept invite"})
 

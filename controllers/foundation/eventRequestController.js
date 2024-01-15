@@ -51,10 +51,18 @@ const foundationAction = async (req, res) => {
     data.volunteers.push({ volunteerId, rating: {}, review: "" });
     await data.save();
 
+    // points
     const _volunteer = await volunteer.findById(volunteerId);
     _volunteer.points += 2;
-    _volunteer.save();
 
+    // badge
+    const events = await event.find({ "volunteers.volunteerId": volunteerId });
+    if (events.length >= 10) {
+      if (!_volunteer.badges.includes("65a3a9cfb3cb63028f79edc4")) {
+        _volunteer.badges.push("65a3a9cfb3cb63028f79edc4");
+      }
+    }
+    await _volunteer.save();
     return res.status(200).json({ msg: "add seccusse" });
   } else {
     return res.status(200).json(invite);

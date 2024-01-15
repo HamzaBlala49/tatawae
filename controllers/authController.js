@@ -18,9 +18,26 @@ const loginUser = async (req, res) => {
     if (user.password === data.password) {
       req.session.role = data.role;
       req.session.user = user;
+
+
+
       if(data.role == 0){
         res.redirect("/foundation");
       }else{
+
+        // badge
+        const user = req.session.user;
+        const _volunteer = await volunteer.findOne({ _id: user._id }).select("createdAt");
+        const years = (new Date().getTime() - new Date(_volunteer.createdAt).getTime()) / (1000 * 60 * 60 * 24 * 365);
+
+        if(years >= 3){
+          if(!_volunteer.badges.includes("65a3a9cfb3cb63028f79edc0")){
+              _volunteer.badges.push("65a3a9cfb3cb63028f79edc0");
+              await _volunteer.save();
+          }
+
+        }
+
         res.redirect("/volunteer");
       }
     } else {
