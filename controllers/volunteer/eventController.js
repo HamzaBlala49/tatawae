@@ -2,20 +2,38 @@ import { event,eventRequest } from "../../models/index.js";
 
 
 const index = async (req, res) => {
-    const events = await event.find({status:0}).where("startDate").gt(new Date())
-    .select("title volunteersNumber city image foundationId").populate("foundationId").select({"fullName":1});
-    res.render("volunteer/events",{events});
+    try{
+        const events = await event.find({status:0}).where("startDate").gt(new Date())
+        .select("title volunteersNumber city image foundationId").populate("foundationId").select({"fullName":1});
+        res.render("volunteer/events",{events});
+    }catch(e){
+        console.log(e)
+        res.status(500).json({msg:e});
+    
+    }
+   
 
 }
 
 const find = async (req,res) =>{
     try{
+        const user = req.session.user;
         const id =  req.params.id;
         const data = await event.findOne({_id:id}).populate("foundationId volunteers.volunteerId");
+        const request = await eventRequest.findOne({volunteer:user._id,event:id}).select("status");
+        let isIn = false;
 
-        res.render("volunteer/eventInfo",{data});
+        data.volunteers.forEach(volunteer => {
+            if(volunteer.volunteerId._id == user._id){
+                isIn = true;
+            }
+        });
+
+        res.render("volunteer/eventInfo",{data,isIn,request:request.status});
     }catch(e){
         console.log(e)
+        res.status(500).json({msg:e});
+
     }
 
 }
@@ -62,6 +80,8 @@ const eventMember = async (req,res) =>{
         res.render("volunteer/eventMember",{data});
     }catch(e){
         console.log(e)
+        res.status(500).json({msg:e});
+
     }
 
 
@@ -90,6 +110,8 @@ const evaluationInfo = async (req,res) =>{
         res.render("volunteer/evaluationInfo",{data:_data});
     }catch(e){
         console.log(e)
+        res.status(500).json({msg:e});
+
     }
 
 }

@@ -12,7 +12,7 @@ import {
   foundationHomeRoute,
 } from "./routes/foundation/index.js";
 
-import { volunteerEventsRouter,VolunteerNotificationRouter,VolunteerProfileRouter,volunteerHomeRouter } from "./routes/volunteer/index.js";
+import { volunteerEventsRouter,VolunteerNotificationRouter,VolunteerProfileRouter,volunteerHomeRouter,volunteerFoundationRouter} from "./routes/volunteer/index.js";
 
 import authRouter from "./routes/authRoute.js";
 
@@ -67,6 +67,6 @@ app.use("/volunteer", volunteerHomeRouter);
 app.use("/volunteer/events",volunteerEventsRouter);
 app.use("/volunteer/requests",VolunteerNotificationRouter);
 app.use("/volunteer/profile", VolunteerProfileRouter);
-
+app.use("/volunteer/foundation", volunteerFoundationRouter);
 
 // 404 route

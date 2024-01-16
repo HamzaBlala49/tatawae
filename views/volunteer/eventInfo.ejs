@@ -99,11 +99,18 @@
                                     <%- data.description %>
                                 </p>
                             </div>
-                            <% if ( Date.now() < new Date(data.startDate).getTime() )  {%>
-                                <button fId="<%-data.foundationId._id%>" id="joinBtn"  class="btn rounded-5 p-2 btn-sm text-white mt-3 h-btn-primary h-bg-primary-dark">
-                                    <i class="fa-solid fa-hand"></i>
-                                    طلب الأنضمام                           
-                                </button>
+                            <% if ( Date.now() < new Date(data.startDate).getTime() && !isIn && (request == 2 || request == 0))  {%>
+                                <% if(request == 0){ %>
+                                    <button id="joinBtn"  class="btn disabled rounded-5 p-2 btn-sm text-white mt-3 h-btn-primary h-bg-primary-dark">
+                                        <i class="fa-solid fa-hand"></i>
+                                        طلب الأنضمام                           
+                                    </button>
+                                <% } else { %>
+                                    <button fId="<%-data.foundationId._id%>" id="joinBtn"  class="btn rounded-5 p-2 btn-sm text-white mt-3 h-btn-primary h-bg-primary-dark">
+                                        <i class="fa-solid fa-hand"></i>
+                                        طلب الأنضمام                           
+                                    </button>
+                                <% } %> 
                             <% } %>
                             
                         </section>
@@ -124,7 +131,7 @@
                         </div>
                         <div id="members" class="container h-50 overflow-auto">
                             <% data.volunteers.forEach(element => { %>
-                                <a href="/foundation/volunteers/<%- element.volunteerId._id %>" class="text-decoration-none text-dark">
+                                <a href="/volunteer/profile/<%- element.volunteerId._id %>" class="text-decoration-none text-dark">
                                     <div class="d-flex bg-light mb-2 p-2 rounded-pill align-items-center justify-content-satrt">
                                         <div class="d-flex align-items-center">
                                             <img src="/<%- element.volunteerId.avatar %>" alt="">

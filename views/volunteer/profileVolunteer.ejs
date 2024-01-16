@@ -31,11 +31,11 @@
                                     <p class="h-text-15 mx-0 my-2 p-0 fw-bold text-secondary">@<%- data.username %></p>
                                     <div id="profileSocial">
                                         <% if (data.email !="") { %>
-                                            <a href="<%- data.email %>"><img src="/img/mail.png" alt=""></a>
+                                            <a href="mailto:<%- data.email %>"><img src="/img/mail.png" alt=""></a>
                                          
                                         <% } %>
                                         <% if (data.whatsapp !="") { %>
-                                            <a href="<%- data.whatsapp %>"><img src="/img/whatsapp.png" alt=""></a>
+                                            <a href="https://wa.me/<%- data.whatsapp %>"><img src="/img/whatsapp.png" alt=""></a>
                                         <% } %>
 
                                     </div>
@@ -140,12 +140,12 @@
                 </div>
                 <div class="col-2">
                     <section class="p-2 pt-3">
+                       
                         <div class="bg-light p-3 pt-3 mb-2 rounded">
-                            <h6 class="border-bottom pb-1 h-text-16 fw-semibold">أحصائيات</h6>
-                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Optio, iure.</p>
-                        </div>
-                        <div class="bg-light p-3 pt-3 mb-2 rounded">
-                            <h6 class="border-bottom h-text-16 fw-semibold pb-1">المؤسسات</h6>
+                            <h6 class="border-bottom h-text-16 fw-semibold pb-1">
+                                <i class="fa-solid fa-arrows-down-to-people"></i>
+                                المؤسسات
+                            </h6>
                             <div class="foundations">
                                 <% foundation.forEach(element => { %>
                                     <img src="/<%- element.avatar %>" 
@@ -161,7 +161,11 @@
                             </div>
                         </div>
                         <div class="bg-light p-3 pt-3 mb-2 rounded">
-                            <h6 class="border-bottom h-text-16 fw-semibold pb-1">الأنجازات</h6>
+                            <h6 class="border-bottom h-text-16 fw-semibold pb-1">
+                                <i class="fa-solid fa-trophy"></i>
+                                الأنجازات
+                            
+                            </h6>
                             <div class="badges g-0 row">
                                 <% data.badges.forEach(element => { %>
                                     <% if(element.name == "Veteran") { %>
