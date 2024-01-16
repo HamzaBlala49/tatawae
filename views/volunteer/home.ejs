@@ -14,48 +14,7 @@
          <div class="">
             <div class="row position-relative">
                 <div class="col-2 vh-100 position-sticky top-0 end-0 bg-light">
-                    <aside class="p-3">
-                        <div class="brand fs-3 mb-3 h-text-primary-dark fw-bold">تطوع</div>
-                        <ul class="sidebar-link">
-                            <li>
-                                <a href="./home.html"  class="active-link-sidebar">
-                                    <i class="fa-solid fa-house"></i>
-                                    الصفحة الرئيسية
-                                </a>
-                            </li>
-                            <li>
-                                <a class="d-flex align-items-center" href="./notifications.html">
-                                    <i class="fa-solid fa-bell"></i>
-                                    الأشعارات
-                                    <span class="notification me-3"></span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="./events.html">
-                                    <i class="fa-solid fa-handshake-angle"></i>
-                                    الأحداث التطوعية
-                                </a>
-                            </li>
-                            <li>
-                                <a href="./myEvents.html">
-                                    <i class="fa-solid fa-hands-holding"></i>
-                                    المشاركات التطوعية
-                                </a>
-                            </li>
-                            <li>
-                                <a href="./profile.html">
-                                    <i class="fa-solid fa-user"></i>
-                                    ملفي الشخصي
-                                </a>
-                            </li>
-                            <li class="mt-4">
-                                <a href="./profile.html" class="h-bg-primary-light rounded-pill px-2 py-1">
-                                    <i class="fa-solid fa-right-from-bracket"></i>
-                                    تسجيل الخروج
-                                </a>
-                            </li>
-                        </ul>
-                    </aside>
+                   <%- include('../part/sidebar.ejs') %>
                 </div>
                 <div class="col-7">
                     <a data-bs-toggle="modal" data-bs-target="#exampleModal" id="search-link" class="text-decoration-none">
@@ -72,7 +31,7 @@
                             <a href="/volunteer/events/<%- element._id %>" class="text-decoration-none text-dark mb-3">
                                 <div>
                                     <div class="d-flex align-items-center">
-                                        <img src="/<%- element.foundationId.avatar %>" class="img-fluid rounded-pill" style="width: 60px; height: 60px; object-fit: cover;" alt="">
+                                        <img src="/<%- element.foundationId.avatar %>" class="img-fluid rounded-pill" style="width: 60px; height: 60px; object-fit:cover;" alt="">
                                         <span class="h-text-17 me-2 fw-bold"><%- element.foundationId.fullName %></span>
                                     </div>
                                     <p class="h-text-17 mb-1 me-5 m-0" >
@@ -88,7 +47,7 @@
                 </div>
                 <div class="col-3   vh-100 position-sticky top-0 satrt-0">
                     <section class="p-3 ">
-                        <div class="m-2 d-flex mb-3 align-items-center">
+                        <div class="mt-2 d-flex mb-3 align-items-center">
                             <img src="/img/success.png" width="50px" height="50px" alt="">
                             <p class="m-0 me-3 fw-bold">أفضل المتطوعين</p>
                         </div>
@@ -97,17 +56,17 @@
                                 <% if(index == 0) { %>
                                     <a href="/volunteer/profile/<%- element._id %>" class="text-dark  text-decoration-none">
                                         <div class=" row mb-1  align-items-center p-1" style="background-color: #36b336; border-top-right-radius:40px ;border-bottom-right-radius:40px ;">
-                                            <div class="col-3">
+                                            <div class="col-3 p-0  ">
                                                 <img src="/<%- element.avatar %>" class="imag-fluid rounded-pill" style="width: 55px; height: 55px; object-fit: cover;" alt="">
                                             </div>
-                                            <div class="col-5">
+                                            <div class="col-5 p-0">
                                                 <p class="h-text-15 fw-bold m-0"><%- element.username %></p>
                                             </div>
-                                            <div class="col-2">
+                                            <div class="col-2  p-0 ">
                                                 <img src="/img/gold-cup.png" width="36px" height="36px" alt="">
 
                                             </div>
-                                            <div class="col-1">
+                                            <div class="col-1  p-0  m-0">
                                                 <p class="h-text-15 m-0 fw-bold"><%- element.points  %></p>
                                             </div>
                                         </div>
@@ -115,17 +74,17 @@
                                 <% } else if(index == 1) { %>
                                     <a href="/volunteer/profile/<%- element._id %>" class="text-dark  text-decoration-none">
                                         <div class=" row mb-1  align-items-center  p-1" style="background-color:#36b336c4;  border-top-right-radius:40px ;border-bottom-right-radius:40px ;">
-                                            <div class="col-3">
+                                            <div class="col-3 p-0">
                                                 <img src="/<%- element.avatar %>" class="imag-fluid rounded-pill" style="width: 55px; height: 55px; object-fit: cover;" alt="">
                                             </div>
-                                            <div class="col-5">
+                                            <div class="col-5 p-0">
                                                 <p class="h-text-15 fw-bold m-0"><%- element.username %></p>
                                             </div>
-                                            <div class="col-2">
+                                            <div class="col-2 p-0">
                                                 <img src="/img/silver-cup.png" width="36px" height="36px" alt="">
 
                                             </div>
-                                            <div class="col-1">
+                                            <div class="col-1 p-0">
                                                 <p class="h-text-15 m-0 fw-bold"><%- element.points  %></p>
                                             </div>
                                         </div>
@@ -133,17 +92,17 @@
                                 <% } else if(index == 2) { %>
                                     <a href="/volunteer/profile/<%- element._id %>" class="text-dark  text-decoration-none">
                                         <div class=" row mb-1  align-items-center  p-1" style="background-color: #36b33680; border-top-right-radius:40px ;border-bottom-right-radius:40px ;">
-                                            <div class="col-3">
+                                            <div class="col-3 p-0">
                                                 <img src="/<%- element.avatar %>" class="imag-fluid rounded-pill" style="width: 55px; height: 55px; object-fit: cover;" alt="">
                                             </div>
-                                            <div class="col-5">
+                                            <div class="col-5 p-0">
                                                 <p class="h-text-15 fw-bold m-0"><%- element.username %></p>
                                             </div>
-                                            <div class="col-2">
+                                            <div class="col-2 p-0">
                                                 <img src="/img/bronze-cup.png" width="36px" height="36px" alt="">
 
                                             </div>
-                                            <div class="col-1">
+                                            <div class="col-1 p-0">
                                                 <p class="h-text-15 m-0 fw-bold"><%- element.points  %></p>
                                             </div>
                                         </div>
@@ -151,17 +110,17 @@
                                 <% } else { %>
                                     <a href="/volunteer/profile/<%- element._id %>" class="text-dark  text-decoration-none">
                                         <div class=" row mb-1  align-items-center  p-1" style="background-color: #68ac682b;;  border-top-right-radius:40px ;border-bottom-right-radius:40px ;">
-                                            <div class="col-3">
+                                            <div class="col-3 p-0">
                                                 <img src="/<%- element.avatar %>" class="imag-fluid rounded-pill" style="width: 55px; height: 55px; object-fit: cover;" alt="">
                                             </div>
-                                            <div class="col-5">
+                                            <div class="col-5 p-0">
                                                 <p class="h-text-15 fw-bold m-0"><%- element.username %></p>
-                                            </div>
-                                            <div class="col-2">
+                                            </div> 
+                                            <div class="col-2 p-0">
                                                 <p class="h-text-15 m-0 pe-2 fw-bold"><%- index + 1 %></p>
 
                                             </div>
-                                            <div class="col-1">
+                                            <div class="col-1 p-0">
                                                 <p class="h-text-15 m-0 fw-bold"><%- element.points  %></p>
                                             </div>
                                         </div>
@@ -227,11 +186,14 @@
                 if(element.birthDate !== undefined){
                     const template = `
                     <div class="p-3 d-flex justify-content-between align-items-center mb-1">
-                        <a href="/volunteer/profile/${element._id}" class="text-decoration-none">
+                        <a href="/volunteer/profile/${element._id}" class="text-decoration-none w-100">
                             <div class="d-flex justify-content-between align-items-center">
-                                <img src="/${element.avatar}" style="width: 50px; height: 50px; object-fit: cover;" class="img-fluid rounded-pill" >
-                                <p class="fw-semibold m-0 me-3 text-dark">${element.username}</p>
-                                <p class="fw-semibold m-0 me-3 text-white rounded-pill p-1 h-bg-primary-dark" style="font-size:11px;">متطوع</p>
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <img src="/${element.avatar}" style="width: 50px; height: 50px; object-fit: cover;" class="img-fluid rounded-pill" >
+                                    <p class="fw-semibold m-0 me-3 text-dark">${element.username}</p>
+                                </div>
+                               
+                                <p class="fw-semibold m-0 me-3 text-white rounded-pill p-1 px-3 h-bg-primary-dark" style="font-size:11px;">متطوع</p>
                             </div>
                         </a>
                     </div>`
@@ -240,11 +202,13 @@
                 }else{
                     const template = `
                     <div class="p-3 d-flex justify-content-between align-items-center mb-1">
-                        <a href="/volunterr/foundation/${element._id}" class="text-decoration-none">
+                        <a href="/volunterr/foundation/${element._id}" class="text-decoration-none w-100">
                             <div class="d-flex justify-content-between align-items-center">
-                                <img src="/${element.avatar}" style="width: 50px; height: 50px; object-fit: cover;" class="img-fluid rounded-pill" >
-                                <p class="fw-semibold m-0 me-3 text-dark">${element.username}</p>
-                                <p class="fw-semibold m-0 me-3 text-white rounded-pill p-1 h-bg-primary-dark" style="font-size:11px;">مؤسسة</p>
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <img src="/${element.avatar}" style="width: 50px; height: 50px; object-fit: cover;" class="img-fluid rounded-pill" >
+                                    <p class="fw-semibold m-0 me-3 text-dark">${element.username}</p>
+                                </div>
+                                <p class="fw-semibold m-0 me-3 text-white rounded-pill p-1 px-3 h-bg-primary-dark" style="font-size:11px;">مؤسسة</p>
                             </div>
                         </a>
                     </div>`

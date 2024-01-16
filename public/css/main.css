@@ -41,6 +41,11 @@
     outline:none;
     font-family:Cairo;
 }
+
+::selection{
+    background-color: var(--h-primary-dark);
+    color: white;
+}
 /* body{
     overflow-x: hidden;
 } */
@@ -249,4 +254,8 @@
 #homeInput:focus{
     box-shadow: none;
     outline: none;
+}
+
+.ladingPageBtn{
+    width: 300px;
 }

@@ -49,7 +49,7 @@ app.use(express.json());
 app.use(express.static("uploads"));
 app.use(express.static("public"));
 
-app.get("/", (req, res) => res.send("landing page"));
+app.get("/", (req, res) => res.render("index"));
 
 // routes
 app.use("/auth", authRouter);
