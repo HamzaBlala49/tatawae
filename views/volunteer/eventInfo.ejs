@@ -38,7 +38,7 @@
                                             <tr>
                                                 <td>المؤسسه:</td>
                                                 <td>
-                                                    <a class="text-decoration-none fw-bold h-text-primary-dark" href="/volunteer/foundation/:<%- data.foundationId._id %>">
+                                                    <a class="text-decoration-none fw-bold h-text-primary-dark" href="/volunteer/foundation/<%- data.foundationId._id %>">
                                                         <%- data.foundationId.fullName %>
                                                     </a>
                                                 </td>
@@ -99,8 +99,8 @@
                                     <%- data.description %>
                                 </p>
                             </div>
-                            <% if ( Date.now() < new Date(data.startDate).getTime() && !isIn && (request == 2 || request == 0))  {%>
-                                <% if(request == 0){ %>
+                            <% if ( Date.now() < new Date(data.startDate).getTime() && !isIn && (requestStatus == 2 || requestStatus == 0  || requestStatus == null))  {%>
+                                <% if(requestStatus == 0){ %>
                                     <button id="joinBtn"  class="btn disabled rounded-5 p-2 btn-sm text-white mt-3 h-btn-primary h-bg-primary-dark">
                                         <i class="fa-solid fa-hand"></i>
                                         طلب الأنضمام                           

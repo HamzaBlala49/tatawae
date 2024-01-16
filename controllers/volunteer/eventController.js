@@ -22,14 +22,21 @@ const find = async (req,res) =>{
         const data = await event.findOne({_id:id}).populate("foundationId volunteers.volunteerId");
         const request = await eventRequest.findOne({volunteer:user._id,event:id}).select("status");
         let isIn = false;
+        let requestStatus;
 
         data.volunteers.forEach(volunteer => {
             if(volunteer.volunteerId._id == user._id){
                 isIn = true;
             }
         });
+        
+        if(request == null){
+            requestStatus = null;
+        }else{
+            requestStatus = request.status;
+        }
 
-        res.render("volunteer/eventInfo",{data,isIn,request:request.status});
+        res.render("volunteer/eventInfo",{data,isIn,requestStatus});
     }catch(e){
         console.log(e)
         res.status(500).json({msg:e});

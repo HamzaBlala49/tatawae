@@ -1,7 +1,6 @@
 import {
   invitePage,
   invitation,
-  addVolunteer,
   index,
   create,
   add,
@@ -13,6 +12,7 @@ import {
   evaluationPage,
   eventMembers,
   evaluation,
+  getAll,
 } from "../../controllers/foundation/eventController.js";
 import { Router } from "express";
 import { upload } from "../../middlewares/index.js";
@@ -20,6 +20,7 @@ import { upload } from "../../middlewares/index.js";
 const router = Router();
 
 router.get("/", index);
+router.get("/allEvents", getAll);
 router.get("/create", create);
 router.post("/create", upload.single("image"), add);
 router.post("/delete", deleteEvent);

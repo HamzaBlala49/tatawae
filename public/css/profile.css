@@ -58,3 +58,16 @@
     
 }
 
+#editLink{
+    width: fit-content;
+    background: #d0d0d082;
+    padding: 10px;
+    border-radius: 20px;
+    position: absolute;
+    left: 50px;
+    top: 250px;
+}     
+
+#editLink:hover{
+    background-color:#d0d0d0a5 ;
+}

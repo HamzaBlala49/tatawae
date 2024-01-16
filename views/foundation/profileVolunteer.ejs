@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/all.min.css">
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="/css/profile.css">
+    <title>Profile</title>
+</head>
+<body>
+    <main>
+         <div class="">
+            <div class="row position-relative">
+                <div class="col-2 vh-100 position-sticky top-0 end-0 bg-light">
+                    <%- include('../part/sidebar2.ejs') %>
+                </div>
+                <div class="col-8">
+                    <section class="p-3">
+                        <header id="profile-header">
+                            <div class="coverProfile" style="background-image: url('/<%- data.coverProfileImage %>');background-size: cover;"></div>
+                            <div class="profileImg">
+                                <img src="/<%- data.avatar %>" alt="">
+                            </div>
+                        </header>
+                        <section id="profileInfo" class="mt-5">
+                            <div class="row">
+                                <div class="col-6 pt-3 pe-5">
+                                    <h5 id="profileName" class="fw-bold"><%- data.fullName %></h5>
+                                    <p class="h-text-15 mx-0 my-2 p-0 fw-bold text-secondary">@<%- data.username %></p>
+                                    <div id="profileSocial">
+                                        <% if (data.email !="") { %>
+                                            <a href="mailto:<%- data.email %>"><img src="/img/mail.png" alt=""></a>
+                                         
+                                        <% } %>
+                                        <% if (data.whatsapp !="") { %>
+                                            <a href="https://wa.me/<%- data.whatsapp %>"><img src="/img/whatsapp.png" alt=""></a>
+                                        <% } %>
+
+                                    </div>
+                                </div>
+                                <div class="col-6 pt-3 d-flex justify-content-around">
+                                    <div>
+                                        <p class="h-text-16 fw-bold">الأيام التطوعية</p>
+                                            <% if (volunteeringDays == 0) { %>
+                                                <p class="fw-bold"><%- volunteeringDays %></p>
+                                            <% } %>
+                                            <% if (volunteeringDays == 1) { %>
+                                                <p class="fw-bold">يوم</p>
+                                            <% } %>
+                                            <% if (volunteeringDays == 2) { %>
+                                                <p class="fw-bold">يومان</p>
+                                            <% } %> 
+                                            <% if (volunteeringDays >= 3 && volunteeringDays <= 10) { %>
+                                                <p class="fw-bold">
+                                                    <%- volunteeringDays %>
+                                                    <span class="me-1 h-text-17">أيام</span>
+                                                </p>
+                                            <% } %> 
+                                            <% if (volunteeringDays > 11) { %>
+                                                <p class="fw-bold">
+                                                    <%- volunteeringDays %>
+                                                    <span class="me-1 h-text-17">يوم</span>
+                                                </p>
+                                            <% } %> 
+                                    </div>
+                                    <div>
+                                        <p class="h-text-16 fw-bold">النقاط التطوعية</p>
+                                        <p class="fw-bold"><%- data.points %></p>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+                        <section id="profileInfo" class="pe-4 pt-4">
+                            <ul class="nav nav-tabs" id="myTab" role="tablist">
+                                <li class="nav-item" role="presentation">
+                                  <button class="nav-link text-dark active" id="profile-info-tab" data-bs-toggle="tab" data-bs-target="#profile-info" type="button" role="tab" aria-controls="home-tab-pane" aria-selected="true">معلومات شخصية</button>
+                                </li>
+                                <li class="nav-item" role="presentation">
+                                  <button class="nav-link text-dark" id="volunteering-info-tab" data-bs-toggle="tab" data-bs-target="#volunteering-info" type="button" role="tab" aria-controls="profile-tab-pane" aria-selected="false">التطوعات</button>
+                                </li>
+                              </ul>
+                              <div class="tab-content" id="myTabContent">
+                                <div class="tab-pane fade show active p-2" id="profile-info" role="tabpanel" aria-labelledby="home-tab" tabindex="0">
+                                    <% if (data.city !="") { %>
+                                        <p class="mt-3 m-0 h-text-17"><strong>
+                                            <i class="fa-solid fa-location-dot"></i> 
+                                            المدينة:
+                                         </strong><br><%-data.city %></p>
+                                        
+                                       <% } %>
+                                       <% if (data.description !="") { %>
+                                        <p class="mt-3 m-0 h-text-17"><strong>
+                                            الوصف:
+                                         </strong><br><%-data.description %></p>
+                                        
+                                       <% } %>
+                                </div>
+                                <div class="tab-pane fade p-3" id="volunteering-info" role="tabpanel" aria-labelledby="profile-tab" tabindex="0">
+                                    <div class="row">
+                                        <% eventsData.forEach(element => { %>
+                                            <div class="col-6">
+                                                <div class="volunteering-card card p-4 mb-2">
+                                                    <div class="mb-2">
+                                                        <img src="/<%- element.avatar %>">
+                                                        <p class="h-text-17 fw-bold m-0"><%- element.fullName %></p>
+                                                    </div>
+                                                    <div class="d-flex gap-1 mb-2">
+                                                        <p class="h-text-16 fw-bold m-0">الحدث:</p>
+                                                        <p class="h-text-16 m-0"><%- element.title %></p>
+                                                    </div>
+                                                    <div class="d-flex gap-1 align-items-center">
+                                                        <p class="h-text-16 fw-semibold m-0 mb-2">التقييم:</p>
+                                                        <p class="m-0 ">
+                                                            <% for( let index = 1; index <= 5 ; index++ ) { %>
+                                                                <% if (index <= element.evaluate) { %>
+                                                                    <i class="fa-solid fa-star"></i>
+                                                                <% }else { %>
+                                                                    <i class="fa-regular fa-star"></i>
+                                                                <%  } %>
+                                                            <% } %>
+                                                        </p>
+                                                    </div>
+                                                    <div class="">
+                                                        <p class="h-text-16 fw-semibold m-0">المراجعة:</p>
+                                                        <p class="h-text-14 mt-1 m-0">
+                                                            <%- element.review %>
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        <% }) %>
+                                    
+                                    </div>
+                                </div>
+                              </div>
+                        </section>
+                    </section>
+                </div>
+                <div class="col-2">
+                    <section class="p-2 pt-3">
+                       
+                        <div class="bg-light p-3 pt-3 mb-2 rounded">
+                            <h6 class="border-bottom h-text-16 fw-semibold pb-1">
+                                <i class="fa-solid fa-arrows-down-to-people"></i>
+                                المؤسسات
+                            </h6>
+                            <div class="foundations">
+                                <% foundation.forEach(element => { %>
+                                    <img src="/<%- element.avatar %>" 
+                                    data-bs-toggle="tooltip" 
+                                    data-bs-placement="bottom"
+                                    data-bs-title="<%- element.fullName %>"
+                                    alt=""
+                                    style="object-fit: cover;"
+                                    class="imag-fluid rounded-pill"
+                                >
+                                 
+                                <% }) %>
+                            </div>
+                        </div>
+                        <div class="bg-light p-3 pt-3 mb-2 rounded">
+                            <h6 class="border-bottom h-text-16 fw-semibold pb-1">
+                                <i class="fa-solid fa-trophy"></i>
+                                الأنجازات
+                            
+                            </h6>
+                            <div class="badges g-0 row">
+                                <% data.badges.forEach(element => { %>
+                                    <% if(element.name == "Veteran") { %>
+                                        <div class="col-4 mb-1">
+                                            <div  data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-title="<%- element.description %>" class="d-flex align-items-center justify-content-center text-white  rounded h-bg-primary-dark" style="width: 42px;height: 42px; cursor: pointer;">
+                                                <i class="fa-solid fa-clock "></i>
+                                            </div>
+                                        </div>
+                                    <% } %>
+
+                                    <% if(element.name == "hard-working") {%>
+                                        <div class="col-4 mb-1">
+                                            <div  data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-title="<%- element.description %>" class="d-flex align-items-center justify-content-center text-white  rounded h-bg-primary-dark" style="width: 42px;height: 42px; cursor: pointer;">
+                                                <i class="fa-solid fa-fire"></i>                                   
+                                             </div>
+                                        </div>
+                                    <% } %>
+
+                                    <% if(element.name == "excellent") {%>
+                                        <div class="col-4 mb-1">
+                                            <div  data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-title="<%- element.description %>" class="d-flex align-items-center justify-content-center text-white  rounded h-bg-primary-dark" style="width: 42px;height: 42px; cursor: pointer;">
+                                                <i class="fa-solid fa-dragon"></i>
+                                            </div>
+                                        </div>
+
+                                    <% } %>
+
+                                    <% if(element.name == "popular") {%>
+                                        <div class="col-4 mb-1">
+                                            <div  data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-title="<%- element.description %>" class="d-flex align-items-center justify-content-center text-white  rounded h-bg-primary-dark" style="width: 42px;height: 42px; cursor: pointer;">
+                                                <i class="fa-solid fa-shield-heart"></i>
+                                            </div>
+                                        </div>
+
+                                    <% } %>
+
+                                <% }) %>
+
+                        </div>
+                       
+
+                    </section>
+                </div>
+            </div>
+            
+         </div>
+    </main>
+    <div></div>
+    
+    <script src="/js/bootstrap.bundle.min.js"></script>
+    <script>
+        let x = [{
+            
+        }]
+        JSON.str
+        const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
+        const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl))
+    </script>
+</body>
+</html>

@@ -22,13 +22,27 @@ const create = async (req, res) => {
   res.render("foundation/addEvent");
 };
 
-// ===================================
+const getAll = async (req, res) => {
+  try {
+    const events = await event
+      .find({ status: 0 })
+      .where("startDate")
+      .gt(new Date())
+      .select("title volunteersNumber city image foundationId")
+      .populate("foundationId")
+      .select({ fullName: 1 });
+    res.render("foundation/allEvents", { events });
+  } catch (e) {
+    console.log(e);
+    res.status(500).json({ msg: e });
+  }
+};
 
 const find = async (req, res) => {
   try {
     const user = req.session.user;
     const data = await event
-      .findOne({ _id: req.params.id, foundationId: user._id })
+      .findOne({ _id: req.params.id})
       .populate("volunteers.volunteerId");
     res.render("foundation/eventInfo", { data });
     // res.json(data);
@@ -139,38 +153,6 @@ const evaluationPage = async (req, res) => {
   }
 };
 
-const addVolunteer = async (req, res) => {
-  const user = req.session.user;
-  const vId = "6599a3cb923187cf3f5dba78";
-  const id = "659e3950839366e8d07e83c7";
-  // const data = {
-  //     volunteerId :vId,
-  //     rating :{},
-  //     review:""
-  // }
-  // const e = await event.findOne({_id:id}).select("volunteers").populate("volunteers.volunteerId");
-  // console.log(e);
-  // await event.findByIdAndUpdate(id,{$push:{volunteers:data}});
-
-  // e.volunteers.push(data);
-
-  // e.save();
-
-  // console.log("kjkjkfdjkdjkfkdf");
-  // const requests = await eventRequest.create({foundation:user._id,volunteer:vId,event:id,status:0,sender:1});
-  // const requests = await eventRequest.find({foundation:user._id,status:1}).populate(["volunteer","event"]);
-  // console.log(requests);
-
-  // const user =  req.session.user;
-
-  // const f = await foundation.findOne({_id:user._id}).select("memberShips")
-  // f.memberShips.push("6599a3cb923187cf3f5dba78");
-  // f.memberShips.push("659a765c2451281668eea9c1");
-  // await f.save();
-
-  res.send("add");
-};
-
 const evaluation = async (req, res) => {
   try {
     const user = req.session.user;
@@ -244,10 +226,10 @@ const evaluation = async (req, res) => {
     });
 
     if (isBadge) {
-        const _volunteer = await volunteer.findById(vId);
+      const _volunteer = await volunteer.findById(vId);
       if (!_volunteer.badges.includes("65a3a9cfb3cb63028f79edc2")) {
-            _volunteer.badges.push("65a3a9cfb3cb63028f79edc2");
-            await _volunteer.save();
+        _volunteer.badges.push("65a3a9cfb3cb63028f79edc2");
+        await _volunteer.save();
       }
     }
 
@@ -327,9 +309,9 @@ export {
   update,
   find,
   evaluationPage,
-  addVolunteer,
   invitePage,
   invitation,
   eventMembers,
   evaluation,
+  getAll
 };

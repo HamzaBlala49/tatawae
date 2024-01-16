@@ -7,55 +7,14 @@
     <link rel="stylesheet" href="/css/bootstrap.min.css">
     <link rel="stylesheet" href="/css/main.css">
     <link rel="stylesheet" href="/css/eventInfo.css">
-    <title>notifications</title>
+    <title>إضافة حدث</title>
 </head>
 <body>
     <main>
          <div class="">
             <div class="row position-relative">
                 <div class="col-2 vh-100 position-sticky top-0 end-0 bg-light">
-                    <aside class="p-3">
-                        <div class="brand fs-3 mb-3 h-text-primary-dark fw-bold">تطوع</div>
-                        <ul class="sidebar-link">
-                            <li>
-                                <a href="/foundation" >
-                                    <i class="fa-solid fa-house"></i>
-                                    الصفحة الرئيسية
-                                </a>
-                            </li>
-                            <li>
-                                <a href="/foundation/requests">
-                                    <i class="fa-solid fa-bell"></i>
-                                    الأشعارات
-                                </a>
-                            </li>
-                            <li>
-                                <a href="/foundation/events" class="active-link-sidebar">
-                                    <i class="fa-solid fa-handshake-angle"></i>
-                                     إدارة الأحداث
-                                </a>
-                            </li>
-                            <li>
-                                <a href="/foundation/members">
-                                    <i class="fa-solid fa-people-group"></i>
-                                    فريقي التطوعي
-                                </a>
-                            </li>
-                            <li>
-                                <a href="/foundation/profile" >
-                                    <i class="fa-solid fa-user"></i>
-                                    ملفي الشخصي
-                                </a>
-                            </li>
-                         
-                            <li class="mt-4">
-                                <a href="/logout" class="h-bg-primary-light rounded-pill px-2 py-1">
-                                    <i class="fa-solid fa-right-from-bracket"></i>
-                                    تسجيل الخروج
-                                </a>
-                            </li>
-                        </ul>
-                    </aside>
+                    <%- include('../part/sidebar2.ejs') %>
                 </div>
                 <div class="col-7">
                     <section class="p-3">

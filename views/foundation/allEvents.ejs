@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/all.min.css">
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/main.css">
+    <title>الاحداث</title>
+</head>
+<body>
+    <main>
+         <div class="">
+            <div class="row position-relative">
+                <div class="col-2 vh-100 position-sticky top-0 end-0 bg-light">
+                    <%- include('../part/sidebar2.ejs') %>
+                </div>
+                <div class="col-7">
+                    <section class="p-3">
+                        <h4 class="fw-bold">الأحداث التطوعية</h4>
+                        <hr>
+                        <div class="container">
+                            <div class="row">
+                                <% events.forEach(element => { %>
+                                    <div class="col-6 mb-2">
+                                        <div class="card  rounded-0">
+                                                <img src="/<%- element.image %>" class="img-fluid m-1 " style="width: 100%; height: 200px;" alt="">
+                                            <div class="card-body">
+                                                <p class="card-title  text-dark m-0 my-2 fw-bold">
+                                                    <i class="fa-solid  fa-handshake-angle ms-1"></i>
+                                                    <%- element.title %>
+                                                </p>
+                                                <p class=" h-text-16  m-0 my-1 text-dark">
+                                                    <i class="fa-solid fa-building ms-1"></i>
+                                                    <%- element.foundationId.fullName %>
+                                                </p>
+                                                <p class="h-text-16  m-0 my-1 text-dark">
+                                                    <i class="fa-solid fa-map-location ms-1"></i>
+                                                    <%- element.city %>
+                                                </p>
+                                                <p class="h-text-16  m-0 my-1 text-dark">
+                                                    <i class="fa-solid fa-people-group ms-1"></i>
+                                                    <%- element.volunteersNumber %>
+
+                                                </p>
+                                            </div>
+                                            <div class=" p-1">
+                                                <a href="/foundation/events/<%- element._id %>" class="btn rounded-0 btn-sm w-100 text-white h-bg-primary-dark h-btn-primary">تفاصيل</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                 
+                                <% }) %>
+                          
+                            </div>        
+                        </div>
+                   </section> 
+                </div>
+                <div class="col-3">
+                    <div class="bg-light p-3">
+                        <h5 class="fw-bold">
+                            <i class="fa-solid fa-filter"></i>
+                            فلترة
+                        </h5>
+                        <hr>
+                        <div class="container">
+                            <form class="">
+                                <div class="col">
+                                    <div class="mb-3">
+                                        <label for="" class="form-label fw-bold h-text-17">
+                                            بحث
+                                            <i class="fa-solid fa-search"></i>
+                                        </label>
+                                        <input type="text" name="" id="" class="form-control rounded-pill form-control-sm h-text-17" placeholder="تنظيف الشاطئ" aria-describedby="helpId"/>
+                                    </div>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="" class="form-label fw-bold h-text-17">
+                                        <i class="fa-solid fa-map-location"></i>
+                                        المدينة
+                                    </label>
+                                    <select class="form-select form-select-sm rounded-pill h-text-17" name="" id="">
+                                        <option selected>الكل</option>
+                                        <option value="">المكلا</option>
+                                        <option value="">سيؤون</option>
+                                        <option value="">غيل باوزير</option>
+                                    </select>
+                                </div>  
+                                <div class="mb-3">
+                                    <label for="" class="form-label fw-bold h-text-17">
+                                        <i class="fa-solid fa-person-half-dress"></i>
+                                        الجنس
+                                    </label>
+                                    <select class="form-select form-select-sm rounded-pill h-text-17" name="" id="">
+                                        <option selected>الكل</option>
+                                        <option value="">ذكر</option>
+                                        <option value="">أنثئ</option>
+                                    </select>
+                                </div>  
+                                <div class="mb-3">
+                                    <label for="" class="form-label fw-bold h-text-17">
+                                        <i class="fa-solid fa-calendar"></i>
+                                        تاريخ البدء
+                                    </label>
+                                    <input type="date" class="form-control rounded-pill form-control-sm" name="" id="" aria-describedby="helpId" placeholder="" />
+                                </div> 
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+         </div>
+    </main>
+    <div></div>
+    
+    <script src="/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

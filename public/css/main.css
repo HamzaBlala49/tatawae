@@ -258,4 +258,10 @@
 
 .ladingPageBtn{
     width: 300px;
+    border: 2px solid var(--h-primary-dark) ;
+}
+
+.ladingPageBtn:hover{
+    border: 2px solid var(--h-primary-dark) ;
+
 }
