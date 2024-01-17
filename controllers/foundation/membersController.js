@@ -12,17 +12,21 @@ const index = async (req, res) => {
       .populate("memberShips")
       .select("memberShips");
     res.render("foundation/members", { foundationsMember });
-    res.end();
   } catch (e) {
     console.log(e.massage);
+    res.status(500).json({msg:e})
   }
-  // res.render('foundation/index', {})
 };
 
 const remove = async (req, res) => {
-  const { id } = req.params;
-  const newVolunteer = await volunteer.findById(id).select("fullName avatar");
-  res.render("foundation/deleteMember", { volunteer: newVolunteer });
+  try {
+    const { id } = req.params;
+    const newVolunteer = await volunteer.findById(id).select("fullName avatar");
+    res.render("foundation/deleteMember", { volunteer: newVolunteer });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({msg:error})
+  }
 };
 
 const distorted = async (req, res) => {
@@ -37,6 +41,7 @@ const distorted = async (req, res) => {
     res.status(200).json({ msg: `remove it from ${deleted.fullName}` });
   } catch (e) {
     console.log(e.massage);
+    res.status(500).json({msg:e})
   }
 };
 

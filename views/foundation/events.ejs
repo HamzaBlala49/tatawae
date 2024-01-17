@@ -58,7 +58,7 @@
                                                 <% } %>
                                             </td>
                                             <td>
-                                                <% if (Date.now() > new Date(element.endDate).getTime()) { %>
+                                                <% if (Date.now() > new Date(element.startDate).getTime()) { %>
                                                     <i class="fa-solid fa-person-circle-plus text-secondary fs-5"></i>
                                                     <% } else{ %>
                                                         <a href="/foundation/events/invite/<%- element._id %>">

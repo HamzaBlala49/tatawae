@@ -1,7 +1,7 @@
 import express from "express";
 import env from "dotenv";
 import mongoose, { set } from "mongoose";
-import { logger, session } from "./middlewares/index.js";
+import { logger, session, checkRole } from "./middlewares/index.js";
 import {
   membersRouter,
   volunteerRouter,
@@ -12,7 +12,13 @@ import {
   foundationHomeRoute,
 } from "./routes/foundation/index.js";
 
-import { volunteerEventsRouter,VolunteerNotificationRouter,VolunteerProfileRouter,volunteerHomeRouter,volunteerFoundationRouter} from "./routes/volunteer/index.js";
+import {
+  volunteerEventsRouter,
+  VolunteerNotificationRouter,
+  VolunteerProfileRouter,
+  volunteerHomeRouter,
+  volunteerFoundationRouter,
+} from "./routes/volunteer/index.js";
 
 import authRouter from "./routes/authRoute.js";
 
@@ -54,19 +60,91 @@ app.get("/", (req, res) => res.render("index"));
 // routes
 app.use("/auth", authRouter);
 // foundation
-app.use("/foundation", foundationHomeRoute);
-app.use("/foundation/members", membersRouter);
-app.use("/foundation/invitation", membershipRequestRouter);
-app.use("/foundation/profile", foundationRouter);
-app.use("/foundation/events", foundationEventsRouter);
-app.use("/foundation/requests", foundationEventsRequestRouter);
-app.use("/foundation/volunteer", volunteerRouter);
+app.use(
+  "/foundation",
+  (req, res, next) => {
+    checkRole(0, req, res, next);
+  },
+  foundationHomeRoute
+);
+app.use(
+  "/foundation/members",
+  (req, res, next) => {
+    checkRole(0, req, res, next);
+  },
+  membersRouter
+);
+app.use(
+  "/foundation/invitation",
+  (req, res, next) => {
+    checkRole(0, req, res, next);
+  },
+  membershipRequestRouter
+);
+app.use(
+  "/foundation/profile",
+  (req, res, next) => {
+    checkRole(0, req, res, next);
+  },
+  foundationRouter
+);
+app.use(
+  "/foundation/events",
+  (req, res, next) => {
+    checkRole(0, req, res, next);
+  },
+  foundationEventsRouter
+);
+app.use(
+  "/foundation/requests",
+  (req, res, next) => {
+    checkRole(0, req, res, next);
+  },
+  foundationEventsRequestRouter
+);
+app.use(
+  "/foundation/volunteer",
+  (req, res, next) => {
+    checkRole(0, req, res, next);
+  },
+  volunteerRouter
+);
 
 //volunteer
-app.use("/volunteer", volunteerHomeRouter);
-app.use("/volunteer/events",volunteerEventsRouter);
-app.use("/volunteer/requests",VolunteerNotificationRouter);
-app.use("/volunteer/profile", VolunteerProfileRouter);
-app.use("/volunteer/foundation", volunteerFoundationRouter);
+app.use(
+  "/volunteer",
+  (req, res, next) => {
+    checkRole(1, req, res, next);
+  },
+  volunteerHomeRouter
+);
+app.use(
+  "/volunteer/events",
+  (req, res, next) => {
+    checkRole(1, req, res, next);
+  },
+  volunteerEventsRouter
+);
+app.use(
+  "/volunteer/requests",
+  (req, res, next) => {
+    checkRole(1, req, res, next);
+  },
+  VolunteerNotificationRouter
+);
+app.use(
+  "/volunteer/profile",
+  (req, res, next) => {
+    checkRole(1, req, res, next);
+  },
+  VolunteerProfileRouter
+);
+app.use(
+  "/volunteer/foundation",
+  (req, res, next) => {
+    checkRole(1, req, res, next);
+  },
+  volunteerFoundationRouter
+);
 
 // 404 route

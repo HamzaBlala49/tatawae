@@ -144,6 +144,7 @@
             const reqId = btn.getAttribute("reqId");
             const foundId= btn.getAttribute("foundId");
 
+
             fetch("/volunteer/requests/actionToMembership",{
                 method:"POST",
                 headers:{
@@ -151,7 +152,7 @@
                 },
                 body:JSON.stringify({
                     requestId:reqId,
-                    status,
+                    status:status,
                     foundationId:foundId
                 })
             }).then(res=>{

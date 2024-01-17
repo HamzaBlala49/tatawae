@@ -72,10 +72,10 @@ const actionToMembership = async (req, res) => {
 
     await membershipRequest.findByIdAndUpdate(requestId, { status: status });
 
-    if (status === 1) {
+    if (status == 1) {
       await foundation.findByIdAndUpdate(
         { _id: foundationId },
-        { $push: { memberShips: user_id } }
+        { $push: { memberShips: user._id } }
       );
 
       // points
@@ -104,8 +104,24 @@ const actionToMembership = async (req, res) => {
   } catch (error) {
     console.log(error);
     res.status(500).json({ msg: error });
-
   }
 };
 
-export { index, actionToEvent, actionToMembership };
+const checkRequests = async (req, res) => {
+  try {
+    const user = req.session.user;
+    const eventReq = await eventRequest
+      .find({ volunteer: user._id, sender: 0, status: 0 })
+      .select("_id");
+    const membershipReq = await membershipRequest
+      .find({ volunteer: user._id, status: 0 })
+      .select("_id");
+    const data = eventReq.concat(membershipReq).length;
+    res.status(200).json({ data });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ msg: error });
+  }
+};
+
+export { index, actionToEvent, actionToMembership , checkRequests };

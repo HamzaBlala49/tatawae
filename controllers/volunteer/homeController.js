@@ -19,32 +19,30 @@ const index = async (req, res) => {
 
     res.render("volunteer/home", { events, volunteers });
   } catch (error) {
-      console.log(error);
+    console.log(error);
     res.status(500).json({ msg: error });
   }
 };
 
 const search = async (req, res) => {
-    try {
-        const un = req.query.username;
-        const users = [];
-        const volunteers = await volunteer
-          .find({ username: { $regex: un, $options: "i" } })
-          .select("username avatar birthDate");
-        users.push(...volunteers);
-      
-        const foundations = await foundation
-          .find({ username: { $regex: un, $options: "i" } })
-          .select("username avatar");
-        users.push(...foundations);
-        console.log(users);
-        res.status(200).json({ users });
-        
-    } catch (error) {
-        console.log(error);        
-        res.status(500).json({ msg: error });
-    }
- 
+  try {
+    const un = req.query.username;
+    const users = [];
+    const volunteers = await volunteer
+      .find({ username: { $regex: un, $options: "i" } })
+      .select("username avatar birthDate");
+    users.push(...volunteers);
+
+    const foundations = await foundation
+      .find({ username: { $regex: un, $options: "i" } })
+      .select("username avatar");
+    users.push(...foundations);
+    console.log(users);
+    res.status(200).json({ users });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ msg: error });
+  }
 };
 
 export { index, search };

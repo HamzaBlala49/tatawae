@@ -1,9 +1,14 @@
-const checkRole = (req,res,next)=>{
-    if(!req.session.role){
+const checkRole = (role, req, res, next) => {
+    console.log(req.session.role);
+  if (req.session.role == role) {
+    if (req.session.role === undefined) {
+        res.redirect("/");
+    } else {
         next();
-    }else{
-        res.redirect('/login');
     }
-}
+  } else {
+    res.redirect("/");
+  }
+};
 
-export default checkRole
+export default checkRole;

@@ -11,7 +11,7 @@
             <a class="d-flex align-items-center" href="/foundation/requests">
                 <i class="fa-solid fa-bullhorn"></i>
                     الطلبات
-                <span class="notification me-3"></span>
+                <p id="greenDot" class="notification d-none text-white me-3 m-0 p-2 d-flex justify-content-center align-items-center"></p>
             </a>
         </li>
         <li>
@@ -41,3 +41,21 @@
         </li>
     </ul>
 </aside>
+
+
+<script>
+    const worker = new Worker("/js/foundationWorker.js")
+    const greenDot = document.getElementById("greenDot");
+    worker.onmessage =(msg)=>{
+        if(msg.data == 0){
+            greenDot.innerHTML = msg.data
+            greenDot.classList.add("d-none");
+
+        }else{
+            greenDot.classList.remove("d-none");
+            greenDot.innerHTML =  msg.data
+        }
+    }
+
+       
+</script>

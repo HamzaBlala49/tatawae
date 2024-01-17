@@ -18,7 +18,6 @@ const index = async (req, res) => {
 };
 
 const create = async (req, res) => {
-  const user = req.session.user;
   res.render("foundation/addEvent");
 };
 
@@ -42,34 +41,38 @@ const find = async (req, res) => {
   try {
     const user = req.session.user;
     const data = await event
-      .findOne({ _id: req.params.id})
+      .findOne({ _id: req.params.id })
       .populate("volunteers.volunteerId");
     res.render("foundation/eventInfo", { data });
-    // res.json(data);
   } catch (e) {
     console.log(e);
   }
 };
 
 const add = async (req, res) => {
-  const user = req.session.user;
-  const data = req.body;
+  try {
+    const user = req.session.user;
+    const data = req.body;
 
-  data.foundationId = user._id;
-  data.volunteers = [];
+    data.foundationId = user._id;
+    data.volunteers = [];
 
-  if (req.file) {
-    data.image = req.file.filename;
+    if (req.file) {
+      data.image = req.file.filename;
+    }
+
+    const newEvent = await event.create(data);
+
+    res.redirect("/foundation/events");
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ msg: error });
   }
-
-  const newEvent = await event.create(data);
-
-  res.redirect("/foundation/events");
 };
 
 const deleteMasge = async (req, res) => {
-  const user = req.session.user;
   try {
+    const user = req.session.user;
     const data = await event.findOne({
       _id: req.params.id,
       foundationId: user._id,
@@ -143,11 +146,6 @@ const evaluationPage = async (req, res) => {
       .findOne({ _id: vId })
       .select("avatar username");
     res.render("foundation/eventEvaluation", { data });
-    // if(Date.now() > data.endDate.getTime()){
-
-    // }else{
-    //     res.redirect("/foundation/events")
-    // }
   } catch (e) {
     console.log(e);
   }
@@ -166,7 +164,7 @@ const evaluation = async (req, res) => {
       initiative,
     } = req.body;
 
-    const volunteerInEvent = await event.findOne({
+    let volunteerInEvent = await event.findOne({
       _id: eId,
       "volunteers.volunteerId": vId,
     });
@@ -195,12 +193,12 @@ const evaluation = async (req, res) => {
         initiative) /
         5
     );
-    const _volunteer = await volunteer.findById(vId);
+    let _volunteer = await volunteer.findById(vId);
     _volunteer.points += points;
     _volunteer.save();
 
     // badge
-    const events = await event
+    let events = await event
       .find({ "volunteers.volunteerId": vId })
       .sort({ createdAt: -1 })
       .limit(5);
@@ -215,7 +213,7 @@ const evaluation = async (req, res) => {
       });
     }
 
-    const isBadge = lsatFiveEvolution.every((rating) => {
+    let isBadge = lsatFiveEvolution.every((rating) => {
       return (
         rating.attendance == 5 &&
         rating.cooperation == 5 &&
@@ -226,7 +224,7 @@ const evaluation = async (req, res) => {
     });
 
     if (isBadge) {
-      const _volunteer = await volunteer.findById(vId);
+      let _volunteer = await volunteer.findById(vId);
       if (!_volunteer.badges.includes("65a3a9cfb3cb63028f79edc2")) {
         _volunteer.badges.push("65a3a9cfb3cb63028f79edc2");
         await _volunteer.save();
@@ -240,64 +238,77 @@ const evaluation = async (req, res) => {
 };
 
 const invitePage = async (req, res) => {
-  const user = req.session.user;
-  const data = await foundation
-    .findOne({ _id: user._id })
-    .select("memberShips")
-    .populate("memberShips");
-  console.log(data);
-  res.render("foundation/eventInvite", { data });
+  try {
+    const user = req.session.user;
+    const data = await foundation
+      .findOne({ _id: user._id })
+      .select("memberShips")
+      .populate("memberShips");
+    console.log(data);
+    res.render("foundation/eventInvite", { data });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ msg: error });
+  }
 };
 
 const invitation = async (req, res) => {
-  const user = req.session.user;
-  const { volunteerId, eventId } = req.body;
-  console.log(req.body);
+  try {
+    const user = req.session.user;
+    const { volunteerId, eventId } = req.body;
 
-  const volunteer = await eventRequest.findOne({
-    volunteer: volunteerId,
-    event: eventId,
-    foundation: user._id,
-    status: 0,
-    sender: 0,
-  });
-  if (volunteer == null) {
-    const requests = await eventRequest.create({
-      foundation: user._id,
+    const volunteer = await eventRequest.findOne({
       volunteer: volunteerId,
       event: eventId,
+      foundation: user._id,
       status: 0,
       sender: 0,
     });
-    res.status(200).json({ msg: "created" });
-  } else {
-    res.status(200).json({ msg: "already exist" });
+    if (volunteer == null) {
+      const requests = await eventRequest.create({
+        foundation: user._id,
+        volunteer: volunteerId,
+        event: eventId,
+        status: 0,
+        sender: 0,
+      });
+      res.status(200).json({ msg: "created" });
+    } else {
+      res.status(200).json({ msg: "already exist" });
+    }
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ msg: error });
   }
 };
 
 const eventMembers = async (req, res) => {
-  const user = req.session.user;
-  const id = req.params.id;
-  let data = await event
-    .findOne({ _id: id, foundationId: user._id })
-    .select("volunteers title image")
-    .populate("volunteers.volunteerId");
-  const filterList = [];
-  // "volunteers.rating":{ $exists: false }
-  data.volunteers.forEach((volunteer) => {
-    if (volunteer.rating.attendance == undefined) {
-      filterList.push(volunteer);
-    }
-  });
+  try {
+    const user = req.session.user;
+    const id = req.params.id;
+    let data = await event
+      .findOne({ _id: id, foundationId: user._id })
+      .select("volunteers title image")
+      .populate("volunteers.volunteerId");
+    const filterList = [];
+    data.volunteers.forEach((volunteer) => {
+      if (volunteer.rating.attendance == undefined) {
+        filterList.push(volunteer);
+      }
+    });
 
-  data = {
-    _id: data._id,
-    title: data.title,
-    image: data.image,
-    volunteers: filterList,
-  };
+    data = {
+      _id: data._id,
+      title: data.title,
+      image: data.image,
+      volunteers: filterList,
+    };
 
-  res.render("foundation/eventMembers", { data });
+    res.render("foundation/eventMembers", { data });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ msg: error });
+  }
 };
 export {
   index,
@@ -313,5 +324,5 @@ export {
   invitation,
   eventMembers,
   evaluation,
-  getAll
+  getAll,
 };
