@@ -9,14 +9,25 @@ import {
 const index = async (req, res) => {
   try {
     const user = req.session.user;
+    let eventsRequests = [];
     const eventReq = await eventRequest
       .find({ volunteer: user._id, sender: 0, status: 0 })
       .populate("event foundation");
+
+    eventReq.forEach((request) => {
+      if (
+        new Date().getTime() < new Date(request.event.startDate).getTime() &&
+        request.event.volunteersNumber != request.event.volunteers.length
+      ) {
+        eventsRequests.push(request);
+      }
+    });
+
     const membershipReq = await membershipRequest
       .find({ volunteer: user._id, status: 0 })
       .populate("foundation");
 
-    const data = eventReq.concat(membershipReq).sort((a, b) => {
+    const data = eventsRequests.concat(membershipReq).sort((a, b) => {
       return new Date(b.createdAt) - new Date(a.createdAt);
     });
     res.render("volunteer/notifications", { data });
@@ -33,8 +44,8 @@ const actionToEvent = async (req, res) => {
 
     await eventRequest.findByIdAndUpdate(requestId, { status: status });
 
-    if (status === 1) {
-      const data = await event.findByIdAndUpdate({ _id: eventId });
+    if (status == 1) {
+      let data = await event.findByIdAndUpdate({ _id: eventId });
       data.volunteers.push({
         volunteerId: user._id,
         rating: {},
@@ -43,11 +54,11 @@ const actionToEvent = async (req, res) => {
       await data.save();
 
       // points
-      const _volunteer = await volunteer.findById(user._id);
+      let _volunteer = await volunteer.findById(user._id);
       _volunteer.points += 2;
 
       //badges
-      const events = await event.find({ "volunteers.volunteerId": user._id });
+      let events = await event.find({ "volunteers.volunteerId": user._id });
       if (events.length >= 10) {
         if (!_volunteer.badges.includes("65a3a9cfb3cb63028f79edc4")) {
           _volunteer.badges.push("65a3a9cfb3cb63028f79edc4");
@@ -57,8 +68,9 @@ const actionToEvent = async (req, res) => {
       await _volunteer.save();
 
       res.status(200).json({ msg: "volunteer in event" });
+    } else {
+      res.status(200).json({ msg: "accept invite" });
     }
-    res.status(200).json({ msg: "accept invite" });
   } catch (error) {
     console.log(error);
     res.status(500).json({ msg: error });
@@ -110,13 +122,27 @@ const actionToMembership = async (req, res) => {
 const checkRequests = async (req, res) => {
   try {
     const user = req.session.user;
+    let eventsRequests = [];
+
     const eventReq = await eventRequest
       .find({ volunteer: user._id, sender: 0, status: 0 })
-      .select("_id");
+      .select("_id event")
+      .populate("event");
+
+    eventReq.forEach((request) => {
+      if (
+        new Date().getTime() < new Date(request.event.startDate).getTime() &&
+        request.event.volunteersNumber != request.event.volunteers.length
+      ) {
+        eventsRequests.push(request);
+      }
+    });
+
     const membershipReq = await membershipRequest
       .find({ volunteer: user._id, status: 0 })
       .select("_id");
-    const data = eventReq.concat(membershipReq).length;
+
+    const data = eventsRequests.concat(membershipReq).length;
     res.status(200).json({ data });
   } catch (error) {
     console.log(error);
@@ -124,4 +150,4 @@ const checkRequests = async (req, res) => {
   }
 };
 
-export { index, actionToEvent, actionToMembership , checkRequests };
+export { index, actionToEvent, actionToMembership, checkRequests };

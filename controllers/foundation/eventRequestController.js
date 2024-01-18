@@ -3,37 +3,24 @@ import { event, eventRequest, volunteer } from "../../models/index.js";
 const index = async (req, res) => {
   try {
     const user = req.session.user;
-    const data = await eventRequest
+    const data = [];
+    const eventRequests = await eventRequest
       .find({ foundation: user._id, sender: 1, status: 0 })
       .populate(["volunteer", "event"]);
+
+    eventRequests.forEach((request) => {
+      if (
+        new Date().getTime() < new Date(request.event.startDate).getTime() &&
+        request.event.volunteersNumber != request.event.volunteers.length
+      ) {
+        data.push(request);
+      }
+    });
+
     res.render("foundation/eventRequests", { data: data });
   } catch (error) {
     console(error);
   }
-};
-
-const invite = async (req, res) => {
-  user = req.session.user;
-  const { eventId, volunteerId } = req.body;
-  const invite = await eventRequest.create({
-    foundation: user_id,
-    volunteer: volunteerId,
-    event: eventId,
-    sender: req.session.role,
-  });
-  return res.status(200).json(invite);
-};
-
-const requestVolunteer = async (req, res) => {
-  user = req.session.user;
-  const { eventId, foundationId } = req.body;
-  const invite = await eventRequest.create({
-    volunteer: user_id,
-    foundation: foundationId,
-    event: eventId,
-    sender: 1,
-  });
-  return res.status(200).json(invite);
 };
 
 const foundationAction = async (req, res) => {
@@ -79,9 +66,21 @@ const foundationAction = async (req, res) => {
 const checkedRequests = async (req, res) => {
   try {
     const user = req.session.user;
-    const data = await eventRequest
+    let data = [];
+    const eventsRequests = await eventRequest
       .find({ foundation: user._id, sender: 1, status: 0 })
-      .select("_id");
+      .select("_id event")
+      .populate("event");
+
+    eventsRequests.forEach((request) => {
+      if (
+        new Date().getTime() < new Date(request.event.startDate).getTime() &&
+        request.event.volunteersNumber != request.event.volunteers.length
+      ) {
+        data.push(request._id);
+      }
+    });
+
     res.status(200).json({ data: data.length });
   } catch (error) {
     console.log(error);
@@ -89,4 +88,4 @@ const checkedRequests = async (req, res) => {
   }
 };
 
-export { index, foundationAction,checkedRequests };
+export { index, foundationAction, checkedRequests };

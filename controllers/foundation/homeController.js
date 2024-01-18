@@ -27,6 +27,7 @@ const index = async (req, res) => {
 
 const search = async (req, res) => {
     try {
+      const user =  req.session.user
         const un = req.query.username;
         const users = [];
         const volunteers = await volunteer
@@ -37,10 +38,15 @@ const search = async (req, res) => {
         const foundations = await foundation
           .find({ username: { $regex: un, $options: "i" } })
           .select("username avatar");
-        users.push(...foundations);
-        console.log(users);
-        res.status(200).json({ users });
+          
+          foundations.forEach(foundation=>{
+            if(foundation._id != user._id){
+              users.push(...foundations);
+            }
+          })
+          
         
+        res.status(200).json({ users });
     } catch (error) {
         console.log(error);        
         res.status(500).json({ msg: error });

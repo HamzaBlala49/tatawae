@@ -23,8 +23,9 @@
                         <a href="/foundation/events" class="backBtn btn h-btn-primary d-flex justify-content-center align-items-center">
                             <i class="fa-solid fa-arrow-right"></i>
                         </a>
+
                         <section class="m-2 mt-4">
-                            <% data.memberShips.forEach(element => { %>
+                            <% data.forEach(element => { %>
                                 <div class="d-flex bg-light mb-2 px-3 py-2 rounded-pill justify-content-between align-items-center w-50 ">
 
                                     <a class="text-decoration-none d-flex  justify-content-between align-items-center text-dark" href="/foundation/volunteer/<%- element._id %>">

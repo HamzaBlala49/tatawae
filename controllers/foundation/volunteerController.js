@@ -1,4 +1,4 @@
-import { volunteer, foundation,event } from "../../models/index.js";
+import { volunteer,foundation,event } from "../../models/index.js";
 
 const find = async (req, res) => {
   try {
@@ -60,14 +60,29 @@ const find = async (req, res) => {
 
 const search = async (req, res) => {
   try {
+    const user = req.session.user
     const un = req.query.username;
-    const newVolunteer = await volunteer
+    let data = [];
+    const volunteers = await volunteer
       .find({
         username: { $regex: un, $options: "i" },
       })
       .select("username avatar");
 
-    res.status(200).json({ data: newVolunteer });
+    const members = await foundation.findOne({_id:user._id})
+    .select("memberShips");
+
+    console.log(members);
+
+    volunteers.forEach(volunteer =>{
+
+      if(!members.memberShips.includes(volunteer._id)){
+        data.push(volunteer)
+      }
+    })
+
+
+    res.status(200).json({data});
   } catch (error) {
     console.log(error);
     res.status(500).json({ msg: error });

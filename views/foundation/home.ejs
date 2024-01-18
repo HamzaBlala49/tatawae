@@ -182,7 +182,7 @@
 
         userSearchInput.addEventListener("input",async()=>{
             userSearchContainer.innerHTML = "";
-            const response = await fetch(`/volunteer/search?username=${userSearchInput.value}`)
+            const response = await fetch(`/foundation/search?username=${userSearchInput.value}`)
             const data = await response.json();
             data.users.forEach(element => {
                 if(element.birthDate !== undefined){

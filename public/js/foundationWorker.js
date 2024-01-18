@@ -14,4 +14,4 @@ setInterval(() => {
     .then((data) => {
       self.postMessage(data.data);
     });
-}, 10000);
+}, 50000);

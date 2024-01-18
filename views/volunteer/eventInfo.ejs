@@ -99,7 +99,7 @@
                                     <%- data.description %>
                                 </p>
                             </div>
-                            <% if ( Date.now() < new Date(data.startDate).getTime() && !isIn && (requestStatus == 2 || requestStatus == 0  || requestStatus == null))  {%>
+                            <% if ( Date.now() < new Date(data.startDate).getTime() && !isIn && (requestStatus == 2 || requestStatus == 0  || requestStatus == null) && data.volunteersNumber != data.volunteers.length )  {%>
                                 <% if(requestStatus == 0){ %>
                                     <button id="joinBtn"  class="btn disabled rounded-5 p-2 btn-sm text-white mt-3 h-btn-primary h-bg-primary-dark">
                                         <i class="fa-solid fa-hand"></i>

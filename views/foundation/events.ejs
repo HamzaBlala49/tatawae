@@ -58,13 +58,13 @@
                                                 <% } %>
                                             </td>
                                             <td>
-                                                <% if (Date.now() > new Date(element.startDate).getTime()) { %>
+                                                <% if (Date.now() > new Date(element.startDate).getTime() || element.volunteersNumber == element.volunteers.length) { %>
                                                     <i class="fa-solid fa-person-circle-plus text-secondary fs-5"></i>
-                                                    <% } else{ %>
+                                                <% } else{ %>
                                                         <a href="/foundation/events/invite/<%- element._id %>">
                                                             <i class="fa-solid fa-person-circle-plus h-text-primary-dark fs-5"></i>
                                                         </a>
-                                                    <% } %>
+                                                <% } %>
                                             </td>
                                             <td>
                                                 <% if (Date.now() > new Date(element.endDate).getTime() ) { %>
@@ -92,9 +92,14 @@
                                                 <% } %>                                                
                                             </td>
                                             <td>
-                                                <a class="text-danger fs-6" href="/foundation/events/delete/<%- element._id %>">
-                                                    <i class="fa-solid fa-ban"></i> 
-                                                </a>
+                                                <% if (element.volunteers.length > 0 || Date.now() >= new Date(element.startDate).getTime()) { %>
+                                                    <i class="fa-solid fa-ban fs-6 text-secondary"></i>
+                                                    
+                                                <% } else { %>
+                                                    <a class="text-danger fs-6" href="/foundation/events/delete/<%- element._id %>">
+                                                        <i class="fa-solid fa-ban"></i> 
+                                                    </a>
+                                                <% } %>  
                                             </td>
                                         </tr>
                                     <% }) %>

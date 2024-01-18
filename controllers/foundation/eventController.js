@@ -10,7 +10,7 @@ const index = async (req, res) => {
     const user = req.session.user;
     const events = await event
       .find({ foundationId: user._id, status: 0 })
-      .select("title startDate endDate volunteers");
+      .select("title startDate endDate volunteers volunteersNumber");
     res.render("foundation/events", { events });
   } catch (e) {
     console.log(e);
@@ -240,11 +240,27 @@ const evaluation = async (req, res) => {
 const invitePage = async (req, res) => {
   try {
     const user = req.session.user;
-    const data = await foundation
+    const data = [];
+    const members = await foundation
       .findOne({ _id: user._id })
       .select("memberShips")
       .populate("memberShips");
-    console.log(data);
+    const _event = await event.findOne({ _id: req.params.id });
+    console.log(_event);
+
+    if (_event.volunteers.length > 0) {
+      members.memberShips.forEach((member) => {
+        _event.volunteers.forEach((volunteer) => {
+          if (volunteer.volunteerId.toString() != member._id.toString()) {
+            console.log("in if")
+            data.push(member);
+          }
+        });
+      });
+    } else {
+      data.push(...members.memberShips);
+    }
+
     res.render("foundation/eventInvite", { data });
   } catch (error) {
     console.log(error);
