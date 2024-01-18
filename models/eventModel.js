@@ -86,13 +86,15 @@ const eventSchema = new Schema({
         initiative: {
           type: Number,
         },
-        
       },
 
       review: {
         type: String,
       },
 
+      days: {
+        type: Number,
+      },
     },
   ],
 

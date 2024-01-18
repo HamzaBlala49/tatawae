@@ -141,13 +141,26 @@
                                   </tbody>
                                 </table>
                               </div>
+
+
+
+                              <div class="mb-3">
+                                <label for="" class="form-label">أيام الحضور</label>
+                                <select class="form-select form-select-sm rounded-pill" name="days">
+                                 <% for( let i = 1; i <= days; i++ ) { %>
+                                    <option value="<%- i %>"><%- i %></option>
+                                 <% } %>
+                                </select>
+                              </div>
+                              
+
                               <div class="mb-3">
                                 <label for="" class="form-label fw-bold">المراجعة:</label>
-                                <textarea class="form-control h-text-14 " name="review" required id=""  rows="5"></textarea>
+                                <textarea class="form-control h-text-14 rounded-4" name="review" required id=""  rows="5"></textarea>
                               </div>
                               
                               <div class="mb-3">
-                                <button type="submit" class="btn h-btn-primary text-white h-bg-primary-dark">حفظ</button>
+                                <button type="submit" class="btn h-btn-primary rounded-pill px-3 text-white h-bg-primary-dark">حفظ</button>
                               </div>
                               
                             

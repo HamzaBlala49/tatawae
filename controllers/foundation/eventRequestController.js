@@ -36,7 +36,7 @@ const foundationAction = async (req, res) => {
 
     if (status == 1) {
       const data = await event.findOne({ _id: eventId });
-      data.volunteers.push({ volunteerId, rating: {}, review: "" });
+      data.volunteers.push({ volunteerId, rating: {}, review: "", days: 0 });
       await data.save();
 
       // points

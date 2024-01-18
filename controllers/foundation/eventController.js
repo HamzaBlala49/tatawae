@@ -145,7 +145,21 @@ const evaluationPage = async (req, res) => {
     const data = await volunteer
       .findOne({ _id: vId })
       .select("avatar username");
-    res.render("foundation/eventEvaluation", { data });
+
+    const _event = await event.findById(eId).select("startDate endDate");
+
+    const startDate = new Date(_event.startDate);
+    const endDate = new Date(_event.endDate);
+    startDate.setHours(0, 0, 0, 0);
+    endDate.setHours(0, 0, 0, 0);
+
+    const days = Math.round(
+      (endDate.getTime() - startDate.getTime()) / (1000 * 60 * 60 * 24)
+    );
+
+    console.log(days);
+
+    res.render("foundation/eventEvaluation", { data, days });
   } catch (e) {
     console.log(e);
   }
@@ -162,6 +176,7 @@ const evaluation = async (req, res) => {
       interaction,
       compliance,
       initiative,
+      days,
     } = req.body;
 
     let volunteerInEvent = await event.findOne({
@@ -172,6 +187,7 @@ const evaluation = async (req, res) => {
     volunteerInEvent.volunteers.forEach((volunteer) => {
       if (volunteer.volunteerId == vId) {
         volunteer.review = review;
+        volunteer.days = days;
         volunteer.rating = {
           attendance,
           cooperation,
@@ -185,13 +201,7 @@ const evaluation = async (req, res) => {
     await volunteerInEvent.save();
     // points
     let points = Math.round(
-      (review +
-        attendance +
-        cooperation +
-        interaction +
-        compliance +
-        initiative) /
-        5
+      (attendance + cooperation + interaction + compliance + initiative) / 5
     );
     let _volunteer = await volunteer.findById(vId);
     _volunteer.points += points;
@@ -246,13 +256,12 @@ const invitePage = async (req, res) => {
       .select("memberShips")
       .populate("memberShips");
     const _event = await event.findOne({ _id: req.params.id });
-    console.log(_event);
 
     if (_event.volunteers.length > 0) {
       members.memberShips.forEach((member) => {
         _event.volunteers.forEach((volunteer) => {
           if (volunteer.volunteerId.toString() != member._id.toString()) {
-            console.log("in if")
+            console.log("in if");
             data.push(member);
           }
         });

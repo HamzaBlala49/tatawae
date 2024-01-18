@@ -50,6 +50,7 @@ const actionToEvent = async (req, res) => {
         volunteerId: user._id,
         rating: {},
         review: "",
+        days: 0,
       });
       await data.save();
 

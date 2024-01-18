@@ -16,8 +16,11 @@ const index = async (req, res) => {
     let volunteeringDays = 0;
 
     events.forEach((event) => {
-      volunteeringDays +=
-        (event.endDate - event.startDate) / (1000 * 60 * 60 * 24);
+      event.volunteers.forEach((volunteer) => {
+        if (volunteer.volunteerId == user._id) {
+          volunteeringDays += volunteer.days;
+        }
+      });
     });
 
     const _foundation = await foundation
@@ -75,8 +78,11 @@ const find = async (req, res) => {
     let volunteeringDays = 0;
 
     events.forEach((event) => {
-      volunteeringDays +=
-        (event.endDate - event.startDate) / (1000 * 60 * 60 * 24);
+      event.volunteers.forEach((volunteer) => {
+        if (volunteer.volunteerId == id) {
+          volunteeringDays += volunteer.days;
+        }
+      });
     });
 
     const _foundation = await foundation

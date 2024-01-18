@@ -1,4 +1,4 @@
-import { volunteer,foundation,event } from "../../models/index.js";
+import { volunteer, foundation, event } from "../../models/index.js";
 
 const find = async (req, res) => {
   try {
@@ -15,8 +15,11 @@ const find = async (req, res) => {
     let volunteeringDays = 0;
 
     events.forEach((event) => {
-      volunteeringDays +=
-        (event.endDate - event.startDate) / (1000 * 60 * 60 * 24);
+      event.volunteers.forEach((volunteer) => {
+        if (volunteer.volunteerId == id) {
+          volunteeringDays += volunteer.days;
+        }
+      });
     });
 
     const _foundation = await foundation
@@ -60,7 +63,7 @@ const find = async (req, res) => {
 
 const search = async (req, res) => {
   try {
-    const user = req.session.user
+    const user = req.session.user;
     const un = req.query.username;
     let data = [];
     const volunteers = await volunteer
@@ -69,20 +72,19 @@ const search = async (req, res) => {
       })
       .select("username avatar");
 
-    const members = await foundation.findOne({_id:user._id})
-    .select("memberShips");
+    const members = await foundation
+      .findOne({ _id: user._id })
+      .select("memberShips");
 
     console.log(members);
 
-    volunteers.forEach(volunteer =>{
-
-      if(!members.memberShips.includes(volunteer._id)){
-        data.push(volunteer)
+    volunteers.forEach((volunteer) => {
+      if (!members.memberShips.includes(volunteer._id)) {
+        data.push(volunteer);
       }
-    })
+    });
 
-
-    res.status(200).json({data});
+    res.status(200).json({ data });
   } catch (error) {
     console.log(error);
     res.status(500).json({ msg: error });
