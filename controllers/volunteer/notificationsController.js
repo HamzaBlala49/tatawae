@@ -96,7 +96,7 @@ const actionToMembership = async (req, res) => {
       _volunteer.points += 3;
 
       // badges
-      const foundations = (await foundation.find({})).splice("memberShips");
+      let foundations = (await foundation.find({})).splice("memberShips");
       let counter = 0;
 
       foundations.forEach((foundation) => {

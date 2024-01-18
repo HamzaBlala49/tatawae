@@ -201,8 +201,10 @@ const evaluation = async (req, res) => {
     await volunteerInEvent.save();
     // points
     let points = Math.round(
-      (attendance + cooperation + interaction + compliance + initiative) / 5
+      (+attendance + +cooperation + +interaction + +compliance + +initiative) /
+        5
     );
+
     let _volunteer = await volunteer.findById(vId);
     _volunteer.points += points;
     _volunteer.save();
@@ -212,12 +214,12 @@ const evaluation = async (req, res) => {
       .find({ "volunteers.volunteerId": vId })
       .sort({ createdAt: -1 })
       .limit(5);
-    let lsatFiveEvolution;
+    let lsatFiveEvolution = [];
     if (events.length == 5) {
-      lsatFiveEvolution = events.map((event) => {
+      events.forEach((event) => {
         event.volunteers.forEach((volunteer) => {
           if (volunteer.volunteerId == vId) {
-            return volunteer.rating;
+            lsatFiveEvolution.push(volunteer.rating);
           }
         });
       });
@@ -236,6 +238,7 @@ const evaluation = async (req, res) => {
     if (isBadge) {
       let _volunteer = await volunteer.findById(vId);
       if (!_volunteer.badges.includes("65a3a9cfb3cb63028f79edc2")) {
+        console.log("in if");
         _volunteer.badges.push("65a3a9cfb3cb63028f79edc2");
         await _volunteer.save();
       }

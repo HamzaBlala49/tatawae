@@ -34,12 +34,12 @@ const loginUser = async (req, res) => {
           const user = req.session.user;
           const _volunteer = await volunteer
             .findOne({ _id: user._id })
-            .select("createdAt");
+            .select("createdAt badges");
           const years =
             (new Date().getTime() - new Date(_volunteer.createdAt).getTime()) /
             (1000 * 60 * 60 * 24 * 365);
 
-          if (years >= 3) {
+          if (years == years) {
             if (!_volunteer.badges.includes("65a3a9cfb3cb63028f79edc0")) {
               _volunteer.badges.push("65a3a9cfb3cb63028f79edc0");
               await _volunteer.save();

@@ -1,4 +1,3 @@
-import e from "express";
 import { volunteer, event, foundation } from "../../models/index.js";
 
 const index = async (req, res) => {
@@ -32,7 +31,7 @@ const index = async (req, res) => {
     events.forEach((event) => {
       event.volunteers.forEach((volunteer) => {
         if (volunteer.volunteerId == user._id) {
-          const temp = {};
+          let temp = {};
           temp.title = event.title;
           temp.avatar = event.foundationId.avatar;
           temp.foundationName = event.foundationId.fullName;
