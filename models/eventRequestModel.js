@@ -32,13 +32,13 @@ const eventRequestSchema = new Schema({
 
   createdAt: {
     type: Date,
-    default: new Date(),
+    default: Date.now,
     immutable: true,
   },
 
   updateAt: {
     type: Date,
-    default: new Date(),
+    default: Date.now,
   },
   
 });

@@ -16,7 +16,7 @@
                 <div class="col-2 vh-100 position-sticky top-0 end-0 bg-light">
                     <%- include('../part/sidebar.ejs') %>
                 </div>
-                <div class="col-8">
+                <div class="col-7">
                     <section class="p-3">
                         <header id="profile-header">
                             <div class="coverProfile" style="background-image: url('/<%- data.coverProfileImage %>');background-size: cover;"></div>
@@ -138,7 +138,7 @@
                         </section>
                     </section>
                 </div>
-                <div class="col-2">
+                <div class="col-3">
                     <section class="p-2 pt-3">
                         <div class="bg-light p-3 pt-3 mb-2 rounded">
                             <h6 class="border-bottom pb-1 h-text-16 fw-semibold">
@@ -177,7 +177,7 @@
                             <div class="badges g-0 row">
                                 <% data.badges.forEach(element => { %>
                                     <% if(element.name == "Veteran") { %>
-                                        <div class="col-4 mb-1">
+                                        <div class="col-2 mb-1">
                                             <div  data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-title="<%- element.description %>" class="d-flex align-items-center justify-content-center text-white  rounded h-bg-primary-dark" style="width: 42px;height: 42px; cursor: pointer;">
                                                 <i class="fa-solid fa-clock "></i>
                                             </div>
@@ -185,7 +185,7 @@
                                     <% } %>
 
                                     <% if(element.name == "hard-working") {%>
-                                        <div class="col-4 mb-1">
+                                        <div class="col-2 mb-1">
                                             <div  data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-title="<%- element.description %>" class="d-flex align-items-center justify-content-center text-white  rounded h-bg-primary-dark" style="width: 42px;height: 42px; cursor: pointer;">
                                                 <i class="fa-solid fa-fire"></i>                                   
                                              </div>
@@ -193,7 +193,7 @@
                                     <% } %>
 
                                     <% if(element.name == "excellent") {%>
-                                        <div class="col-4 mb-1">
+                                        <div class="col-2 mb-1">
                                             <div  data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-title="<%- element.description %>" class="d-flex align-items-center justify-content-center text-white  rounded h-bg-primary-dark" style="width: 42px;height: 42px; cursor: pointer;">
                                                 <i class="fa-solid fa-dragon"></i>
                                             </div>
@@ -202,7 +202,7 @@
                                     <% } %>
 
                                     <% if(element.name == "popular") {%>
-                                        <div class="col-4 mb-1">
+                                        <div class="col-2 mb-1">
                                             <div  data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-title="<%- element.description %>" class="d-flex align-items-center justify-content-center text-white  rounded h-bg-primary-dark" style="width: 42px;height: 42px; cursor: pointer;">
                                                 <i class="fa-solid fa-shield-heart"></i>
                                             </div>

@@ -24,8 +24,11 @@ const find = async (req, res) => {
       .findOne({ _id: id })
       .populate("foundationId volunteers.volunteerId");
     const request = await eventRequest
-      .findOne({ volunteer: user._id, event: id })
-      .select("status");
+      .findOne({ volunteer: user._id, event: id }).sort({createdAt:-1})
+      .select("status createdAt");
+
+      // res.json({request});
+
     let isIn = false;
     let requestStatus;
 
@@ -61,19 +64,26 @@ const join = async (req, res) => {
     ) {
       res.status(200).json({ msg: "no space" });
     } else {
-      const volunteer = await eventRequest.findOne({
+      const data = await eventRequest.create({
+        foundation,
         volunteer: user._id,
         event: eventId,
-        foundation,
+        sender: 1,
       });
-      if (volunteer == null || volunteer.status == 2) {
-        const data = await eventRequest.create({
-          foundation,
-          volunteer: user._id,
-          event: eventId,
-          sender: 1,
-        });
-      }
+
+      // const volunteer = await eventRequest.findOne({
+      //   volunteer: user._id,
+      //   event: eventId,
+      //   foundation,
+      // });
+      // if (volunteer == null || volunteer.status == 2) {
+      //   const data = await eventRequest.create({
+      //     foundation,
+      //     volunteer: user._id,
+      //     event: eventId,
+      //     sender: 1,
+      //   });
+      // }
       res.status(201).json({ msg: "created" });
     }
   } catch (e) {
