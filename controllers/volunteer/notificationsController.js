@@ -60,7 +60,7 @@ const actionToEvent = async (req, res) => {
 
       //badges
       let events = await event.find({ "volunteers.volunteerId": user._id });
-      if (events.length >= 10) {
+      if (events.length >= 1) {
         if (!_volunteer.badges.includes("65a3a9cfb3cb63028f79edc4")) {
           _volunteer.badges.push("65a3a9cfb3cb63028f79edc4");
         }
@@ -105,7 +105,7 @@ const actionToMembership = async (req, res) => {
         }
       });
 
-      if (counter >= 5) {
+      if (counter >= 1) {
         if (!_volunteer.badges.includes("65a3a9cfb3cb63028f79edc6")) {
           _volunteer.badges.push("65a3a9cfb3cb63028f79edc6");
         }

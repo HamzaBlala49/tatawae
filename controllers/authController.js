@@ -39,7 +39,7 @@ const loginUser = async (req, res) => {
             (new Date().getTime() - new Date(_volunteer.createdAt).getTime()) /
             (1000 * 60 * 60 * 24 * 365);
 
-          if (years == years) {
+          if (years >= 3) {
             if (!_volunteer.badges.includes("65a3a9cfb3cb63028f79edc0")) {
               _volunteer.badges.push("65a3a9cfb3cb63028f79edc0");
               await _volunteer.save();

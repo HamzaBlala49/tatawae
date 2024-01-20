@@ -41,7 +41,7 @@ const search = async (req, res) => {
           
           foundations.forEach(foundation=>{
             if(foundation._id != user._id){
-              users.push(...foundations);
+              users.push(foundation);
             }
           })
           
