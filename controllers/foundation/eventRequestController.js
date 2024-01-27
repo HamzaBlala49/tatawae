@@ -68,20 +68,23 @@ const checkedRequests = async (req, res) => {
     const user = req.session.user;
     let data = [];
     const eventsRequests = await eventRequest
-      .find({ foundation: user._id, sender: 1, status: 0 })
-      .select("_id event")
-      .populate("event");
+      .find({ foundation: user._id, sender: 1, status: 0})
+      .select("_id event volunteer")
+      .populate(["event","volunteer"]);
 
     eventsRequests.forEach((request) => {
       if (
         new Date().getTime() < new Date(request.event.startDate).getTime() &&
         request.event.volunteersNumber != request.event.volunteers.length
       ) {
-        data.push(request._id);
+        data.push({
+          event: request.event.title,
+          volunteer: request.volunteer.username,
+        });
       }
     });
 
-    res.status(200).json({ data: data.length });
+    res.status(200).json({ data });
   } catch (error) {
     console.log(error);
     res.status(500).json({ msg: error });

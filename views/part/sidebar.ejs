@@ -40,6 +40,7 @@
         </li>
     </ul>
 </aside>
+<!-- <div id="snackbar">Some text some message..</div> -->
 
 <script>
     const worker = new Worker("/js/volunteerWorker.js")
@@ -48,12 +49,25 @@
         if(msg.data == 0){
             greenDot.innerHTML = msg.data
             greenDot.classList.add("d-none");
+            // myFunction(msg.data);
 
         }else{
             greenDot.classList.remove("d-none");
             greenDot.innerHTML =  msg.data
+            // myFunction(msg.data);
         }
     }
+
+    // function myFunction(data) {
+    //     // Get the snackbar DIV
+    //     var x = document.getElementById("snackbar");
+    //     x.innerHTML = data
+    //     // Add the "show" class to DIV
+    //     x.className = "show";
+
+    //     // After 3 seconds, remove the show class from DIV
+    //     setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
+    // }
 
        
 </script>

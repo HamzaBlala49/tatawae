@@ -41,20 +41,47 @@
         </li>
     </ul>
 </aside>
+<div id="snackbar">Some text some message..</div>
+
 
 
 <script>
     const worker = new Worker("/js/foundationWorker.js")
     const greenDot = document.getElementById("greenDot");
     worker.onmessage =(msg)=>{
-        if(msg.data == 0){
-            greenDot.innerHTML = msg.data
+        if(localStorage.getItem("notify") == null){
+            localStorage.setItem("notify",0);
+        }
+        if(msg.data.length == 0){
+            greenDot.innerHTML = msg.data.length
             greenDot.classList.add("d-none");
+            localStorage.setItem("notify",0);
 
+            
         }else{
             greenDot.classList.remove("d-none");
-            greenDot.innerHTML =  msg.data
+            greenDot.innerHTML =  msg.data.length
+            if(document.location.pathname.split("/")[2] != "requests"){
+                if(localStorage.getItem("notify") < msg.data.length){
+                    localStorage.setItem("notify",msg.data.length);
+                    myFunction(msg.data[msg.data.length - 1]);
+                }else{
+                    localStorage.setItem("notify",msg.data.length);
+                }
+            }
+           
         }
+    }
+
+    function myFunction(data) {
+        // Get the snackbar DIV
+        var x = document.getElementById("snackbar");
+        x.innerHTML =`<span class="fw-bold">@${data.volunteer}</span>  طلب الانضمام الئ حدث  <span class="fw-bold">${data.event}</span>`
+        // Add the "show" class to DIV
+        x.className = "show";
+
+        // After 3 seconds, remove the show class from DIV
+        setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
     }
 
        
